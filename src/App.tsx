@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Link, Route, Switch as RouterSwitch, useLocation} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 import Settings from "./settings";
 import {AppBar, createStyles, Switch, Tab, Tabs, Theme, withStyles} from "@material-ui/core";
 
@@ -40,14 +40,24 @@ const AntSwitch = withStyles((theme: Theme) =>
     }),
 )(Switch);
 
+
+export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
+    const match = useRouteMatch(routes);
+
+    return {
+        tabValue: match ? match.path : defaultRoute,
+        path: match?.path
+    };
+};
+
 function App() {
 
-    const location = useLocation();
+    const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
 
     return (
         <div className="App">
             <AppBar position="static">
-                <Tabs value={location.pathname} aria-label="simple tabs example">
+                <Tabs value={tabValue} aria-label="simple tabs example">
                     <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
                     <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
                     <Tab label="settings" value={"/settings"} component={Link} to={"/settings"}/>
