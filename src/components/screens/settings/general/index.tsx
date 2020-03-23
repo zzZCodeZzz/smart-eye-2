@@ -87,6 +87,7 @@ const GeneralSettings = (): JSX.Element => {
         console.table(state);
     };
 
+
     const handleSliderChange = (name: keyof typeof state) => (event: any, value: number | number[]) => {
         setState({
             ...state,
