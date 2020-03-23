@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-import Settings from "./components/screens/settings";
+import Settings from "./settings";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import {connectMqttClient} from "./mqtt/mqttClient";
 import {Provider} from "react-redux";
@@ -16,16 +16,17 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
     };
 };
 
+
 function App() {
 
-    const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+    const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
 
     useEffect(() => {
         connectMqttClient();
     }, []);
 
     return (
-        <div className="App" style={{flexGrow: 1}}>
+        <div className="App">
             <AppBar position="static">
                 <Tabs value={tabValue} aria-label="simple tabs example">
                     <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
