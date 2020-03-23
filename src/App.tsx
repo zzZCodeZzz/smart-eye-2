@@ -1,45 +1,8 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-import Settings from "./settings";
-import {AppBar, createStyles, Switch, Tab, Tabs, Theme, withStyles} from "@material-ui/core";
-
-const AntSwitch = withStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            width: 28,
-            height: 16,
-            padding: 0,
-            display: 'flex',
-        },
-        switchBase: {
-            padding: 2,
-            color: theme.palette.grey[500],
-            '&$checked': {
-                transform: 'translateX(12px)',
-                color: theme.palette.common.white,
-                '& + $track': {
-                    opacity: 1,
-                    backgroundColor: theme.palette.primary.main,
-                    borderColor: theme.palette.primary.main,
-                },
-            },
-        },
-        thumb: {
-            width: 12,
-            height: 12,
-            boxShadow: 'none',
-        },
-        track: {
-            border: `1px solid ${theme.palette.grey[500]}`,
-            borderRadius: 16 / 2,
-            opacity: 1,
-            backgroundColor: theme.palette.common.white,
-        },
-        checked: {},
-    }),
-)(Switch);
-
+import Settings from "./components/screens/settings";
+import {AppBar, Tab, Tabs} from "@material-ui/core";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -52,10 +15,10 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 
 function App() {
 
-    const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+    const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
 
     return (
-        <div className="App">
+        <div className="App" style={{flexGrow: 1}}>
             <AppBar position="static">
                 <Tabs value={tabValue} aria-label="simple tabs example">
                     <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
