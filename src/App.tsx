@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 import Settings from "./settings";
 import {AppBar, createStyles, Switch, Tab, Tabs, Theme, withStyles} from "@material-ui/core";
+import {connectMqttClient} from "./mqtt/mqttClient";
 
 const AntSwitch = withStyles((theme: Theme) =>
     createStyles({
@@ -53,6 +54,10 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 function App() {
 
     const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+
+    useEffect(() => {
+        connectMqttClient();
+    },[] );
 
     return (
         <div className="App">
