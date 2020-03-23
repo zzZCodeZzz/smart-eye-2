@@ -1,5 +1,8 @@
 import {config} from "./config";
 import mqtt, {Message, MQTTError} from "paho-mqtt"
+import store from "../redux/store";
+import { onDevicesReceived } from "../redux/devices.slice";
+import { onSettingsReceived } from "../redux/settings.slice";
 
 export let mqttClient = new mqtt.Client(config.broker, 9001, Math.random().toString(36).substr(2, 9));
 
@@ -14,7 +17,16 @@ mqttClient.onConnectionLost = (error: MQTTError) => {
 mqttClient.onMessageArrived = (message: Message) => {
     if (/^[\],:{}\s]*$/.test(message.payloadString.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
-        console.log("wuuhuuu", message.payloadString);
+        const data = JSON.parse(message.payloadString);
+
+        if(message.destinationName === config.topic_coming_going_toclient) {
+            if(data.devices) {
+                store.dispatch(onDevicesReceived(data.devices))
+            }else if(data.settings) {
+                console.log("settings", data.settings);
+                store.dispatch(onSettingsReceived(data.settings))
+            }
+        }
     }
 };
 
@@ -39,11 +51,15 @@ const onConnect = () => {
     message.destinationName = config.topic_coming_going_toserver;
     mqttClient.send(message);
 
-    setTimeout(function () {
-        message = new Message("SHOW_DICTIONARY");
-        message.destinationName = config.topic_coming_going_toserver;
-        mqttClient.send(message);
-    }, 30);
+    message = new Message("SHOW_DICTIONARY");
+    message.destinationName = config.topic_coming_going_toserver;
+    mqttClient.send(message);
+
+    // setTimeout(function () {
+    //     message = new Message("SHOW_DICTIONARY");
+    //     message.destinationName = config.topic_coming_going_toserver;
+    //     mqttClient.send(message);
+    // }, 30);
 };
 
 const connectionOptions = {

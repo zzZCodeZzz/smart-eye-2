@@ -4,6 +4,8 @@ import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from 
 import Settings from "./settings";
 import {AppBar, createStyles, Switch, Tab, Tabs, Theme, withStyles} from "@material-ui/core";
 import {connectMqttClient} from "./mqtt/mqttClient";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const AntSwitch = withStyles((theme: Theme) =>
     createStyles({
@@ -53,11 +55,11 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 
 function App() {
 
-    const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+    const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
 
     useEffect(() => {
         connectMqttClient();
-    },[] );
+    }, []);
 
     return (
         <div className="App">
@@ -84,9 +86,11 @@ function App() {
 }
 
 const AppWithRouter = () => (
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>);
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </Provider>);
 
 
 export default AppWithRouter;
