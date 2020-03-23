@@ -13,6 +13,7 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
+import AntSelect from "../../../ui/inputs/select";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -84,27 +85,21 @@ const GeneralSettings = (): JSX.Element => {
             ...state,
             [name]: event.target.value,
         });
-        console.table(state);
     };
-
 
     const handleSliderChange = (name: keyof typeof state) => (event: any, value: number | number[]) => {
         setState({
             ...state,
             [name]: value
         });
-        console.table(state);
     };
 
     const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name as keyof typeof state;
-        console.log(`show ${name} before`, state[name]);
         setState({
             ...state,
             [name]: event.target.checked
         });
-        console.log(`show ${name} after`, state[name]);
-        console.table(state);
     };
 
     const handleDateChange = (date: Date | null) => {
@@ -112,30 +107,34 @@ const GeneralSettings = (): JSX.Element => {
             ...state,
             date: date
         });
-        console.table(state);
     };
 
     return (
         <div className={classes.root}>
             <Grid container className={classes.container} spacing={3}>
                 <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="language-select">Language</InputLabel>
-                        <Select
-                            native
-                            value={state.language}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'language',
-                                id: 'language-select',
-                            }}
-                        >
-                            <option aria-label="None" value=""/>
-                            <option value="Deutsch">Deutsch</option>
-                            <option value="English">English</option>
-                            <option value="Français">Français</option>
-                        </Select>
-                    </FormControl>
+                    <AntSelect
+                        label="Language"
+                        value={state.language}
+                        options={[{
+                            value: "Deutsch",
+                            label: "Deutsch"
+                        },
+                        {
+                            value: "English",
+                            label: "English",
+                        },
+                        {
+                            value: "Français",
+                            label: "Français"
+                        }]}
+                        inputProps={{
+                            name: 'language',
+                            id: 'language-select',
+                        }}
+                        onChange={handleSelectChange}
+                    />
+                    {console.table(state)}
                 </Grid>
                 <Grid item xs={12} md={3}>
                     <FormControl className={classes.formControl}>
