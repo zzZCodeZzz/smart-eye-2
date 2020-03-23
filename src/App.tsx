@@ -3,6 +3,9 @@ import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 import Settings from "./components/screens/settings";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {connectMqttClient} from "./mqtt/mqttClient";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);

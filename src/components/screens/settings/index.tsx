@@ -1,5 +1,5 @@
 import React, {Fragment} from "react"
-import {Link, Route, Switch} from "react-router-dom";
+import {Link, Route, Switch, Redirect} from "react-router-dom";
 import {useTabsWithRouter} from "../../../App";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import GeneralSettings from "./general";
@@ -27,6 +27,9 @@ const Settings = (): JSX.Element => {
                 </Tabs>
             </AppBar>
             <Switch>
+                <Route exact path={"/settings"}>
+                    <Redirect to={"/settings/general"}/>
+                </Route>
                 <Route path={"/settings/general"}>
                     <GeneralSettings/>
                 </Route>

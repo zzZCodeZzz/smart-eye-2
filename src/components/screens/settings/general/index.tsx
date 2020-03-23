@@ -11,11 +11,7 @@ import {
     Typography
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from "@material-ui/pickers";
+import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -335,7 +331,8 @@ const GeneralSettings = (): JSX.Element => {
                         <Grid component="label" container alignItems="center" spacing={1}>
                             <Grid item>Off</Grid>
                             <Grid item>
-                                <Switch checked={state.graphicalView} onChange={handleSwitchChange} name="graphicalView"/>
+                                <Switch checked={state.graphicalView} onChange={handleSwitchChange}
+                                        name="graphicalView"/>
                             </Grid>
                             <Grid item>On</Grid>
                         </Grid>
@@ -343,8 +340,7 @@ const GeneralSettings = (): JSX.Element => {
                 </Grid>
             </Grid>
         </div>
-    )
-        ;
+    );
 };
 
 export default GeneralSettings;
