@@ -14,6 +14,9 @@ import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../redux/rootReducer";
+import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 
 
@@ -133,16 +136,16 @@ const GeneralSettings = () => {
                         value={state.language}
                         options={[{
                             value: "Deutsch",
-                            label: "Deutsch",
+                            label: "Deutsch"
                         },
-                            {
-                                value: "English",
-                                label: "English",
-                            },
-                            {
-                                value: "Français",
-                                label: "Français",
-                            }]}
+                        {
+                            value: "English",
+                            label: "English",
+                        },
+                        {
+                            value: "Français",
+                            label: "Français"
+                        }]}
                         inputProps={{
                             name: 'language',
                             id: 'language-select',
