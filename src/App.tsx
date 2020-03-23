@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 import Settings from "./components/screens/settings";
@@ -16,6 +16,10 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 function App() {
 
     const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+
+    useEffect(() => {
+        connectMqttClient();
+    }, []);
 
     return (
         <div className="App" style={{flexGrow: 1}}>
@@ -42,9 +46,11 @@ function App() {
 }
 
 const AppWithRouter = () => (
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>);
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </Provider>);
 
 
 export default AppWithRouter;
