@@ -118,7 +118,7 @@ const GeneralSettings = (): JSX.Element => {
                         value={state.language}
                         options={[{
                             value: "Deutsch",
-                            label: "Deutsch"
+                            label: "Deutsch",
                         },
                         {
                             value: "English",
@@ -126,7 +126,7 @@ const GeneralSettings = (): JSX.Element => {
                         },
                         {
                             value: "Français",
-                            label: "Français"
+                            label: "Français",
                         }]}
                         inputProps={{
                             name: 'language',

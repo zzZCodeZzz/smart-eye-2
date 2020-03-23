@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 // import Settings from "./settings";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
+import Settings from "./components/screens/settings";
 import {connectMqttClient} from "./mqtt/mqttClient";
 import {Provider} from "react-redux";
 import store from "./redux/store";
@@ -42,8 +43,7 @@ function App() {
                     log
                 </Route>
                 <Route path={"/settings"}>
-                    {/*<Settings/>*/}
-                    Settings
+                    <Settings/>
                 </Route>
             </RouterSwitch>
         </div>
