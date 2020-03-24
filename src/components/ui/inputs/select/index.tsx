@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
+import AntPaper from "../../surfaces/paper";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,12 +36,14 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     );
 
     return (
-        <FormControl className={classes.formControl}>
-            <InputLabel htmlFor={inputId}>{name}</InputLabel>
-            <Select native value={value} inputProps={{name: name, id: inputId}} onChange={onChange}>
-                {options.map(option => <option key={option} value={option}>{option}</option>)}
-            </Select>
-        </FormControl>
+        <AntPaper>
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor={inputId}>{name}</InputLabel>
+                <Select native value={value} inputProps={{name: name, id: inputId}} onChange={onChange}>
+                    {options.map(option => <option key={option} value={option}>{option}</option>)}
+                </Select>
+            </FormControl>
+        </AntPaper>
     )
 };
 

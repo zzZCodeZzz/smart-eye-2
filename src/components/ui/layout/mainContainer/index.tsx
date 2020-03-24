@@ -9,7 +9,7 @@ const useStyles = makeStyles(() =>
             overflowX: "hidden",
             padding: 20,
             minHeight: "80vh",
-            // maxWidth: "1200px"
+            maxWidth: "1600px"
         }
     })
 );
