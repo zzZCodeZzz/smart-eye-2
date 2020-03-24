@@ -1,6 +1,6 @@
 import {combineReducers} from '@reduxjs/toolkit'
 import radEyeDevicesSlice from "./device/radEyeDevicesSlice";
-import settingsSlice from "./settings/settingsSlice";
+import settingsSlice from "./app/appSlice";
 import gatewaySlice from "./gateway/gatewaySlice";
 
 const rootReducer = combineReducers({

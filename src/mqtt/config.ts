@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {Message} from "paho-mqtt";
 import {onDevicesReceived} from "../redux/device/radEyeDevicesSlice";
-import {onDictionaryReceived, onSettingsReceived} from "../redux/settings/settingsSlice";
+import {onDictionaryReceived, onSettingsReceived} from "../redux/app/appSlice";
 import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
 import {connectMqttClient, mqttClient} from "./mqttClient";
 import {useEffect} from "react";
