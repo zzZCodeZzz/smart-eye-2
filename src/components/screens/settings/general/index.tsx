@@ -1,12 +1,13 @@
 import React from "react";
 import {createStyles, Grid, Theme} from "@material-ui/core";
-import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
+import DatePicker from "../../../ui/inputs/date";
+import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -152,34 +153,45 @@ const GeneralSettings = () => {
                     onChange={handleSwitchChange}/>
             </Grid>
             <Grid item xs={12} md={3}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justify="space-around">
-                        <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="Pick date"
-                            value={state.date}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                        />
-                        <KeyboardTimePicker
-                            margin="normal"
-                            id="time-picker"
-                            label="Pick time"
-                            value={state.date}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change time',
-                            }}
-                        />
-                    </Grid>
-                </MuiPickersUtilsProvider>
-                {console.table(state)}
+                {/*<DatePicker*/}
+                {/*    label={"Geburtstag"}*/}
+                {/*    value={moment()}*/}
+                {/*    onSelectDate={() => console.log("ha")}*/}
+                {/*    // inputStyle={{width: longInputWith}}*/}
+                {/*    // error={isUnder18}*/}
+                {/*    // errorText={isUnder18 ? "Nicht 18" : ""}*/}
+                {/*    disableFuture*/}
+                {/*    openTo={"year"}*/}
+                {/*    views={["year", "month", "date"]}*/}
+                {/*    autoOk />*/}
+                {/*<MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
+                {/*    <Grid container justify="space-around">*/}
+                {/*        <KeyboardDatePicker*/}
+                {/*            disableToolbar*/}
+                {/*            variant="inline"*/}
+                {/*            format="MM/dd/yyyy"*/}
+                {/*            margin="normal"*/}
+                {/*            id="date-picker-inline"*/}
+                {/*            label="Pick date"*/}
+                {/*            value={state.date}*/}
+                {/*            onChange={handleDateChange}*/}
+                {/*            KeyboardButtonProps={{*/}
+                {/*                'aria-label': 'change date',*/}
+                {/*            }}*/}
+                {/*        />*/}
+                {/*        <KeyboardTimePicker*/}
+                {/*            margin="normal"*/}
+                {/*            id="time-picker"*/}
+                {/*            label="Pick time"*/}
+                {/*            value={state.date}*/}
+                {/*            onChange={handleDateChange}*/}
+                {/*            KeyboardButtonProps={{*/}
+                {/*                'aria-label': 'change time',*/}
+                {/*            }}*/}
+                {/*        />*/}
+                {/*    </Grid>*/}
+                {/*</MuiPickersUtilsProvider>*/}
+                {/*{console.table(state)}*/}
             </Grid>
             <Grid item xs={12} md={3} spacing={5}>
                 <AntSwitch
@@ -202,7 +214,7 @@ const GeneralSettings = () => {
                 <AntSelect
                     name="temperatureDisplay"
                     value={state.temperatureDisplay}
-                    options={["None","Fahrenheit", "Celsius"]}
+                    options={["None", "Fahrenheit", "Celsius"]}
                 />
                 <br/>
                 <AntSwitch

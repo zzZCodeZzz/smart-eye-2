@@ -1,5 +1,5 @@
-import {createStyles, Grid, Switch, Theme, Typography, withStyles} from "@material-ui/core";
 import React, {FunctionComponent} from "react";
+import {createStyles, Grid, styled, Switch, Theme, Typography} from "@material-ui/core";
 import AntPaper from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const RedSwitch = withStyles({
+const RedSwitch = styled(Switch)({
     switchBase: {
         color: red[300],
         '&$checked': {
@@ -25,7 +25,7 @@ const RedSwitch = withStyles({
     },
     checked: {},
     track: {},
-})(Switch);
+});
 
 type antSwitchProps = {
     label: string;

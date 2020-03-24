@@ -1,20 +1,9 @@
 import React, {Fragment} from "react"
-import {Link, Route, Switch, Redirect} from "react-router-dom";
+import {Link, Redirect, Route, Switch} from "react-router-dom";
 import {useTabsWithRouter} from "../../../App";
-import {AppBar, createStyles, Tab, Tabs, Theme} from "@material-ui/core";
+import {AppBar, Tab, Tabs} from "@material-ui/core";
 import GeneralSettings from "./general";
-import {makeStyles} from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-            overflowX: "hidden",
-            padding: 20,
-            minHeight: "80vh"
-        },
-    }),
-);
+import MainContainer from "../../ui/layout/mainContainer";
 
 const Settings = (): JSX.Element => {
 
@@ -28,8 +17,6 @@ const Settings = (): JSX.Element => {
         "/settings/general"
     );
 
-    const classes = useStyles();
-
     return (
         <Fragment>
             <AppBar position="relative">
@@ -40,13 +27,13 @@ const Settings = (): JSX.Element => {
                     <Tab label="function" value="/settings/function" component={Link} to="/settings/function"/>
                 </Tabs>
             </AppBar>
-            <div className={classes.root}>
+            <MainContainer>
                 <Switch>
                     <Route exact path={"/settings"}>
                         <Redirect to={"/settings/general"}/>
                     </Route>
                     <Route path={"/settings/general"}>
-                        <GeneralSettings/>
+                        <GeneralSettings />
                     </Route>
                     <Route path={"/settings/log"}>
                         log
@@ -58,7 +45,7 @@ const Settings = (): JSX.Element => {
                         function
                     </Route>
                 </Switch>
-            </div>
+            </MainContainer>
         </Fragment>
     )
 };
