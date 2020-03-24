@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import i18n from "i18next";
 
 type AppSettings = {
     interval: number;
@@ -16,7 +17,7 @@ type AppState = {
     dictionary: Dictionary
 };
 
-type Dictionary = {
+export type Dictionary = {
     [key: string]: {
         de: string,
         en: string
@@ -36,10 +37,26 @@ const appSlice = createSlice({
             state.settings = action.payload;
         },
         onDictionaryReceived(state, action: PayloadAction<Dictionary>) {
+
+            // transforms dictionary shape from api to dictionary shape from i18n
+            const i18nDictionary = Object.entries(action.payload).reduce((acc: any, [wordKey, translations]) => {
+                Object.entries(translations).forEach(([language, value]) => {
+                    if (!acc[language]) acc[language] = {};
+                    acc[language][wordKey] = value
+                });
+                return acc;
+            }, {});
+
+            Object.entries(i18nDictionary).forEach(([language, translations]) => {
+                i18n.addResources(language, "translation", translations);
+            });
+
             state.dictionary = action.payload;
         }
     }
 });
+
+// export const upda
 
 export const {onSettingsReceived, onDictionaryReceived} = appSlice.actions;
 

@@ -17,7 +17,7 @@ export const mqttConfig = {
     // Topic for writing parser configs
     "topic_debug": "DEBUG",
     "topic_debug_qos": "2",
-    "log_to_mqtt" : "1",
+    "log_to_mqtt": "1",
     // Topic for writing parser configs
     "topic_config_write": "CONFIG/WRITE",
     "topic_config_write_qos": "2",
@@ -66,19 +66,22 @@ export const useConfigureAndConnectMqttClient = () => {
     useEffect(() => {
         mqttClient.onMessageArrived = (message: Message): void => {
             // eslint-disable-next-line no-useless-escape
-            if (/^[\],:{}\s]*$/.test(message.payloadString.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-
+            if (/^[\],:{}\s]*$/.test(message.payloadString
+                .replace(/\\["\\\/bfnrtu]/g, '@')
+                .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
+            ) {
                 const data = JSON.parse(message.payloadString);
 
                 if (message.destinationName === mqttConfig.topic_coming_going_toclient) {
                     if (data.devices) {
-                        dispatch(onDevicesReceived(data.devices))
+                        dispatch(onDevicesReceived(data.devices));
                     } else if (data.settings) {
-                        dispatch(onSettingsReceived(data.settings))
+                        dispatch(onSettingsReceived(data.settings));
                     } else if (data.gateways) {
-                        dispatch(onGatewaysReceived(data.gateways))
+                        dispatch(onGatewaysReceived(data.gateways));
                     } else if (data.dictionary) {
-                        dispatch(onDictionaryReceived(data.dictionary))
+                        dispatch(onDictionaryReceived(data.dictionary));
                     }
                 }
             }

@@ -6,6 +6,8 @@ import Settings from "./components/screens/settings";
 import {Provider} from "react-redux";
 import store from "./redux/store";
 import {useConfigureAndConnectMqttClient} from "./mqtt/config";
+import i18n from "i18next";
+import {initReactI18next} from "react-i18next";
 
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
@@ -16,6 +18,16 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
         path: match?.path
     };
 };
+
+i18n.use(initReactI18next)
+    .init({
+        resources: {
+        },
+        fallbackLng: "en",
+        interpolation: {
+            escapeValue: false
+        }
+    });
 
 
 function App() {
