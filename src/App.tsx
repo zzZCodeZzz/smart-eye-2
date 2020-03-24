@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-import {AppBar, Tab, Tabs, Toolbar} from "@material-ui/core";
+// import Settings from "./settings";
+import {AppBar, CssBaseline, Tab, Tabs, ThemeProvider, Toolbar} from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import {theme} from "./components/ui/layout/theme";
+import MainContainer from "./components/ui/layout/mainContainer";
 import {useConfigureAndConnectMqttClient} from "./mqtt/config";
 
 
@@ -35,10 +38,10 @@ function App() {
             </AppBar>
             <RouterSwitch>
                 <Route path={"/measurement"}>
-                    measurement
+                    <MainContainer>measurement</MainContainer>
                 </Route>
-                <Route path={"/log"}>RouterSwitch
-                    log
+                <Route path={"/log"}>
+                    <MainContainer>log</MainContainer>
                 </Route>
                 <Route path={"/settings"}>
                     <Settings/>
@@ -55,9 +58,12 @@ function App() {
 
 const AppWithRouter = () => (
     <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <ThemeProvider theme={theme} >
+            <CssBaseline />
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </ThemeProvider>
     </Provider>);
 
 
