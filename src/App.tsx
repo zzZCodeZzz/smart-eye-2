@@ -45,6 +45,11 @@ function App() {
                     <Settings/>
                 </Route>
             </RouterSwitch>
+            <AppBar position="static" component="footer">
+                <Toolbar>
+                    Footer
+                </Toolbar>
+            </AppBar>
         </div>
     );
 }

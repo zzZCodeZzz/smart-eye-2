@@ -1,21 +1,12 @@
 import React from "react";
-import {
-    createStyles,
-    FormControl,
-    Grid,
-    InputLabel,
-    Select,
-    Slider,
-    Switch,
-    Theme,
-    Typography
-} from "@material-ui/core";
+import {createStyles, Grid, Theme} from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
-
+import AntSwitch from "../../../ui/inputs/switch";
+import AntSlider from "../../../ui/inputs/slider";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -114,219 +105,188 @@ const GeneralSettings = () => {
     const fields = useActiveDeviceFields(device => ({language: device.language}));
 
     return (
-        <div className={classes.root}>
-            <Grid container className={classes.container} spacing={3}>
-                <Grid item xs={12} md={3}>
-                    <AntSelect
-                        name="language"
-                        value={fields?.language}
-                        options={["german", "english", "français"]}
-                    />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="battery-type-select">Battery Type</InputLabel>
-                        <Select
-                            native
-                            value={state.batteryType}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'batteryType',
-                                id: 'battery-type-select',
+        <Grid container className={classes.container} spacing={3}>
+            <Grid item xs={12} md={3}>
+                <AntSelect
+                    label="Language"
+                    value={state.language}
+                    options={[
+                        {value: "Deutsch", label: "Deutsch",},
+                        {value: "English", label: "English",},
+                        {value: "Français", label: "Français",}
+                    ]}
+                    inputProps={{
+                        name: 'language',
+                        id: 'language-select',
+                    }}
+                    onChange={handleSelectChange}/>
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <AntSelect
+                    label="Battery Type"
+                    value={state.batteryType}
+                    options={[
+                        {value: "Rechargeable", label: "Rechargeable",},
+                        {value: "Alkaline", label: "Alkaline",}
+                    ]}
+                    inputProps={{
+                        name: 'batteryType',
+                        id: 'battery-type-select',
+                    }}
+                    onChange={handleSelectChange}/>
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <AntSelect
+                    label="Acoustic indication"
+                    value={state.acoustic}
+                    options={[
+                        {value: "None", label: "None",},
+                        {value: "Finder", label: "Finder",},
+                        {value: "Single impulse", label: "Single impulse",}
+                    ]}
+                    inputProps={{
+                        name: 'acoustic',
+                        id: 'acoustic-select',
+                    }}
+                    onChange={handleSelectChange}/>
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <AntSlider
+                    label="History Log"
+                    id="historyLog"
+                    value={state.historyLog}
+                    max={3600}
+                    min={0}
+                    step={10}
+                    onChange={handleSliderChange("historyLog")}
+                    caption="0 = Save history manually" />
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <AntSelect
+                    label="Unit"
+                    value={state.unit}
+                    options={[
+                        {value: "S-1", label: "S-1",},
+                        {value: "SW/H", label: "SW/H",},
+                        {value: "R/H", label: "R/H",},
+                        {value: "REM/H", label: "REM/H",},
+                        {value: "Level", label: "Level",}
+                    ]}
+                    inputProps={{
+                        name: 'unit',
+                        id: 'unit-select',
+                    }}
+                    onChange={handleSelectChange}/>
+                <br/>
+                <AntSelect
+                    label="Unit dose rate"
+                    value={state.unitDoseRate}
+                    options={[
+                        {value: "SW/H", label: "SW/H",},
+                        {value: "R/H", label: "R/H",},
+                        {value: "REM/H", label: "REM/H",}
+                    ]}
+                    inputProps={{
+                        name: 'unitDoseRate',
+                        id: 'unit-dose-rate-select',
+                    }}
+                    onChange={handleSelectChange}/>
+                <br/>
+                <AntSwitch
+                    label="Show Unit"
+                    checked={state.showUnit}
+                    name="showUnit"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Pick date"
+                            value={state.date}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
                             }}
-                        >
-                            <option aria-label="None" value=""/>
-                            <option value="Rechargeable">Rechargeable</option>
-                            <option value="Alkaline">Alkaline</option>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="acoustic-select">Acoustic indication</InputLabel>
-                        <Select
-                            native
-                            value={state.acoustic}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'acoustic',
-                                id: 'acoustic-select',
-                            }}
-                        >
-                            <option aria-label="None" value=""/>
-                            <option value="None">None</option>
-                            <option value="Finder">Finder</option>
-                            <option value="Single impulse">Single impulse</option>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <Typography id="historyLog" gutterBottom>History Log</Typography>
-                        <Slider
-                            value={state.historyLog}
-                            valueLabelDisplay="auto"
-                            step={10}
-                            min={0}
-                            max={3600}
-                            onChange={handleSliderChange("historyLog")}
                         />
-                        <Typography variant="caption">0 = Save history manually</Typography>
-                    </FormControl>
-                </Grid>
+                        <KeyboardTimePicker
+                            margin="normal"
+                            id="time-picker"
+                            label="Pick time"
+                            value={state.date}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change time',
+                            }}
+                        />
+                    </Grid>
+                </MuiPickersUtilsProvider>
+                {console.table(state)}
             </Grid>
-
-            <Grid container className={classes.container} spacing={3}>
-                <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="acoustic-select">Unit</InputLabel>
-                        <Select
-                            native
-                            value={state.unit}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'unit',
-                                id: 'unit-select',
-                            }}
-                        >
-                            <option aria-label="None" value=""/>
-                            <option value="S-1">S-1</option>
-                            <option value="SW/H">SW/H</option>
-                            <option value="R/H">R/H</option>
-                            <option value="REM/H">REM/H</option>
-                            <option value="Level">Level</option>
-                        </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="unit-dose-rate-select">Unit</InputLabel>
-                        <Select
-                            native
-                            value={state.unitDoseRate}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'unitDoseRate',
-                                id: 'unit-dose-rate-select',
-                            }}
-                        >
-                            <option aria-label="None" value=""/>
-                            <option value="SW/H">SW/H</option>
-                            <option value="R/H">R/H</option>
-                            <option value="REM/H">REM/H</option>
-                        </Select>
-                    </FormControl>
-                    <div>
-                        <Typography>Show Unit</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.showUnit} onChange={handleSwitchChange} name="showUnit"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Pick date"
-                                value={state.date}
-                                onChange={handleDateChange}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                            <KeyboardTimePicker
-                                margin="normal"
-                                id="time-picker"
-                                label="Pick time"
-                                value={state.date}
-                                onChange={handleDateChange}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change time',
-                                }}
-                            />
-                        </Grid>
-                    </MuiPickersUtilsProvider>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <div>
-                        <Typography>Key Tones</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.keyTones} onChange={handleSwitchChange} name="keyTones"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                    <div>
-                        <Typography>Key Lock</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.keyLock} onChange={handleSwitchChange} name="keyLock"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="temperature-display-select">Temperature display</InputLabel>
-                        <Select
-                            native
-                            value={state.temperatureDisplay}
-                            onChange={handleSelectChange}
-                            inputProps={{
-                                name: 'temperatureDisplay',
-                                id: 'temperature-display-select',
-                            }}
-                        >
-                            <option value="None">None</option>
-                            <option value="Fahrenheit">Fahrenheit</option>
-                            <option value="Celsius">Celsius</option>
-                        </Select>
-                    </FormControl>
-                    <div>
-                        <Typography>Show DR in CPS mode</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.keyLock} onChange={handleSwitchChange} name="keyLock"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                    <div>
-                        <Typography>Reversible</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.reversible} onChange={handleSwitchChange} name="reversible"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                    <div>
-                        <Typography>Graphical view</Typography>
-                        <Grid component="label" container alignItems="center" spacing={1}>
-                            <Grid item>Off</Grid>
-                            <Grid item>
-                                <Switch checked={state.graphicalView} onChange={handleSwitchChange}
-                                        name="graphicalView"/>
-                            </Grid>
-                            <Grid item>On</Grid>
-                        </Grid>
-                    </div>
-                </Grid>
+            <Grid item xs={12} md={3} spacing={5}>
+                <AntSwitch
+                    label="Key Tones"
+                    checked={state.keyTones}
+                    name="keyTones"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
+                <br/>
+                <AntSwitch
+                    label="Key Lock"
+                    checked={state.keyLock}
+                    name="keyLock"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
             </Grid>
-        </div>
+            <Grid item xs={12} md={3}>
+                <AntSelect
+                    label="Temperature display"
+                    value={state.temperatureDisplay}
+                    options={[
+                        {value: "None", label: "None",},
+                        {value: "Fahrenheit", label: "Fahrenheit",},
+                        {value: "Celsius", label: "Celsius",}
+                    ]}
+                    inputProps={{
+                        name: 'temperatureDisplay',
+                        id: 'temperature-display-select',
+                    }}
+                    onChange={handleSelectChange}/>
+                <br/>
+                <AntSwitch
+                    label="Show DR in CPS mode"
+                    checked={state.showDisplay}
+                    name="showDisplay"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
+                <br/>
+                <AntSwitch
+                    label="Reversible"
+                    checked={state.reversible}
+                    name="reversible"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
+                <br/>
+                <AntSwitch
+                    label="Graphical view"
+                    checked={state.graphicalView}
+                    name="graphicalView"
+                    checkedLabel="On"
+                    uncheckedLabel="Off"
+                    onChange={handleSwitchChange}/>
+            </Grid>
+        </Grid>
     );
 };
 
