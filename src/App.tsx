@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 // import Settings from "./settings";
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Tab, Tabs, Toolbar} from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {connectMqttClient} from "./mqtt/mqttClient";
 import {Provider} from "react-redux";
@@ -46,6 +46,11 @@ function App() {
                     <Settings/>
                 </Route>
             </RouterSwitch>
+            <AppBar position="static" component="footer">
+                <Toolbar>
+                    Footer
+                </Toolbar>
+            </AppBar>
         </div>
     );
 }
