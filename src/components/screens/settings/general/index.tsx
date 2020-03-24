@@ -1,11 +1,12 @@
 import React from "react";
-import {createStyles, FormControl, Grid, Slider, Theme, Typography} from "@material-ui/core";
+import {createStyles, Grid, Theme} from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
+import AntSlider from "../../../ui/inputs/slider";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -161,19 +162,15 @@ const GeneralSettings = () => {
                     onChange={handleSelectChange}/>
             </Grid>
             <Grid item xs={12} md={3}>
-                <FormControl className={classes.formControl}>
-                    <Typography id="historyLog" gutterBottom>History Log</Typography>
-                    <Slider
-                        value={state.historyLog}
-                        valueLabelDisplay="auto"
-                        step={10}
-                        min={0}
-                        max={3600}
-                        onChange={handleSliderChange("historyLog")}
-                    />
-                    <Typography variant="caption">0 = Save history manually</Typography>
-                    {/*<FormHelperText>Be careful</FormHelperText>*/}
-                </FormControl>
+                <AntSlider
+                    label="History Log"
+                    id="historyLog"
+                    value={state.historyLog}
+                    max={3600}
+                    min={0}
+                    step={10}
+                    onChange={handleSliderChange("historyLog")}
+                    caption="0 = Save history manually" />
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
