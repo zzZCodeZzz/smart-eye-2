@@ -1,13 +1,17 @@
 import React, {FunctionComponent} from "react";
-import {createStyles, FormControl, InputLabel, Select, Theme} from "@material-ui/core";
+import {createStyles, FormControl, InputLabel, Paper, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
             width: "100%",
-            marginBottom: theme.spacing(3)
-        }
+        },
+        paper: {
+            padding: theme.spacing(2),
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+        },
     }),
 );
 
@@ -30,17 +34,19 @@ const AntSelect: FunctionComponent<antSelectProps> = ({label, value, options, in
     const classes = useStyles();
 
     return (
-        <FormControl className={classes.formControl}>
-            <InputLabel htmlFor={inputProps.id}>{label}</InputLabel>
-            <Select
-                native
-                value={value}
-                inputProps={inputProps}
-                onChange={onChange}
-            >
-                {options.map(o => o ? <option value={o.value}>{o.label}</option> : null)}
-            </Select>
-        </FormControl>
+        <Paper className={classes.paper}>
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor={inputProps.id}>{label}</InputLabel>
+                <Select
+                    native
+                    value={value}
+                    inputProps={inputProps}
+                    onChange={onChange}
+                >
+                    {options.map(o => o ? <option value={o.value}>{o.label}</option> : null)}
+                </Select>
+            </FormControl>
+        </Paper>
     )
 };
 

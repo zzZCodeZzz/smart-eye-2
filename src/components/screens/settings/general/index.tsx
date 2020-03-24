@@ -134,18 +134,11 @@ const GeneralSettings = () => {
                     <AntSelect
                         label="Language"
                         value={state.language}
-                        options={[{
-                            value: "Deutsch",
-                            label: "Deutsch"
-                        },
-                        {
-                            value: "English",
-                            label: "English",
-                        },
-                        {
-                            value: "Français",
-                            label: "Français"
-                        }]}
+                        options={[
+                            {value: "Deutsch", label: "Deutsch",},
+                            {value: "English", label: "English",},
+                            {value: "Français", label: "Français",}
+                        ]}
                         inputProps={{
                             name: 'language',
                             id: 'language-select',
@@ -329,7 +322,7 @@ const GeneralSettings = () => {
                         <Grid component="label" container alignItems="center" spacing={1}>
                             <Grid item>Off</Grid>
                             <Grid item>
-                                <Switch checked={state.keyLock} onChange={handleSwitchChange} name="keyLock"/>
+                                <Switch checked={state.showDisplay} onChange={handleSwitchChange} name="showDisplay"/>
                             </Grid>
                             <Grid item>On</Grid>
                         </Grid>
