@@ -14,7 +14,10 @@ type AppSettings = {
 
 type AppState = {
     settings: AppSettings,
-    dictionary: Dictionary
+    dictionary: {
+        ready: boolean;
+        dictionary: Dictionary
+    }
 };
 
 export type Dictionary = {
@@ -26,7 +29,10 @@ export type Dictionary = {
 
 const initialState: AppState = {
     settings: null,
-    dictionary: {}
+    dictionary: {
+        ready: false,
+        dictionary: {}
+    }
 };
 
 const appSlice = createSlice({
@@ -47,16 +53,15 @@ const appSlice = createSlice({
                 return acc;
             }, {});
 
+            // adds new translations
             Object.entries(i18nDictionary).forEach(([language, translations]) => {
                 i18n.addResources(language, "translation", translations);
             });
-
-            state.dictionary = action.payload;
+            state.dictionary.ready = true;
+            state.dictionary.dictionary = action.payload;
         }
     }
 });
-
-// export const upda
 
 export const {onSettingsReceived, onDictionaryReceived} = appSlice.actions;
 

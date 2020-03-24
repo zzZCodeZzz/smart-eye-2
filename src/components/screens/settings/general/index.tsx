@@ -148,8 +148,6 @@ const GeneralSettings = () => {
                     label="Show Unit"
                     checked={state.showUnit}
                     name="showUnit"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
             </Grid>
             <Grid item xs={12} md={3}>
@@ -198,16 +196,12 @@ const GeneralSettings = () => {
                     label="Key Tones"
                     checked={state.keyTones}
                     name="keyTones"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
                 <br/>
                 <AntSwitch
                     label="Key Lock"
                     checked={state.keyLock}
                     name="keyLock"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
             </Grid>
             <Grid item xs={12} md={3}>
@@ -221,24 +215,18 @@ const GeneralSettings = () => {
                     label="Show DR in CPS mode"
                     checked={state.showDisplay}
                     name="showDisplay"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
                 <br/>
                 <AntSwitch
                     label="Reversible"
                     checked={state.reversible}
                     name="reversible"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
                 <br/>
                 <AntSwitch
                     label="Graphical view"
                     checked={state.graphicalView}
                     name="graphicalView"
-                    checkedLabel="On"
-                    uncheckedLabel="Off"
                     onChange={handleSwitchChange}/>
             </Grid>
         </Grid>

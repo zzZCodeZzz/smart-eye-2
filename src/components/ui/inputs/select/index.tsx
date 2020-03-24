@@ -31,9 +31,7 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     const classes = useStyles();
     const dispatch = useDispatch();
     const inputId = `${name}-select`;
-    const trans = useTranslation();
-
-    console.log("trans", trans)
+    const {t} = useTranslation();
 
     const onChange = (event: React.ChangeEvent<any>) => dispatch(
         updateDeviceLocalAndRemote(event.target.name, event.target.value)
@@ -42,7 +40,7 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     return (
         <AntPaper>
             <FormControl className={classes.formControl}>
-                <InputLabel htmlFor={inputId}>{trans.t(name)}</InputLabel>
+                <InputLabel htmlFor={inputId}>{t(name)}</InputLabel>
                 <Select native value={value} inputProps={{name: name, id: inputId}} onChange={onChange}>
                     {options.map(option => <option key={option} value={option}>{option}</option>)}
                 </Select>

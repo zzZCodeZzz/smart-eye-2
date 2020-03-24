@@ -3,6 +3,7 @@ import {createStyles, Grid, styled, Switch, Theme, Typography} from "@material-u
 import AntPaper from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,19 +37,22 @@ type antSwitchProps = {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 }
 
-const AntSwitch: FunctionComponent<antSwitchProps> = ({label, checked, checkedLabel, uncheckedLabel, name, onChange}): JSX.Element => {
+const AntSwitch: FunctionComponent<antSwitchProps> = ({label, checked, name, onChange,
+                                                          checkedLabel = "on", uncheckedLabel = "off"}): JSX.Element => {
 
     const classes = useStyles();
 
+    const {t} = useTranslation();
+
     return (
         <AntPaper>
-            <Typography className={classes.label}>{label}</Typography>
+            <Typography className={classes.label}>{t(name)}</Typography>
             <Grid component="label" container alignItems="center" justify={"space-around"} spacing={1}>
-                {uncheckedLabel && <Grid item>{uncheckedLabel}</Grid>}
+                <Grid item>{t(uncheckedLabel)}</Grid>
                 <Grid item>
-                    <RedSwitch checked={checked} onChange={onChange} name={name} />
+                    <RedSwitch checked={checked} onChange={onChange} name={name}/>
                 </Grid>
-                {checkedLabel && <Grid item>{checkedLabel}</Grid>}
+                <Grid item>{t(checkedLabel)}</Grid>
             </Grid>
         </AntPaper>
     )
