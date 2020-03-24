@@ -1,9 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
-import {mqttClient, MQTTsendDevice} from "../../mqtt/mqttClient";
-import {Message} from "paho-mqtt";
-import {config} from "../../mqtt/config";
+import {MQTTsendDevice} from "../../mqtt/mqttClient";
 
 type DevicesState = {
     activeDevice: string | null;
@@ -44,7 +42,6 @@ const radEyeDevicesSlice = createSlice({
     }
 });
 
-
 export const updateDeviceLocalAndRemote = (fieldName: string, value: string): AppThunk => async (dispatch, getState) => {
 
     const {radEyeDevices} = getState();
@@ -53,12 +50,12 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
         alert("no device active");
         return;
     }
-    //
+
     const alteredDevice: Device = {...radEyeDevices?.devices![radEyeDevices.activeDevice], [fieldName]: value};
 
-    const message = new Message(JSON.stringify(alteredDevice));
-    message.destinationName = config.topic_parsed_tobroker.replace('#', alteredDevice.device_id);
-    mqttClient.send(message);
+    MQTTsendDevice(alteredDevice);
+
+    dispatch(updateDevice(alteredDevice));
 };
 
 export const {onDevicesReceived, updateDevice} = radEyeDevicesSlice.actions;

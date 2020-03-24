@@ -12,6 +12,3 @@ export const useActiveDeviceFields = <T>(selector: (device: Device) => T): T | n
     const activeDevice = useActiveDevice();
     return activeDevice ? selector(activeDevice) : null
 };
-
-
-

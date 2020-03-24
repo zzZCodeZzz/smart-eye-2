@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Tab, Tabs, Toolbar} from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {Provider} from "react-redux";
 import store from "./redux/store";
-import {useConfigureAndConnectMqttClient} from "./mqtt/mqttHook";
-// import {useConfigureAndConnectMqttClient} from "./mqtt/mqttClient";
+import {useConfigureAndConnectMqttClient} from "./mqtt/config";
 
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {

@@ -3,7 +3,6 @@ import radEyeDevicesSlice from "./device/radEyeDevicesSlice";
 import settingsSlice from "./settings/settingsSlice";
 import gatewaySlice from "./gateway/gatewaySlice";
 
-console.log("reducer",radEyeDevicesSlice);
 const rootReducer = combineReducers({
     radEyeDevices: radEyeDevicesSlice,
     app: settingsSlice,

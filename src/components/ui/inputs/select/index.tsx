@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from "react";
-import {createStyles, FormControl, InputLabel, Paper, Select, Theme} from "@material-ui/core";
+import {createStyles, FormControl, InputLabel, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
@@ -18,34 +18,26 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type antSelectProps = {
+type SelectProps = {
     name: string;
     value: Maybe<string>;
     options: string[];
-    onChange?: (event: React.ChangeEvent<{ name?: string; value: unknown }>) => void;
 }
 
-const AntSelect: FunctionComponent<antSelectProps> = ({name, value, options}): JSX.Element => {
+const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.Element => {
 
     const classes = useStyles();
-
     const dispatch = useDispatch();
-
     const inputId = `${name}-select`;
 
-    const onChange = (event: React.ChangeEvent<any>) => {
-        dispatch(updateDeviceLocalAndRemote(event.target.name, event.target.value))
-    };
+    const onChange = (event: React.ChangeEvent<any>) => dispatch(
+        updateDeviceLocalAndRemote(event.target.name, event.target.value)
+    );
 
     return (
         <FormControl className={classes.formControl}>
             <InputLabel htmlFor={inputId}>{name}</InputLabel>
-            <Select
-                native
-                value={value}
-                inputProps={{name: name, id: inputId}}
-                onChange={onChange}
-            >
+            <Select native value={value} inputProps={{name: name, id: inputId}} onChange={onChange}>
                 {options.map(option => <option key={option} value={option}>{option}</option>)}
             </Select>
         </FormControl>

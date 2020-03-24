@@ -1,4 +1,12 @@
-export const config = {
+import {useDispatch} from "react-redux";
+import {Message} from "paho-mqtt";
+import {onDevicesReceived} from "../redux/device/radEyeDevicesSlice";
+import {onDictionaryReceived, onSettingsReceived} from "../redux/settings/settingsSlice";
+import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
+import {connectMqttClient, mqttClient} from "./mqttClient";
+import {useEffect} from "react";
+
+export const mqttConfig = {
     // ----------------MQTT -------------------
     // See diagram at documentation "Parser Direction and Topics.pptx" in Docs Folder
     //IP or Hostname of MQTT TCP capable Broker
@@ -51,3 +59,31 @@ export const config = {
     // empty for Sqlite
     "database_ip": "0.0.0.0"
 };
+
+export const useConfigureAndConnectMqttClient = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        mqttClient.onMessageArrived = (message: Message): void => {
+            // eslint-disable-next-line no-useless-escape
+            if (/^[\],:{}\s]*$/.test(message.payloadString.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+                const data = JSON.parse(message.payloadString);
+
+                if (message.destinationName === mqttConfig.topic_coming_going_toclient) {
+                    if (data.devices) {
+                        dispatch(onDevicesReceived(data.devices))
+                    } else if (data.settings) {
+                        dispatch(onSettingsReceived(data.settings))
+                    } else if (data.gateways) {
+                        dispatch(onGatewaysReceived(data.gateways))
+                    } else if (data.dictionary) {
+                        dispatch(onDictionaryReceived(data.dictionary))
+                    }
+                }
+            }
+        };
+        connectMqttClient();
+    }, [dispatch]);
+};
+

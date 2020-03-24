@@ -72,14 +72,6 @@ const GeneralSettings = () => {
         graphicalView: false,
     });
 
-    const handleSelectChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-        const name = event.target.name as keyof typeof state;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
-    };
-
     const handleSliderChange = (name: keyof typeof state) => (event: any, value: number | number[]) => {
         setState({
             ...state,
@@ -108,47 +100,24 @@ const GeneralSettings = () => {
         <Grid container className={classes.container} spacing={3}>
             <Grid item xs={12} md={3}>
                 <AntSelect
-                    label="Language"
-                    value={state.language}
-                    options={[
-                        {value: "Deutsch", label: "Deutsch",},
-                        {value: "English", label: "English",},
-                        {value: "Français", label: "Français",}
-                    ]}
-                    inputProps={{
-                        name: 'language',
-                        id: 'language-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    name="language"
+                    value={fields?.language}
+                    options={["german", "english", "français"]}
+                />
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
-                    label="Battery Type"
+                    name="batteryType"
                     value={state.batteryType}
-                    options={[
-                        {value: "Rechargeable", label: "Rechargeable",},
-                        {value: "Alkaline", label: "Alkaline",}
-                    ]}
-                    inputProps={{
-                        name: 'batteryType',
-                        id: 'battery-type-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    options={["Rechargeable", "Alkaline"]}
+                />
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
-                    label="Acoustic indication"
+                    name="acoustic"
                     value={state.acoustic}
-                    options={[
-                        {value: "None", label: "None",},
-                        {value: "Finder", label: "Finder",},
-                        {value: "Single impulse", label: "Single impulse",}
-                    ]}
-                    inputProps={{
-                        name: 'acoustic',
-                        id: 'acoustic-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    options={["None", "Finder", "Single impulse"]}
+                />
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSlider
@@ -159,38 +128,20 @@ const GeneralSettings = () => {
                     min={0}
                     step={10}
                     onChange={handleSliderChange("historyLog")}
-                    caption="0 = Save history manually" />
+                    caption="0 = Save history manually"/>
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
-                    label="Unit"
+                    name="unit"
                     value={state.unit}
-                    options={[
-                        {value: "S-1", label: "S-1",},
-                        {value: "SW/H", label: "SW/H",},
-                        {value: "R/H", label: "R/H",},
-                        {value: "REM/H", label: "REM/H",},
-                        {value: "Level", label: "Level",}
-                    ]}
-                    inputProps={{
-                        name: 'unit',
-                        id: 'unit-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
+                />
                 <br/>
                 <AntSelect
-                    label="Unit dose rate"
+                    name="unitDoseRate"
                     value={state.unitDoseRate}
-                    options={[
-                        {value: "SW/H", label: "SW/H",},
-                        {value: "R/H", label: "R/H",},
-                        {value: "REM/H", label: "REM/H",}
-                    ]}
-                    inputProps={{
-                        name: 'unitDoseRate',
-                        id: 'unit-dose-rate-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    options={["SW/H", "R/H", "REM/H"]}
+                />
                 <br/>
                 <AntSwitch
                     label="Show Unit"
@@ -249,18 +200,10 @@ const GeneralSettings = () => {
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
-                    label="Temperature display"
+                    name="temperatureDisplay"
                     value={state.temperatureDisplay}
-                    options={[
-                        {value: "None", label: "None",},
-                        {value: "Fahrenheit", label: "Fahrenheit",},
-                        {value: "Celsius", label: "Celsius",}
-                    ]}
-                    inputProps={{
-                        name: 'temperatureDisplay',
-                        id: 'temperature-display-select',
-                    }}
-                    onChange={handleSelectChange}/>
+                    options={["None","Fahrenheit", "Celsius"]}
+                />
                 <br/>
                 <AntSwitch
                     label="Show DR in CPS mode"
