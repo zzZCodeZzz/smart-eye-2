@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {Device} from "./device.types";
 
 type DevicesState = {
     activeDevice: string | null;
     devices: {
-        [device_id: string]: any
+        [device_id: string]: Device;
     };
 }
 
