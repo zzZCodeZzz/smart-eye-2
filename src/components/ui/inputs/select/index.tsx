@@ -1,6 +1,9 @@
 import React, {FunctionComponent} from "react";
 import {createStyles, FormControl, InputLabel, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {Maybe} from "../../../../redux/device/device.types";
+import {useDispatch} from "react-redux";
+import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -12,33 +15,34 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type antSelectProps = {
-    label: string;
-    value: string | number | null;
-    options: {
-        label: string | number | null;
-        value: string | string[] | number;
-    }[];
-    inputProps: {
-        name: string;
-        id: string;
-    };
+    name: string;
+    value: Maybe<string>;
+    options: string[];
     onChange?: (event: React.ChangeEvent<{ name?: string; value: unknown }>) => void;
 }
 
-const AntSelect: FunctionComponent<antSelectProps> = ({label, value, options, inputProps, onChange}): JSX.Element => {
+const AntSelect: FunctionComponent<antSelectProps> = ({name, value, options}): JSX.Element => {
 
     const classes = useStyles();
 
+    const dispatch = useDispatch();
+
+    const inputId = `${name}-select`;
+
+    const onChange = (event: React.ChangeEvent<any>) => {
+        dispatch(updateDeviceLocalAndRemote(event.target.name, event.target.value))
+    };
+
     return (
         <FormControl className={classes.formControl}>
-            <InputLabel htmlFor={inputProps.id}>{label}</InputLabel>
+            <InputLabel htmlFor={inputId}>{name}</InputLabel>
             <Select
                 native
                 value={value}
-                inputProps={inputProps}
+                inputProps={{name: name, id: inputId}}
                 onChange={onChange}
             >
-                {options.map(o => o ? <option value={o.value}>{o.label}</option> : null)}
+                {options.map(option => <option key={option} value={option}>{option}</option>)}
             </Select>
         </FormControl>
     )

@@ -64,9 +64,6 @@ const GeneralSettings = () => {
 
     const classes = useStyles();
 
-    const fields = useActiveDeviceFields(device => ({language: device.language}));
-
-
     const [state, setState] = React.useState<generalSettingsState>({
         language: "",
         batteryType: "",
@@ -114,42 +111,17 @@ const GeneralSettings = () => {
         });
     };
 
-    // const bla = useActiveDeviceField(device => device.language);
-
-    // const dafq = useSelector((state: RootState) => state.devices && state.devices.devices && state.devices.activeDevice
-    //     ? state.devices?.devices[state.devices.activeDevice]
-    //     : null);
-    //
-    // const fields = useActiveDeviceFields(device => ({language: device.language}));
-
-    // console.log("FfFFF", fields);
+    const fields = useActiveDeviceFields(device => ({language: device.language}));
 
     return (
         <div className={classes.root}>
             <Grid container className={classes.container} spacing={3}>
                 <Grid item xs={12} md={3}>
                     <AntSelect
-                        label="Language"
-                        value={state.language}
-                        options={[{
-                            value: "Deutsch",
-                            label: "Deutsch",
-                        },
-                            {
-                                value: "English",
-                                label: "English",
-                            },
-                            {
-                                value: "Français",
-                                label: "Français",
-                            }]}
-                        inputProps={{
-                            name: 'language',
-                            id: 'language-select',
-                        }}
-                        onChange={handleSelectChange}
+                        name="language"
+                        value={fields?.language}
+                        options={["german", "english", "français"]}
                     />
-                    {console.table(state)}
                 </Grid>
                 <Grid item xs={12} md={3}>
                     <FormControl className={classes.formControl}>

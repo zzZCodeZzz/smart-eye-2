@@ -1,10 +1,11 @@
 import {combineReducers} from '@reduxjs/toolkit'
-import devicesSlice from "./device/devicesSlice";
+import radEyeDevicesSlice from "./device/radEyeDevicesSlice";
 import settingsSlice from "./settings/settingsSlice";
 import gatewaySlice from "./gateway/gatewaySlice";
 
+console.log("reducer",radEyeDevicesSlice);
 const rootReducer = combineReducers({
-    devices: devicesSlice,
+    radEyeDevices: radEyeDevicesSlice,
     app: settingsSlice,
     gateways: gatewaySlice
 });

@@ -1,4 +1,4 @@
-type Maybe<T> = T | undefined | null;
+export type Maybe<T> = T | undefined | null;
 
 export type Device = {
     device_id: string;

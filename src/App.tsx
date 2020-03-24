@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-// import Settings from "./settings";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import Settings from "./components/screens/settings";
-import {connectMqttClient} from "./mqtt/mqttClient";
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import {useConfigureAndConnectMqttClient} from "./mqtt/mqttHook";
+// import {useConfigureAndConnectMqttClient} from "./mqtt/mqttClient";
+
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -20,11 +21,9 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 
 function App() {
 
-    const { tabValue } = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
-
-    useEffect(() => {
-        connectMqttClient();
-    }, []);
+    const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
+    // const dispatch=useDispatch();
+    useConfigureAndConnectMqttClient();
 
     return (
         <div className="App">

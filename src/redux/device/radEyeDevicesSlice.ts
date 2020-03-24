@@ -1,9 +1,9 @@
-import {createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
-import {MQTTsendDevice} from "../../mqtt/mqttClient";
-import {createSelectorHook, useSelector} from "react-redux";
-import {RootState} from "../rootReducer";
+import {mqttClient, MQTTsendDevice} from "../../mqtt/mqttClient";
+import {Message} from "paho-mqtt";
+import {config} from "../../mqtt/config";
 
 type DevicesState = {
     activeDevice: string | null;
@@ -17,8 +17,8 @@ const initialState: DevicesState = {
     devices: null
 };
 
-const devicesSlice = createSlice({
-    name: "devices",
+const radEyeDevicesSlice = createSlice({
+    name: "radEyeDevices",
     initialState,
     reducers: {
         setActiveDevice(state, action: PayloadAction<string>) {
@@ -44,22 +44,23 @@ const devicesSlice = createSlice({
     }
 });
 
+
 export const updateDeviceLocalAndRemote = (fieldName: string, value: string): AppThunk => async (dispatch, getState) => {
 
-    const {devices} = getState();
+    const {radEyeDevices} = getState();
 
-    if (!devices.activeDevice) {
+    if (!radEyeDevices.activeDevice) {
         alert("no device active");
         return;
     }
+    //
+    const alteredDevice: Device = {...radEyeDevices?.devices![radEyeDevices.activeDevice], [fieldName]: value};
 
-    const alteredDevice: Device = {...devices?.devices![devices.activeDevice], [fieldName]: value};
-
-    MQTTsendDevice(alteredDevice);
-
-    dispatch(updateDevice(alteredDevice))
+    const message = new Message(JSON.stringify(alteredDevice));
+    message.destinationName = config.topic_parsed_tobroker.replace('#', alteredDevice.device_id);
+    mqttClient.send(message);
 };
 
-export const {onDevicesReceived, updateDevice} = devicesSlice.actions;
+export const {onDevicesReceived, updateDevice} = radEyeDevicesSlice.actions;
 
-export default devicesSlice.reducer;
+export default radEyeDevicesSlice.reducer;

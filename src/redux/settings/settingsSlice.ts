@@ -12,11 +12,20 @@ type AppSettings = {
 } | null;
 
 type AppState = {
-    settings: AppSettings
+    settings: AppSettings,
+    dictionary: Dictionary
 };
 
+type Dictionary = {
+    [key: string]: {
+        de: string,
+        en: string
+    }
+}
+
 const initialState: AppState = {
-    settings: null
+    settings: null,
+    dictionary: {}
 };
 
 const appSlice = createSlice({
@@ -25,10 +34,13 @@ const appSlice = createSlice({
     reducers: {
         onSettingsReceived(state, action: PayloadAction<AppSettings>) {
             state.settings = action.payload;
+        },
+        onDictionaryReceived(state, action: PayloadAction<Dictionary>) {
+            state.dictionary = action.payload;
         }
     }
 });
 
-export const {onSettingsReceived} = appSlice.actions;
+export const {onSettingsReceived, onDictionaryReceived} = appSlice.actions;
 
 export default appSlice.reducer;

@@ -3,8 +3,8 @@ import {RootState} from "../rootReducer";
 import {Device} from "./device.types";
 
 export const useActiveDevice = () => useSelector((state: RootState): Device | null =>
-        state.devices && state.devices.devices && state.devices.activeDevice
-            ? state.devices.devices[state.devices.activeDevice] : null,
+        state.radEyeDevices && state.radEyeDevices.devices && state.radEyeDevices.activeDevice
+            ? state.radEyeDevices.devices[state.radEyeDevices.activeDevice] : null,
     shallowEqual
 );
 
