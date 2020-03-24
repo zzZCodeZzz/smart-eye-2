@@ -3,11 +3,18 @@ import mqtt, {Message, MQTTError} from "paho-mqtt"
 import store from "../redux/store";
 import {onDevicesReceived} from "../redux/devices.slice";
 import {onSettingsReceived} from "../redux/settings.slice";
-import { onGatewaysReceived } from "../redux/gateway.slice";
+import {onGatewaysReceived} from "../redux/gateway.slice";
+import {Device} from "../redux/device.types";
 
 export let mqttClient = new mqtt.Client(config.broker, 9001, Math.random().toString(36).substr(2, 9));
 
-mqttClient.onConnectionLost = (error: MQTTError) => {
+export const MQTTsendDevice = (device: Device): void => {
+    const message = new Message(JSON.stringify(device));
+    message.destinationName = config.topic_parsed_tobroker.replace('#', device.device_id);
+    mqttClient.send(message);
+};
+
+mqttClient.onConnectionLost = (error: MQTTError): void => {
     console.log("connection lost, using broker:", config.broker)
     if (error.errorCode !== 0) {
         console.log("onConnectionLost:" + error.errorMessage);
@@ -15,7 +22,7 @@ mqttClient.onConnectionLost = (error: MQTTError) => {
     mqttClient = new mqtt.Client(config.broker, 443, "client_id");
 };
 
-mqttClient.onMessageArrived = (message: Message) => {
+mqttClient.onMessageArrived = (message: Message): void => {
     if (/^[\],:{}\s]*$/.test(message.payloadString.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
         const data = JSON.parse(message.payloadString);
@@ -32,7 +39,7 @@ mqttClient.onMessageArrived = (message: Message) => {
     }
 };
 
-const onConnect = () => {
+const onConnect = (): void => {
     mqttClient.subscribe(config.topic_coming_going_toclient);
     mqttClient.subscribe(config.topic_coming_going_toserver);
     mqttClient.subscribe(config.topic_parsed_toclient + "/#");
@@ -57,14 +64,12 @@ const onConnect = () => {
     message.destinationName = config.topic_coming_going_toserver;
     mqttClient.send(message);
 
-    // setTimeout(function () {
-    //     message = new Message("SHOW_DICTIONARY");
-    //     message.destinationName = config.topic_coming_going_toserver;
-    //     mqttClient.send(message);
-    // }, 30);
+    message = new Message("SHOW_DICTIONARY");
+    message.destinationName = config.topic_coming_going_toserver;
+    mqttClient.send(message);
 };
 
-const connectionOptions = {
+const connectionOptions: mqtt.ConnectionOptions = {
     onSuccess: onConnect,
     onFailure: (e: MQTTError) => console.log("onFailure", e)
 };
