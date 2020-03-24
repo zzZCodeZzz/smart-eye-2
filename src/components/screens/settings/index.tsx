@@ -16,6 +16,7 @@ const Settings = (): JSX.Element => {
         "/settings/general"
     );
 
+
     return (
         <Fragment>
             <AppBar position="relative">

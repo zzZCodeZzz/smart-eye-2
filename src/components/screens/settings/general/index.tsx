@@ -14,8 +14,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../redux/rootReducer";
+import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -60,13 +60,12 @@ type generalSettingsState = {
     graphicalView: boolean;
 }
 
-const GeneralSettings = (): JSX.Element => {
+const GeneralSettings = () => {
 
     const classes = useStyles();
 
-    const {settings} = useSelector((state: RootState) => state.app);
+    const fields = useActiveDeviceFields(device => ({language: device.language}));
 
-    const dispatch = useDispatch();
 
     const [state, setState] = React.useState<generalSettingsState>({
         language: "",
@@ -115,6 +114,16 @@ const GeneralSettings = (): JSX.Element => {
         });
     };
 
+    // const bla = useActiveDeviceField(device => device.language);
+
+    // const dafq = useSelector((state: RootState) => state.devices && state.devices.devices && state.devices.activeDevice
+    //     ? state.devices?.devices[state.devices.activeDevice]
+    //     : null);
+    //
+    // const fields = useActiveDeviceFields(device => ({language: device.language}));
+
+    // console.log("FfFFF", fields);
+
     return (
         <div className={classes.root}>
             <Grid container className={classes.container} spacing={3}>
@@ -126,14 +135,14 @@ const GeneralSettings = (): JSX.Element => {
                             value: "Deutsch",
                             label: "Deutsch",
                         },
-                        {
-                            value: "English",
-                            label: "English",
-                        },
-                        {
-                            value: "Français",
-                            label: "Français",
-                        }]}
+                            {
+                                value: "English",
+                                label: "English",
+                            },
+                            {
+                                value: "Français",
+                                label: "Français",
+                            }]}
                         inputProps={{
                             name: 'language',
                             id: 'language-select',

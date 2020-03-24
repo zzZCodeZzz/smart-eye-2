@@ -1,18 +1,20 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
-import {AppThunk} from "./store";
-import {MQTTsendDevice} from "../mqtt/mqttClient";
+import {AppThunk} from "../store";
+import {MQTTsendDevice} from "../../mqtt/mqttClient";
+import {createSelectorHook, useSelector} from "react-redux";
+import {RootState} from "../rootReducer";
 
 type DevicesState = {
     activeDevice: string | null;
     devices: {
         [device_id: string]: Device;
-    };
+    } | null;
 }
 
 const initialState: DevicesState = {
     activeDevice: null,
-    devices: {}
+    devices: null
 };
 
 const devicesSlice = createSlice({
@@ -36,14 +38,11 @@ const devicesSlice = createSlice({
             }
         },
         updateDevice(state, action: PayloadAction<Device>) {
+            if (!state.devices) state.devices = {};
             state.devices[action.payload.device_id] = action.payload;
         }
     }
 });
-
-export const {onDevicesReceived, updateDevice} = devicesSlice.actions;
-
-export default devicesSlice.reducer;
 
 export const updateDeviceLocalAndRemote = (fieldName: string, value: string): AppThunk => async (dispatch, getState) => {
 
@@ -54,9 +53,13 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
         return;
     }
 
-    const alteredDevice: Device = {...devices.devices[devices.activeDevice], [fieldName]: value};
+    const alteredDevice: Device = {...devices?.devices![devices.activeDevice], [fieldName]: value};
 
     MQTTsendDevice(alteredDevice);
 
     dispatch(updateDevice(alteredDevice))
 };
+
+export const {onDevicesReceived, updateDevice} = devicesSlice.actions;
+
+export default devicesSlice.reducer;

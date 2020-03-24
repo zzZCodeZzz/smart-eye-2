@@ -15,6 +15,7 @@ type GatewayState = {
     }
 };
 
+
 const initialState: GatewayState = {
     gateways: {}
 };

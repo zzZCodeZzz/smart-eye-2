@@ -1,7 +1,7 @@
-import { combineReducers } from '@reduxjs/toolkit'
-import devicesSlice from "./devices.slice";
-import settingsSlice from "./settings.slice";
-import gatewaySlice from "./gateway.slice";
+import {combineReducers} from '@reduxjs/toolkit'
+import devicesSlice from "./device/devicesSlice";
+import settingsSlice from "./settings/settingsSlice";
+import gatewaySlice from "./gateway/gatewaySlice";
 
 const rootReducer = combineReducers({
     devices: devicesSlice,

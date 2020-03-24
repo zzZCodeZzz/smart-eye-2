@@ -1,10 +1,10 @@
 import {config} from "./config";
 import mqtt, {Message, MQTTError} from "paho-mqtt"
 import store from "../redux/store";
-import {onDevicesReceived} from "../redux/devices.slice";
-import {onSettingsReceived} from "../redux/settings.slice";
-import {onGatewaysReceived} from "../redux/gateway.slice";
-import {Device} from "../redux/device.types";
+import {onDevicesReceived} from "../redux/device/devicesSlice";
+import {onSettingsReceived} from "../redux/settings/settingsSlice";
+import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
+import {Device} from "../redux/device/device.types";
 
 export let mqttClient = new mqtt.Client(config.broker, 9001, Math.random().toString(36).substr(2, 9));
 
@@ -34,6 +34,9 @@ mqttClient.onMessageArrived = (message: Message): void => {
                 store.dispatch(onSettingsReceived(data.settings))
             } else if (data.gateways) {
                 store.dispatch(onGatewaysReceived(data.gateways))
+            } else if  (data.dictionary) {
+                console.log("data dict", data.dictionary)
+                // store.dispatch(onDictionaryReceived(data.dictionary))
             }
         }
     }
