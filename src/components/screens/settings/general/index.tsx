@@ -14,6 +14,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../redux/rootReducer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -61,6 +63,10 @@ type generalSettingsState = {
 const GeneralSettings = (): JSX.Element => {
 
     const classes = useStyles();
+
+    const {settings} = useSelector((state: RootState) => state.app);
+
+    const dispatch = useDispatch();
 
     const [state, setState] = React.useState<generalSettingsState>({
         language: "",
