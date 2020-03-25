@@ -5,6 +5,7 @@ import {MQTTsendDevice} from "../../mqtt/mqttClient";
 
 type DevicesState = {
     activeDevice: string | null;
+    activeDeviceHistory?: any;
     devices: {
         [device_id: string]: Device;
     } | null;

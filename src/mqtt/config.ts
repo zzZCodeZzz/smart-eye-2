@@ -85,6 +85,8 @@ export const useConfigureAndConnectMqttClient = () => {
                         dispatch(onGatewaysReceived(data.gateways));
                     } else if (data.dictionary) {
                         dispatch(onDictionaryReceived(data.dictionary));
+                    } else if(data.history) {
+                        console.log("history", data.history);
                     }
                 }
 

@@ -67,7 +67,7 @@ const MainNavigation: FunctionComponent = () => {
                             <AntLabel>Active Device</AntLabel>
                             <Select
                                 inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}
-                                value={devices.activeDevice}
+                                value={devices.activeDevice ? devices.activeDevice : ""}
                                 onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDevice(event.target.value))}
                             >
                                 {devices.devices && Object.values(devices.devices).map(device =>
