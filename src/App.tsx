@@ -12,6 +12,7 @@ import {useConfigureAndConnectMqttClient} from "./mqtt/config";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import {RootState} from "./redux/rootReducer";
+import {Measurement} from "./components/screens/measurement";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -50,7 +51,7 @@ function App() {
             </AppBar>
             <RouterSwitch>
                 <Route path={"/measurement"}>
-                    <MainContainer>measurement</MainContainer>
+                    <MainContainer><Measurement/></MainContainer>
                 </Route>
                 <Route path={"/log"}>
                     <MainContainer>log</MainContainer>

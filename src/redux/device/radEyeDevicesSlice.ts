@@ -25,7 +25,7 @@ const radEyeDevicesSlice = createSlice({
         onDevicesReceived(state, action: PayloadAction<any[]>) {
             state.devices = action.payload
                 .map(device => {
-                    if (!device.serial_number || device.serial_number.replace(/[^0-9SNC]/g, "").length) {
+                    if (!device.serial_number || device.serial_number.replace(/[^0-9SNC]/g, "").length === 0) {
                         return {...device, serial_number: "00000"}
                     }
                     return device;
@@ -58,6 +58,6 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
     dispatch(updateDevice(alteredDevice));
 };
 
-export const {onDevicesReceived, updateDevice} = radEyeDevicesSlice.actions;
+export const {onDevicesReceived, updateDevice, setActiveDevice} = radEyeDevicesSlice.actions;
 
 export default radEyeDevicesSlice.reducer;
