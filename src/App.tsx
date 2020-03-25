@@ -67,7 +67,7 @@ function App() {
                 <Container maxWidth={"lg"}>
                     <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"}>
                         <Grid item xs={12} md={5}>
-                            <Typography variant={"h3"} style={{fontWeight: 500, paddingLeft: "10px"}}>smartEye</Typography>
+                            <Typography variant={"h3"} style={{fontWeight: 500, padding: "10px"}}>smartEye</Typography>
                         </Grid>
                         <Grid item xs={12} md={3} style={{padding: "0 10px 5px"}}>
                             <FormControl style={{width: "100%", textAlign: "center"}}>
