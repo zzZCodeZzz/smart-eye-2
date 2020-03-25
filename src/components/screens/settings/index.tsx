@@ -20,7 +20,7 @@ const Settings = (): JSX.Element => {
     return (
         <Fragment>
             <AppBar position="relative">
-                <Tabs value={tabValue} aria-label="simple tabs example">
+                <Tabs value={tabValue} aria-label="simple tabs example" centered>
                     <Tab label="general" value="/settings/general" component={Link} to="/settings/general"/>
                     <Tab label="alarm" value="/settings/alarm" component={Link} to="/settings/alarm"/>
                     <Tab label="function" value="/settings/function" component={Link} to="/settings/function"/>

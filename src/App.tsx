@@ -2,16 +2,16 @@ import React from 'react';
 import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
 // import Settings from "./settings";
 import {
-    AppBar,
+    AppBar, Container,
     CssBaseline,
-    FormControl,
+    FormControl, Grid,
     InputLabel,
     MenuItem,
     Select,
     Tab,
     Tabs,
     ThemeProvider,
-    Toolbar
+    Toolbar, Typography
 } from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {Provider, useDispatch, useSelector} from "react-redux";
@@ -64,27 +64,38 @@ function App() {
     return (
         <div className="App">
             <AppBar position="static">
-                <Tabs value={tabValue} aria-label="simple tabs example">
-                    <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
-                    <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
-                    <Tab label="settings" value={"/settings"} component={Link} to={"/settings"}/>
-                </Tabs>
-                <FormControl>
-                    <InputLabel htmlFor={"deviceDropDown"}>{"Active Device"}</InputLabel>
-                    <Select
-                        inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}
-                        value={devices.activeDevice}
-                        onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDevice(event.target.value))}
-                    >
-                        {devices.devices && Object.values(devices.devices).map(device =>
-                            <MenuItem
-                                key={device.device_id}
-                                value={device.device_id}>
-                                {device.device_id}
-                                {device.connection_type === "BLE" ? <Bluetooth/> : <Flare/>}
-                            </MenuItem>)}
-                    </Select>
-                </FormControl>
+                <Container maxWidth={"lg"}>
+                    <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"}>
+                        <Grid item xs={12} md={5}>
+                            <Typography variant={"h3"} style={{fontWeight: 500, paddingLeft: "10px"}}>smartEye</Typography>
+                        </Grid>
+                        <Grid item xs={12} md={3} style={{padding: "0 10px 5px"}}>
+                            <FormControl style={{width: "100%", textAlign: "center"}}>
+                                <InputLabel htmlFor={"deviceDropDown"}>{"Active Device"}</InputLabel>
+                                <Select
+                                    inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}
+                                    value={devices.activeDevice}
+                                    onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDevice(event.target.value))}
+                                >
+                                    {devices.devices && Object.values(devices.devices).map(device =>
+                                        <MenuItem
+                                            key={device.device_id}
+                                            value={device.device_id}>
+                                            {device.device_id}
+                                            {device.connection_type === "BLE" ? <Bluetooth/> : <Flare/>}
+                                        </MenuItem>)}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} justify={"center"}>
+                            <Tabs value={tabValue} aria-label="simple tabs example" centered>
+                                <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
+                                <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
+                                <Tab label="settings" value={"/settings"} component={Link} to={"/settings"}/>
+                            </Tabs>
+                        </Grid>
+                    </Grid>
+                </Container>
             </AppBar>
             <RouterSwitch>
                 <Route path={"/measurement"}>
@@ -98,16 +109,18 @@ function App() {
                 </Route>
             </RouterSwitch>
             <AppBar position="static" component="footer">
-                <Toolbar>
-                    Verbindungsart: {activeDevice && activeDevice.connection_type}
-                    Seriennummer: {activeDevice && activeDevice.serial_number}
-                    Batterie: {activeDevice && activeDevice.batteryType}
-                    Letzt kalibrierung: ?
-                    Aktiv: {activeDevice && activeDevice.last_seen}
-                    Temparatur: {activeDevice && activeDevice.temperature}
-                    Standort: Wolfratshause
-                    Boardnummer: {activeDevice && activeDevice.board_number}
-                </Toolbar>
+                <Container maxWidth="lg">
+                    <Toolbar>
+                        Verbindungsart: {activeDevice && activeDevice.connection_type}
+                        Seriennummer: {activeDevice && activeDevice.serial_number}
+                        Batterie: {activeDevice && activeDevice.batteryType}
+                        Letzt kalibrierung: ?
+                        Aktiv: {activeDevice && activeDevice.last_seen}
+                        Temparatur: {activeDevice && activeDevice.temperature}
+                        Standort: Wolfratshause
+                        Boardnummer: {activeDevice && activeDevice.board_number}
+                    </Toolbar>
+                </Container>
             </AppBar>
         </div>
     );
