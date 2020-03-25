@@ -82,7 +82,7 @@ const GeneralSettings = () => {
             <Grid item xs={12} md={3}>
                 date
             </Grid>
-            <Grid item xs={12} md={3} spacing={5}>
+            <Grid item xs={12} md={3}>
                 <AntSwitch name="keyTones" value={fields.keyTones}/>
                 <br/>
                 <AntSwitch name="keyLock" value={fields.keyLock}/>

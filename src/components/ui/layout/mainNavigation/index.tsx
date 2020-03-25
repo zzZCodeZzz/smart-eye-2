@@ -80,7 +80,7 @@ const MainNavigation: FunctionComponent = () => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={12} justify={"center"}>
+                    <Grid item xs={12}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
                             <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
                             <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
