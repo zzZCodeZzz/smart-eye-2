@@ -15,7 +15,9 @@ mqttClient.onConnectionLost = (error: MQTTError): void => {
     if (error.errorCode !== 0) {
         console.log("onConnectionLost:" + error.errorMessage);
     }
-   mqttClient = new mqtt.Client(mqttConfig.broker, 443, mqttClient.clientId);
+    const newMqttClient = new mqtt.Client(mqttConfig.broker, mqttClient.port, mqttClient.clientId);
+    newMqttClient.connect(connectionOptions);
+    mqttClient = newMqttClient;
 };
 
 const onConnect = (): void => {

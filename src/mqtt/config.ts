@@ -5,6 +5,7 @@ import {onDictionaryReceived, onSettingsReceived} from "../redux/app/appSlice";
 import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
 import {connectMqttClient, mqttClient} from "./mqttClient";
 import {useEffect} from "react";
+import {useActiveDevice} from "../redux/device/deviceStoreSelectors";
 
 export const mqttConfig = {
     // ----------------MQTT -------------------
@@ -63,6 +64,8 @@ export const mqttConfig = {
 export const useConfigureAndConnectMqttClient = () => {
     const dispatch = useDispatch();
 
+    const activeDevice = useActiveDevice();
+
     useEffect(() => {
         mqttClient.onMessageArrived = (message: Message): void => {
             // eslint-disable-next-line no-useless-escape
@@ -83,6 +86,10 @@ export const useConfigureAndConnectMqttClient = () => {
                     } else if (data.dictionary) {
                         dispatch(onDictionaryReceived(data.dictionary));
                     }
+                }
+
+                if(message.destinationName === `${ mqttConfig.topic_parsed_toclient}/${activeDevice}`) {
+
                 }
             }
         };

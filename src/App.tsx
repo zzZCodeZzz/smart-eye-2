@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter, Redirect, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
-// import Settings from "./settings";
 import {CssBaseline, ThemeProvider} from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {Provider} from "react-redux";
