@@ -9,8 +9,10 @@ export type Device = {
 
     // Todo Manu -> naming klären
     reversible: Maybe<string>;
-    batteryType: Maybe<string>;
-    acoustic: Maybe<string>;
+    battery_type: Maybe<string>;
+    accustic_view: Maybe<string>;
+    history_log_time: Maybe<string>;
+
     unit: Maybe<string>;
     unitDoseRate: Maybe<string>;
     temperatureDisplay: Maybe<string>;

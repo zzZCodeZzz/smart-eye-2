@@ -42,7 +42,7 @@ const Footer: FunctionComponent = () => {
                     <Grid container justify="space-between" alignItems="center">
                         Verbindungsart: {activeDevice && activeDevice.connection_type}
                         Seriennummer: {activeDevice && activeDevice.serial_number}
-                        Batterie: {activeDevice && activeDevice.batteryType}
+                        Batterie: {activeDevice && activeDevice.battery_type}
                         Letzt kalibrierung: ?
                         Aktiv: {activeDevice && activeDevice.last_seen}
                         Temparatur: {activeDevice && activeDevice.temperature}

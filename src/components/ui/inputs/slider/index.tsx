@@ -3,6 +3,9 @@ import React, {FunctionComponent} from "react";
 import AntPaper from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";
+import {useTranslation} from "react-i18next";
+import {useDispatch} from "react-redux";
+import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -46,27 +49,34 @@ const PrettoSlider = withStyles((theme: Theme) => ({
 }))(Slider);
 
 type antSliderProps = {
-    label: string;
+    name: string;
     caption?: string;
-    value?: number | number[];
+    value?: string;
     max: number;
     min: number;
     step: number | null;
     onChange?: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({label, caption, value, max, min, step, onChange}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, caption, value, max, min, step}) => {
 
     const classes = useStyles();
+    const {t} = useTranslation();
+    const dispatch = useDispatch();
+
+    const onChange = (event: React.ChangeEvent<{}>, value: number | number[]) => dispatch(
+        updateDeviceLocalAndRemote(name, String(value))
+    );
+
 
     return (
         <AntPaper>
             <FormControl className={classes.formControl}>
-                <AntLabel>{label}</AntLabel>
+                <AntLabel>{t(name)}</AntLabel>
                 <PrettoSlider
-                    value={value}
+                    value={Number(value)}
                     valueLabelDisplay="auto"
-                    step={step}
+                    name={name}
                     min={min}
                     max={max}
                     onChange={onChange}

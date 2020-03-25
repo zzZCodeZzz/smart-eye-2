@@ -42,8 +42,8 @@ const GeneralSettings = () => {
     const fields = useActiveDeviceFields(device => ({
         language: device.language,
         reversible: device.reversible,
-        batteryType: device.batteryType,
-        acoustic: device.acoustic,
+        battery_type: device.battery_type,
+        accustic_view: device.accustic_view,
         unit: device.unit,
         unitDoseRate: device.unitDoseRate,
         temperatureDisplay: device.temperatureDisplay,
@@ -55,6 +55,7 @@ const GeneralSettings = () => {
         // Todo manu klären ob das naming so kommt
         pick_date: device.pick_date,
         pick_time: device.pick_time,
+        history_log_time: device.history_log_time
     }));
 
     return (
@@ -63,22 +64,25 @@ const GeneralSettings = () => {
                 <AntSelect name="language" value={fields.language} options={["german", "english", "français"]}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="batteryType" value={fields.batteryType} options={["Rechargeable", "Alkaline"]}/>
+                <AntSelect
+                    name="battery_type"
+                    value={fields.battery_type}
+                    options={["battery_rechargeable", "battery_alkaline"]}
+                />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="acoustic" value={fields.acoustic} options={["None", "Finder", "Single impulse"]}/>
+                <AntSelect name="accustic_view" value={fields.accustic_view} options={["none", "finder", "single_impulse"]}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSlider
-                    label="History Log"
-                    value={50}
+                    name="history_log_time"
+                    value={fields.history_log_time}
                     max={3600}
                     min={0}
                     step={10}
                     caption="0 = Save history manually"
                 />
             </Grid>
-
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="unit" value={fields.unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
                 <br/>

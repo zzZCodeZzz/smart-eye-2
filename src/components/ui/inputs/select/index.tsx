@@ -50,7 +50,7 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange} className={classes.select}>
-                    {options.map(option => <MenuItem key={option} value={option} className={classes.option}>{option}</MenuItem>)}
+                    {options.map(option => <MenuItem key={option} value={option} className={classes.option}>{t(option)}</MenuItem>)}
                 </Select>
             </FormControl>
         </AntPaper>
