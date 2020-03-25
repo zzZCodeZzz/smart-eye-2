@@ -130,10 +130,10 @@ const AlarmSettings = () => {
                     <AntTextField name="Minimale Werte" />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSlider label={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10} />
+                    <AntSlider name={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10} />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSlider label={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10} />
+                    <AntSlider name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10} />
                 </Grid>
             </Grid>
 
