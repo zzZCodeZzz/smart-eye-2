@@ -80,7 +80,7 @@ const GeneralSettings = () => {
                     max={3600}
                     min={0}
                     step={10}
-                    caption="0 = Save history manually"
+                    caption="zero_history_save_manual"
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>

@@ -81,7 +81,7 @@ const AntSlider: FunctionComponent<antSliderProps> = ({name, caption, value, max
                     max={max}
                     onChange={onChange}
                 />
-                {caption && <FormHelperText>{caption}</FormHelperText>}
+                {caption && <FormHelperText>{t(caption)}</FormHelperText>}
             </FormControl>
         </AntPaper>
     )
