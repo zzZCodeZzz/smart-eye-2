@@ -12,7 +12,7 @@ import {
     Theme,
     Typography
 } from "@material-ui/core";
-import {setActiveDevice} from "../../../../redux/device/radEyeDevicesSlice";
+import {setActiveDevice, setActiveDeviceAndSubscribeHistory} from "../../../../redux/device/radEyeDevicesSlice";
 import {Bluetooth, Flare} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -68,7 +68,7 @@ const MainNavigation: FunctionComponent = () => {
                             <Select
                                 inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}
                                 value={devices.activeDevice ? devices.activeDevice : ""}
-                                onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDevice(event.target.value))}
+                                onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDeviceAndSubscribeHistory(event.target.value))}
                             >
                                 {devices.devices && Object.values(devices.devices).map(device =>
                                     <MenuItem

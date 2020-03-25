@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import {Message} from "paho-mqtt";
-import {onDevicesReceived} from "../redux/device/radEyeDevicesSlice";
+import {onDevicesReceived, onDeviceHistoryReceived} from "../redux/device/radEyeDevicesSlice";
 import {onDictionaryReceived, onSettingsReceived} from "../redux/app/appSlice";
 import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
 import {connectMqttClient, mqttClient} from "./mqttClient";
@@ -75,7 +75,7 @@ export const useConfigureAndConnectMqttClient = () => {
                 .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
             ) {
                 const data = JSON.parse(message.payloadString);
-
+                console.log("act", activeDevice?.device_id, data, message.destinationName)
                 if (message.destinationName === mqttConfig.topic_coming_going_toclient) {
                     if (data.devices) {
                         dispatch(onDevicesReceived(data.devices));
@@ -85,17 +85,15 @@ export const useConfigureAndConnectMqttClient = () => {
                         dispatch(onGatewaysReceived(data.gateways));
                     } else if (data.dictionary) {
                         dispatch(onDictionaryReceived(data.dictionary));
-                    } else if(data.history) {
-                        console.log("history", data.history);
                     }
-                }
-
-                if(message.destinationName === `${ mqttConfig.topic_parsed_toclient}/${activeDevice}`) {
-
+                } else if (message.destinationName === `${mqttConfig.topic_parsed_toclient}/${activeDevice?.device_id}`) {
+                    dispatch(onDeviceHistoryReceived(data.entries))
                 }
             }
         };
-        connectMqttClient();
-    }, [dispatch]);
+        if (!activeDevice) {
+            connectMqttClient();
+        }
+    });
 };
 

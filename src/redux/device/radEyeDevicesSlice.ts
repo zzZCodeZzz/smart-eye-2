@@ -1,11 +1,32 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
-import {MQTTsendDevice} from "../../mqtt/mqttClient";
+import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
+
+type DeviceHistoryEntry = {
+    line: string;
+    device_id: string;
+    time_record_todb: string;
+    time_measurestring: string;
+    mean_value_activity: string;
+    mean_value_count_rate: string;
+    max_value_activity: string;
+    max_value_count_rate: string;
+    mean_value_dose_rate: string;
+    max_value_dose_rate: string;
+    measuring_time: string;
+    temperature: string;
+    ratemeter_net_value: string;
+    operation_mode_scaler: string;
+    background_measurement: string;
+    preset_time: string;
+    dose_rate_unit: string;
+    contamination_bq: string;
+}
 
 type DevicesState = {
     activeDevice: string | null;
-    activeDeviceHistory?: any;
+    activeDeviceHistory?: DeviceHistoryEntry[];
     devices: {
         [device_id: string]: Device;
     } | null;
@@ -23,7 +44,7 @@ const radEyeDevicesSlice = createSlice({
         setActiveDevice(state, action: PayloadAction<string>) {
             state.activeDevice = action.payload;
         },
-        onDevicesReceived(state, action: PayloadAction<any[]>) {
+        onDevicesReceived(state ,action: PayloadAction<Device[]>) {
             state.devices = action.payload
                 .map(device => {
                     if (!device.serial_number || device.serial_number.replace(/[^0-9SNC]/g, "").length === 0) {
@@ -32,16 +53,25 @@ const radEyeDevicesSlice = createSlice({
                     return device;
                 }).reduce((acc, curr) => ({...acc, [curr.device_id]: curr}), {});
 
-            if (!state.activeDevice) {
-                state.activeDevice = action.payload[0] ? action.payload[0].device_id : null;
+            if (!state.activeDevice && action.payload[0]) {
+                state.activeDevice = action.payload[0].device_id;
+                MQTTSubscribeHistoryForActiveDevice(action.payload[0].device_id);
             }
         },
         updateDevice(state, action: PayloadAction<Device>) {
             if (!state.devices) state.devices = {};
             state.devices[action.payload.device_id] = action.payload;
+        },
+        onDeviceHistoryReceived(state, action: PayloadAction<DeviceHistoryEntry[]>){
+            state.activeDeviceHistory = action.payload;
         }
     }
 });
+
+export const setActiveDeviceAndSubscribeHistory = (deviceId: string): AppThunk => async dispatch => {
+    dispatch(setActiveDevice(deviceId));
+    MQTTSubscribeHistoryForActiveDevice(deviceId);
+};
 
 export const updateDeviceLocalAndRemote = (fieldName: string, value: string): AppThunk => async (dispatch, getState) => {
     const {radEyeDevices} = getState();
@@ -54,6 +84,6 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
     dispatch(updateDevice(alteredDevice));
 };
 
-export const {onDevicesReceived, updateDevice, setActiveDevice} = radEyeDevicesSlice.actions;
+export const {onDevicesReceived, updateDevice, setActiveDevice, onDeviceHistoryReceived} = radEyeDevicesSlice.actions;
 
 export default radEyeDevicesSlice.reducer;

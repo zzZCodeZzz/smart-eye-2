@@ -2,7 +2,7 @@ import React, {FunctionComponent} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/rootReducer";
 import {Maybe} from "../../../redux/device/device.types";
-import {setActiveDevice} from "../../../redux/device/radEyeDevicesSlice";
+import {setActiveDeviceAndSubscribeHistory} from "../../../redux/device/radEyeDevicesSlice";
 import {Bluetooth, Flare} from "@material-ui/icons";
 
 type DeviceProps = {
@@ -18,7 +18,7 @@ type DeviceProps = {
 const Device: FunctionComponent<DeviceProps> = ({active, connection_type, serialNumber, type_info, device_id, gateway, lastSeen}) => {
 
     const dispatch = useDispatch();
-    const onClick = () => dispatch(setActiveDevice(device_id));
+    const onClick = () => dispatch(setActiveDeviceAndSubscribeHistory(device_id));
 
     return (
         <div
@@ -44,6 +44,7 @@ export const Measurement = () => {
             {activeDevice}
             {devices && Object.values(devices).map(device =>
                 <Device
+                    key={device.device_id}
                     active={activeDevice === device.device_id}
                     device_id={device.device_id}
                     type_info={device.type_info}

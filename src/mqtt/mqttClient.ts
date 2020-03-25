@@ -10,6 +10,12 @@ export const MQTTsendDevice = (device: Device) => {
     mqttClient.send(message);
 };
 
+export const MQTTSubscribeHistoryForActiveDevice = (deviceId: string) => {
+    const message = new Message(('{ "cmd":"query","table":"history_values","order_by":"measuring_time","direction":"desc"}'));
+    message.destinationName = mqttConfig.topic_parsed_tobroker.replace('#', deviceId);
+    mqttClient.send(message);
+};
+
 mqttClient.onConnectionLost = (error: MQTTError): void => {
     console.log("connection lost, using broker:", mqttConfig.broker)
     if (error.errorCode !== 0) {
