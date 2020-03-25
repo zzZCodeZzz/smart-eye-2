@@ -21,13 +21,16 @@ const PrettoSlider = withStyles((theme: Theme) => ({
     thumb: {
         height: 18,
         width: 18,
-        backgroundColor: theme.palette.secondary.light,
-        border: '2px solid currentColor',
+        backgroundColor: "#bdbdbd",
+        border: '2px solid #bdbdbd',
         '&:focus, &:hover, &$active': {
             boxShadow: 'inherit',
         },
     },
-    active: {},
+    active: {
+        backgroundColor: theme.palette.secondary.main,
+        borderColor: theme.palette.secondary.main
+    },
     valueLabel: {
         left: 'calc(-60%)',
     },
@@ -38,6 +41,7 @@ const PrettoSlider = withStyles((theme: Theme) => ({
     rail: {
         height: 8,
         borderRadius: 4,
+        backgroundColor: theme.palette.text.primary,
     },
 }))(Slider);
 
