@@ -6,6 +6,8 @@ import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelecto
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DatePicker from "../../../ui/inputs/date/datePicker";
+import TimePicker from "../../../ui/inputs/date/timePikcer";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -85,22 +87,8 @@ const GeneralSettings = () => {
                 <AntSwitch name="showUnit" value={fields.showUnit}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                {/*<MuiPickersUtilsProvider utils={momentUtils}>*/}
-                {/*    <DatePicker*/}
-                {/*        label={t("pick_date")}*/}
-                {/*        value={moment()}*/}
-                {/*        onChange={() => console.log("ayay")}*/}
-                {/*        animateYearScrolling*/}
-                {/*    />*/}
-                {/*    <TimePicker*/}
-                {/*        variant="inline"*/}
-                {/*        label={t("pick_time")}*/}
-                {/*        orientation="landscape"*/}
-                {/*        value={moment()}*/}
-                {/*        onChange={()=> console.log("hamasdf")}*/}
-                {/*    />*/}
-                {/*</MuiPickersUtilsProvider>*/}
                 <DatePicker name={"pick_date"} value={fields.pick_date}/>
+                <TimePicker name={"pick_time"} value={fields.pick_time}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch name="keyTones" value={fields.keyTones}/>
