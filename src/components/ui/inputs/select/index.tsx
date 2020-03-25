@@ -1,11 +1,12 @@
 import React, {FunctionComponent} from "react";
-import {createStyles, FormControl, InputLabel, Select, Theme, MenuItem} from "@material-ui/core";
+import {createStyles, FormControl, MenuItem, Select, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 import {useTranslation} from "react-i18next";
 import AntPaper from "../../surfaces/paper";
+import AntLabel from "../label";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -41,7 +42,7 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
         <AntPaper>
             <FormControl className={classes.formControl}>
                 {/*Todo @damata kann man dass so machen das das label soch nicht bewegt? ^^'*/}
-                <InputLabel htmlFor={inputId}>{t(name)}</InputLabel>
+                <AntLabel>{t(name)}</AntLabel>
                 <Select value={value ? value : null} inputProps={{name: name, id: inputId}} onChange={onChange}>
                     {options.map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
                 </Select>

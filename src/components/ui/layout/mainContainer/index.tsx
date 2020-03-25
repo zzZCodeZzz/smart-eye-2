@@ -8,7 +8,7 @@ const useStyles = makeStyles(() =>
             flexGrow: 1,
             overflowX: "hidden",
             padding: 20,
-            minHeight: "70vh",
+            minHeight: "40rem",
         }
     })
 );
@@ -22,7 +22,7 @@ const MainContainer: FunctionComponent<mainContainerProps> = ({children}) => {
     const classes = useStyles();
 
     return <Container component="main" maxWidth={"lg"} className={classes.main}> {children} </Container>;
-}
+};
 
 
 export default MainContainer;
