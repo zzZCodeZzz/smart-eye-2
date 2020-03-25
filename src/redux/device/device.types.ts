@@ -13,14 +13,14 @@ export type Device = {
     accustic_view: Maybe<string>;
     history_log_time: Maybe<string>;
 
-    unit: Maybe<string>;
-    unitDoseRate: Maybe<string>;
+    dose_rate_display_unit: Maybe<string>;
+    dose_rate_cps: Maybe<string>;
     temperatureDisplay: Maybe<string>;
+    show_dr_in_cps_mode: Maybe<string>
     keyTones: Maybe<string>,
     keyLock: Maybe<string>,
     showDisplay: Maybe<string>,
     graphicalView: Maybe<string>,
-    showUnit: Maybe<string>
     pick_date: Maybe<string>;
     pick_time: Maybe<string>;
 } & InfoData &

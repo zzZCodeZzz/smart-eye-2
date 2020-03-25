@@ -1,5 +1,5 @@
 import React from "react";
-import {createStyles, Grid} from "@material-ui/core";
+import {createStyles, Grid, Button} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
@@ -7,6 +7,7 @@ import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DatePicker from "../../../ui/inputs/date/datePicker";
 import TimePicker from "../../../ui/inputs/date/timePikcer";
+import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 
 
 const useStyles = makeStyles(() =>
@@ -27,15 +28,14 @@ const GeneralSettings = () => {
         reversible: device.reversible,
         battery_type: device.battery_type,
         accustic_view: device.accustic_view,
-        unit: device.unit,
-        unitDoseRate: device.unitDoseRate,
+        dose_rate_display_unit: device.dose_rate_display_unit,
+        dose_rate_cps: device.dose_rate_cps,
         temperatureDisplay: device.temperatureDisplay,
         keyTones: device.keyTones,
         keyLock: device.keyLock,
         showDisplay: device.showDisplay,
         graphicalView: device.graphicalView,
-        showUnit: device.showUnit,
-        // Todo manu klären ob das naming so kommt
+        show_dr_in_cps_mode: device.show_dr_in_cps_mode,
         pick_date: device.pick_date,
         pick_time: device.pick_time,
         history_log_time: device.history_log_time
@@ -67,15 +67,16 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="unit" value={fields.unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
+                <AntSelect name="dose_rate_display_unit" value={fields.dose_rate_display_unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
                 <br/>
-                <AntSelect name="unitDoseRate" value={fields.unitDoseRate} options={["SW/H", "R/H", "REM/H"]}/>
+                <AntSelect name="dose_rate_cps" value={fields.dose_rate_cps} options={["SW/H", "R/H", "REM/H"]}/>
                 <br/>
-                <AntSwitch name="showUnit" value={fields.showUnit}/>
+                <AntSwitch name="show_dr_in_cps_mode" value={fields.show_dr_in_cps_mode}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <DatePicker name={"pick_date"} value={fields.pick_date}/>
                 <TimePicker name={"pick_time"} value={fields.pick_time}/>
+                <SyncTimeButton/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch name="keyTones" value={fields.keyTones}/>
