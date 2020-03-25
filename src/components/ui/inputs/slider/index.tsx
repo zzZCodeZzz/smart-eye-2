@@ -19,7 +19,7 @@ type antSliderProps = {
     label: string;
     id: string;
     caption?: string;
-    value: number | number[];
+    value?: number | number[];
     max: number;
     min: number;
     step: number | null;

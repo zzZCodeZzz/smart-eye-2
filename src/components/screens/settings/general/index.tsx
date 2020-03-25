@@ -1,13 +1,10 @@
 import React from "react";
 import {createStyles, Grid, Theme} from "@material-ui/core";
-import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider,} from "@material-ui/pickers";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
-import DatePicker from "../../../ui/inputs/date";
-import moment from "moment";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,203 +32,77 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type generalSettingsState = {
-    language: string;
-    batteryType: string;
-    acoustic: string;
-    historyLog: number | number[];
-    unit: string;
-    unitDoseRate: string;
-    showUnit: boolean;
-    date: Date | null;
-    keyTones: boolean;
-    keyLock: boolean;
-    temperatureDisplay: string;
-    showDisplay: boolean;
-    reversible: boolean;
-    graphicalView: boolean;
-}
-
 const GeneralSettings = () => {
 
     const classes = useStyles();
 
-    const [state, setState] = React.useState<generalSettingsState>({
-        language: "",
-        batteryType: "",
-        acoustic: "",
-        historyLog: 0,
-        unit: "",
-        unitDoseRate: "",
-        showUnit: false,
-        date: new Date(),
-        keyTones: false,
-        keyLock: false,
-        temperatureDisplay: "",
-        showDisplay: false,
-        reversible: false,
-        graphicalView: false,
-    });
-
-    const handleSliderChange = (name: keyof typeof state) => (event: any, value: number | number[]) => {
-        setState({
-            ...state,
-            [name]: value
-        });
-    };
-
-    const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const name = event.target.name as keyof typeof state;
-        setState({
-            ...state,
-            [name]: event.target.checked
-        });
-    };
-
-    const handleDateChange = (date: Date | null) => {
-        setState({
-            ...state,
-            date: date
-        });
-    };
-
-    const fields = useActiveDeviceFields(device => ({language: device.language}));
+    const fields = useActiveDeviceFields(device => ({
+        language: device.language,
+        reversible: device.reversible,
+        batteryType: device.batteryType,
+        acoustic: device.acoustic,
+        unit: device.unit,
+        unitDoseRate: device.unitDoseRate,
+        temperatureDisplay: device.temperatureDisplay,
+        keyTones: device.keyTones,
+        keyLock: device.keyLock,
+        showDisplay: device.showDisplay,
+        graphicalView: device.graphicalView,
+        showUnit: device.showUnit
+    }));
 
     return (
         <Grid container className={classes.container} spacing={3}>
             <Grid item xs={12} md={3}>
-                <AntSelect
-                    name="language"
-                    value={fields?.language}
-                    options={["german", "english", "français"]}
-                />
+                <AntSelect name="language" value={fields.language} options={["german", "english", "français"]}/>
             </Grid>
             <Grid item xs={12} md={3}>
-                <AntSelect
-                    name="batteryType"
-                    value={state.batteryType}
-                    options={["Rechargeable", "Alkaline"]}
-                />
+                <AntSelect name="batteryType" value={fields.batteryType} options={["Rechargeable", "Alkaline"]}/>
             </Grid>
             <Grid item xs={12} md={3}>
-                <AntSelect
-                    name="acoustic"
-                    value={state.acoustic}
-                    options={["None", "Finder", "Single impulse"]}
-                />
+                <AntSelect name="acoustic" value={fields.acoustic} options={["None", "Finder", "Single impulse"]}/>
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSlider
                     label="History Log"
                     id="historyLog"
-                    value={state.historyLog}
+                    value={50}
                     max={3600}
                     min={0}
                     step={10}
-                    onChange={handleSliderChange("historyLog")}
-                    caption="0 = Save history manually"/>
+                    caption="0 = Save history manually"
+                />
             </Grid>
             <Grid item xs={12} md={3}>
-                <AntSelect
-                    name="unit"
-                    value={state.unit}
-                    options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
-                />
+                <AntSelect name="unit" value={fields.unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
                 <br/>
-                <AntSelect
-                    name="unitDoseRate"
-                    value={state.unitDoseRate}
-                    options={["SW/H", "R/H", "REM/H"]}
-                />
+                <AntSelect name="unitDoseRate" value={fields.unitDoseRate} options={["SW/H", "R/H", "REM/H"]}/>
                 <br/>
-                <AntSwitch
-                    label="Show Unit"
-                    checked={state.showUnit}
-                    name="showUnit"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="showUnit" value={fields.showUnit}/>
             </Grid>
             <Grid item xs={12} md={3}>
-                {/*<DatePicker*/}
-                {/*    label={"Geburtstag"}*/}
-                {/*    value={moment()}*/}
-                {/*    onSelectDate={() => console.log("ha")}*/}
-                {/*    // inputStyle={{width: longInputWith}}*/}
-                {/*    // error={isUnder18}*/}
-                {/*    // errorText={isUnder18 ? "Nicht 18" : ""}*/}
-                {/*    disableFuture*/}
-                {/*    openTo={"year"}*/}
-                {/*    views={["year", "month", "date"]}*/}
-                {/*    autoOk />*/}
-                {/*<MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
-                {/*    <Grid container justify="space-around">*/}
-                {/*        <KeyboardDatePicker*/}
-                {/*            disableToolbar*/}
-                {/*            variant="inline"*/}
-                {/*            format="MM/dd/yyyy"*/}
-                {/*            margin="normal"*/}
-                {/*            id="date-picker-inline"*/}
-                {/*            label="Pick date"*/}
-                {/*            value={state.date}*/}
-                {/*            onChange={handleDateChange}*/}
-                {/*            KeyboardButtonProps={{*/}
-                {/*                'aria-label': 'change date',*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*        <KeyboardTimePicker*/}
-                {/*            margin="normal"*/}
-                {/*            id="time-picker"*/}
-                {/*            label="Pick time"*/}
-                {/*            value={state.date}*/}
-                {/*            onChange={handleDateChange}*/}
-                {/*            KeyboardButtonProps={{*/}
-                {/*                'aria-label': 'change time',*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </Grid>*/}
-                {/*</MuiPickersUtilsProvider>*/}
-                {/*{console.table(state)}*/}
+                date
             </Grid>
             <Grid item xs={12} md={3} spacing={5}>
-                <AntSwitch
-                    label="Key Tones"
-                    checked={state.keyTones}
-                    name="keyTones"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="keyTones" value={fields.keyTones}/>
                 <br/>
-                <AntSwitch
-                    label="Key Lock"
-                    checked={state.keyLock}
-                    name="keyLock"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="keyLock" value={fields.keyLock}/>
             </Grid>
             <Grid item xs={12} md={3}>
                 <AntSelect
                     name="temperatureDisplay"
-                    value={state.temperatureDisplay}
+                    value={fields.temperatureDisplay}
                     options={["None", "Fahrenheit", "Celsius"]}
                 />
                 <br/>
-                <AntSwitch
-                    label="Show DR in CPS mode"
-                    checked={state.showDisplay}
-                    name="showDisplay"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="showDisplay" value={fields.showDisplay}/>
                 <br/>
-                <AntSwitch
-                    label="Reversible"
-                    checked={state.reversible}
-                    name="reversible"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="reversible" value={fields.reversible}/>
                 <br/>
-                <AntSwitch
-                    label="Graphical view"
-                    checked={state.graphicalView}
-                    name="graphicalView"
-                    onChange={handleSwitchChange}/>
+                <AntSwitch name="graphicalView" value={fields.graphicalView}/>
             </Grid>
         </Grid>
     );
 };
 
 export default GeneralSettings;
-

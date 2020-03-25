@@ -1,4 +1,4 @@
-export type Maybe<T> = T | undefined | null;
+export type Maybe<T> = T | undefined;
 
 export type Device = {
     device_id: string;
@@ -6,6 +6,19 @@ export type Device = {
     connection_type: string;
     last_seen: string;
     host_name: string;
+
+    // Todo Manu -> naming klären
+    reversible: Maybe<string>;
+    batteryType: Maybe<string>;
+    acoustic: Maybe<string>;
+    unit: Maybe<string>;
+    unitDoseRate: Maybe<string>;
+    temperatureDisplay: Maybe<string>;
+    keyTones: Maybe<string>,
+    keyLock: Maybe<string>,
+    showDisplay: Maybe<string>,
+    graphicalView: Maybe<string>,
+    showUnit: Maybe<string>
 } & InfoData &
     MeasurementValues &
     ConfigurationValues &

@@ -4,6 +4,9 @@ import AntPaper from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
 import {useTranslation} from "react-i18next";
+import {useDispatch} from "react-redux";
+import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
+import {crazyToBool} from "../../../../mqtt/utils";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,21 +31,22 @@ const RedSwitch = styled(Switch)({
     track: {},
 });
 
-type antSwitchProps = {
-    label: string;
-    checked: boolean;
+type AntSwitchProps = {
+    name: string;
+    value?: string | number | boolean;
     checkedLabel?: string;
     uncheckedLabel?: string;
-    name: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 }
 
-const AntSwitch: FunctionComponent<antSwitchProps> = ({label, checked, name, onChange,
-                                                          checkedLabel = "on", uncheckedLabel = "off"}): JSX.Element => {
+const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, value, checkedLabel = "on", uncheckedLabel = "off"}) => {
 
     const classes = useStyles();
-
+    const dispatch = useDispatch();
     const {t} = useTranslation();
+
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => dispatch(
+        updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0")
+    );
 
     return (
         <AntPaper>
@@ -50,7 +54,7 @@ const AntSwitch: FunctionComponent<antSwitchProps> = ({label, checked, name, onC
             <Grid component="label" container alignItems="center" justify={"space-around"} spacing={1}>
                 <Grid item>{t(uncheckedLabel)}</Grid>
                 <Grid item>
-                    <RedSwitch checked={checked} onChange={onChange} name={name}/>
+                    <RedSwitch onChange={onChange} checked={crazyToBool(value)} name={name}/>
                 </Grid>
                 <Grid item>{t(checkedLabel)}</Grid>
             </Grid>

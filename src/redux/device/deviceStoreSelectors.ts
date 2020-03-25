@@ -8,7 +8,7 @@ export const useActiveDevice = () => useSelector((state: RootState): Device | nu
     shallowEqual
 );
 
-export const useActiveDeviceFields = <T>(selector: (device: Device) => T): T | null => {
+export const useActiveDeviceFields = <T>(selector: (device: Device) => T): T => {
     const activeDevice = useActiveDevice();
-    return activeDevice ? selector(activeDevice) : null
+    return activeDevice ? selector(activeDevice) : {} as T;
 };

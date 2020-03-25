@@ -22,7 +22,6 @@ const Settings = (): JSX.Element => {
             <AppBar position="relative">
                 <Tabs value={tabValue} aria-label="simple tabs example">
                     <Tab label="general" value="/settings/general" component={Link} to="/settings/general"/>
-                    <Tab label="log" value="/settings/log" component={Link} to="/settings/log"/>
                     <Tab label="alarm" value="/settings/alarm" component={Link} to="/settings/alarm"/>
                     <Tab label="function" value="/settings/function" component={Link} to="/settings/function"/>
                 </Tabs>
@@ -34,9 +33,6 @@ const Settings = (): JSX.Element => {
                     </Route>
                     <Route path={"/settings/general"}>
                         <GeneralSettings />
-                    </Route>
-                    <Route path={"/settings/log"}>
-                        log
                     </Route>
                     <Route path={"/settings/alarm"}>
                         alarm

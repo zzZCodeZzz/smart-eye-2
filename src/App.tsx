@@ -24,14 +24,12 @@ export const useTabsWithRouter = (routes: string | string[], defaultRoute: strin
 
 i18n.use(initReactI18next)
     .init({
-        resources: {
-        },
+        resources: {},
         fallbackLng: "de",
         interpolation: {
             escapeValue: false
         }
     });
-
 
 function App() {
 
