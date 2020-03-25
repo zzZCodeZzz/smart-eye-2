@@ -6,6 +6,7 @@ import {setActiveDeviceAndSubscribeHistory} from "../../../redux/device/radEyeDe
 import {Bluetooth, Flare} from "@material-ui/icons";
 import {createStyles, Grid, Paper, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import AntPaper from "../../ui/surfaces/paper";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -67,10 +68,10 @@ export const Measurement = () => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} sm={4} md={3}>
-                <Paper>Dosisleistung</Paper>
+                <AntPaper>Dosisleistung</AntPaper>
             </Grid>
             <Grid item xs={12} sm={8} md={6}>
-                <Paper>Graph</Paper>
+                <AntPaper>Graph</AntPaper>
             </Grid>
             <Grid item xs={12} md={3} className={classes.devicesList}>
                 {devices && Object.values(devices).map(device =>

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
         formControl: {
             width: "100%",
             [theme.breakpoints.only("xs")]: {
-                marginBottom: theme.spacing(1),
+                marginBottom: theme.spacing(3),
                 textAlign: "center"
             },
         },

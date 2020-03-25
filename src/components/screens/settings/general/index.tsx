@@ -53,16 +53,16 @@ const GeneralSettings = () => {
 
     return (
         <Grid container className={classes.container} spacing={3}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="language" value={fields.language} options={["german", "english", "français"]}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="batteryType" value={fields.batteryType} options={["Rechargeable", "Alkaline"]}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="acoustic" value={fields.acoustic} options={["None", "Finder", "Single impulse"]}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSlider
                     label="History Log"
                     value={50}
@@ -72,22 +72,22 @@ const GeneralSettings = () => {
                     caption="0 = Save history manually"
                 />
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="unit" value={fields.unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
                 <br/>
                 <AntSelect name="unitDoseRate" value={fields.unitDoseRate} options={["SW/H", "R/H", "REM/H"]}/>
                 <br/>
                 <AntSwitch name="showUnit" value={fields.showUnit}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 date
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch name="keyTones" value={fields.keyTones}/>
                 <br/>
                 <AntSwitch name="keyLock" value={fields.keyLock}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
                     name="temperatureDisplay"
                     value={fields.temperatureDisplay}
