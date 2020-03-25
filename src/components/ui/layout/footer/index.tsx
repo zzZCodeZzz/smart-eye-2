@@ -5,14 +5,19 @@ import {useActiveDevice} from "../../../../redux/device/deviceStoreSelectors";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        footer: {
-            background: theme.palette.secondary.main
-        },
         container: {
             padding: theme.spacing(3)
         },
+        footer: {
+            background: theme.palette.secondary.main,
+            "& span" : {
+                display: "block"
+            }
+        },
         right: {
-            textAlign: "right"
+            [theme.breakpoints.up("sm")]: {
+                textAlign: "right"
+            }
         }
     })
 );
@@ -48,7 +53,7 @@ const Footer: FunctionComponent = () => {
             </AppBar>
             <AppBar position="static" component="footer" className={classes.footer}>
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container justify="space-between">
+                    <Grid container spacing={3} justify="space-between" alignItems="center">
                         <Grid item xs={12} sm={6}>
                             <span>RadEye PRD-ER 33525</span>
                             <span>DESKTOP-RMTM4VA</span>
