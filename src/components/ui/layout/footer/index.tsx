@@ -28,8 +28,6 @@ const Footer: FunctionComponent = () => {
 
     const activeDevice = useActiveDevice();
 
-    console.log(activeDevice);
-
     const classes = useStyles();
 
     return (
