@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch as RouterSwitch, useRouteMatch, Redirect} from "react-router-dom";
 // import Settings from "./settings";
 import {
     AppBar, Container,
@@ -98,6 +98,9 @@ function App() {
                 </Container>
             </AppBar>
             <RouterSwitch>
+                <Route exact path={"/"}>
+                    <Redirect to={"/settings"}/>
+                </Route>
                 <Route path={"/measurement"}>
                     <MainContainer><Measurement/></MainContainer>
                 </Route>
