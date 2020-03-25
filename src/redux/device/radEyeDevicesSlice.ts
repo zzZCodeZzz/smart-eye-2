@@ -43,18 +43,13 @@ const radEyeDevicesSlice = createSlice({
 });
 
 export const updateDeviceLocalAndRemote = (fieldName: string, value: string): AppThunk => async (dispatch, getState) => {
-
     const {radEyeDevices} = getState();
-
     if (!radEyeDevices.activeDevice) {
         alert("no device active");
         return;
     }
-
     const alteredDevice: Device = {...radEyeDevices?.devices![radEyeDevices.activeDevice], [fieldName]: value};
-
     MQTTsendDevice(alteredDevice);
-
     dispatch(updateDevice(alteredDevice));
 };
 
