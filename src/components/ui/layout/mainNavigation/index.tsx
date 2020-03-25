@@ -28,13 +28,17 @@ const useStyles = makeStyles((theme: Theme) =>
             background: theme.palette.secondary.light
         },
         logo: {
+            letterSpacing: "-0.07rem",
             fontWeight: 500,
             marginTop: theme.spacing(3),
-            marginBottom: theme.spacing(3)
+            marginBottom: theme.spacing(3),
+            [theme.breakpoints.only("xs")]: {
+                textAlign: "center"
+            }
         },
         formControl: {
             width: "100%",
-            [theme.breakpoints.down("sm")]: {
+            [theme.breakpoints.only("xs")]: {
                 marginBottom: theme.spacing(1),
                 textAlign: "center"
             },
