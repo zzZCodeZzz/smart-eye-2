@@ -1,5 +1,5 @@
 import React from "react";
-import {createStyles, Grid, Button} from "@material-ui/core";
+import {createStyles, Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
@@ -8,7 +8,6 @@ import AntSlider from "../../../ui/inputs/slider";
 import DatePicker from "../../../ui/inputs/date/datePicker";
 import TimePicker from "../../../ui/inputs/date/timePikcer";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
-
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -43,7 +42,11 @@ const GeneralSettings = () => {
     return (
         <Grid container className={classes.gridContainer} spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="language" value={fields.language} options={["german", "english", "français"]}/>
+                <AntSelect
+                    name="language"
+                    value={fields.language}
+                    options={["german", "english", "français"]}
+                />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
@@ -53,7 +56,11 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="accustic_view" value={fields.accustic_view} options={["none", "finder", "single_impulse"]}/>
+                <AntSelect
+                    name="accustic_view"
+                    value={fields.accustic_view}
+                    options={["none", "finder", "single_impulse"]}
+                />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSlider
@@ -66,21 +73,44 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect name="dose_rate_display_unit" value={fields.dose_rate_display_unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
+                <AntSelect
+                    name="dose_rate_display_unit"
+                    value={fields.dose_rate_display_unit}
+                    options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
+                />
                 <br/>
-                <AntSelect name="dose_rate_cps" value={fields.dose_rate_cps} options={["SW/H", "R/H", "REM/H"]}/>
+                <AntSelect
+                    name="dose_rate_cps"
+                    value={fields.dose_rate_cps}
+                    options={["SW/H", "R/H", "REM/H"]}
+                />
                 <br/>
-                <AntSwitch name="show_dr_in_cps_mode" value={fields.show_dr_in_cps_mode}/>
+                <AntSwitch
+                    name="show_dr_in_cps_mode"
+                    value={fields.show_dr_in_cps_mode}
+                />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <DatePicker name={"pick_date"} value={fields.pick_date}/>
-                <TimePicker name={"pick_time"} value={fields.pick_time}/>
+                <DatePicker
+                    name={"pick_date"}
+                    value={fields.pick_date}
+                />
+                <TimePicker
+                    name={"pick_time"}
+                    value={fields.pick_time}
+                />
                 <SyncTimeButton/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSwitch name="beep_on_key" value={fields.beep_on_key}/>
+                <AntSwitch
+                    name="beep_on_key"
+                    value={fields.beep_on_key}
+                />
                 <br/>
-                <AntSwitch name="keyboard_lock" value={fields.keyboard_lock}/>
+                <AntSwitch
+                    name="keyboard_lock"
+                    value={fields.keyboard_lock}
+                />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
@@ -89,11 +119,20 @@ const GeneralSettings = () => {
                     options={["none", "celsius", "fahrenheit"]}
                 />
                 <br/>
-                <AntSwitch name="show_dr_in_cps_mode" value={fields.show_dr_in_cps_mode}/>
+                <AntSwitch
+                    name="show_dr_in_cps_mode"
+                    value={fields.show_dr_in_cps_mode}
+                />
                 <br/>
-                <AntSwitch name="reversible" value={fields.reversible}/>
+                <AntSwitch
+                    name="reversible"
+                    value={fields.reversible}
+                />
                 <br/>
-                <AntSwitch name="graphical_view" value={fields.graphical_view}/>
+                <AntSwitch
+                    name="graphical_view"
+                    value={fields.graphical_view}
+                />
             </Grid>
         </Grid>
     );
