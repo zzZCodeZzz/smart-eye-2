@@ -12,7 +12,7 @@ import {
     Theme,
     Typography
 } from "@material-ui/core";
-import {setActiveDevice, setActiveDeviceAndSubscribeHistory} from "../../../../redux/device/radEyeDevicesSlice";
+import {setActiveDeviceAndSubscribeHistory} from "../../../../redux/device/radEyeDevicesSlice";
 import {Bluetooth, Flare} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 textAlign: "center"
             },
         },
+        activeDeviceIcon: {
+            fontSize: "1rem",
+            lineHeight: "80%",
+            marginLeft: theme.spacing(0.5)
+        }
     })
 );
 
@@ -75,7 +80,7 @@ const MainNavigation: FunctionComponent = () => {
                                         key={device.device_id}
                                         value={device.device_id}>
                                         {device.device_id}
-                                        {device.connection_type === "BLE" ? <Bluetooth/> : <Flare/>}
+                                        {device.connection_type === "BLE" ? <Bluetooth className={classes.activeDeviceIcon}/> : <Flare className={classes.activeDeviceIcon}/>}
                                     </MenuItem>)}
                             </Select>
                         </FormControl>
