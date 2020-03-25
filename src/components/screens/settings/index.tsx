@@ -1,9 +1,18 @@
 import React, {Fragment} from "react"
 import {Link, Redirect, Route, Switch} from "react-router-dom";
 import {useTabsWithRouter} from "../../../App";
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, createStyles, Tab, Tabs, Theme} from "@material-ui/core";
 import GeneralSettings from "./general";
 import MainContainer from "../../ui/layout/mainContainer";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        settingsNavigation: {
+            background: theme.palette.background.default
+        }
+    })
+);
 
 const Settings = (): JSX.Element => {
 
@@ -17,9 +26,11 @@ const Settings = (): JSX.Element => {
         "/settings/general"
     );
 
+    const classes = useStyles();
+
     return (
         <Fragment>
-            <AppBar position="relative">
+            <AppBar position="relative" className={classes.settingsNavigation}>
                 <Tabs value={tabValue} aria-label="simple tabs example" centered>
                     <Tab label="general" value="/settings/general" component={Link} to="/settings/general"/>
                     <Tab label="alarm" value="/settings/alarm" component={Link} to="/settings/alarm"/>
