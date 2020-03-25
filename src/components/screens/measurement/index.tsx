@@ -7,6 +7,7 @@ import {Bluetooth, Flare} from "@material-ui/icons";
 import {createStyles, Grid, Paper, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntPaper from "../../ui/surfaces/paper";
+import MainContainer from "../../ui/layout/mainContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -66,27 +67,29 @@ export const Measurement = () => {
     const classes = useStyles();
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={4} md={3}>
-                <AntPaper>Dosisleistung</AntPaper>
-            </Grid>
-            <Grid item xs={12} sm={8} md={6}>
-                <AntPaper>Graph</AntPaper>
-            </Grid>
-            <Grid item xs={12} md={3} className={classes.devicesList}>
-                {devices && Object.values(devices).map(device =>
-                    <Device
-                        key={device.device_id}
-                        active={activeDevice === device.device_id}
-                        device_id={device.device_id}
-                        type_info={device.type_info}
-                        serialNumber={device.serial_number}
-                        gateway={device.host_name}
-                        lastSeen={device.last_seen}
-                        connection_type={device.connection_type}
-                    />)}
+        <MainContainer>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={4} md={3}>
+                    <AntPaper>Dosisleistung</AntPaper>
+                </Grid>
+                <Grid item xs={12} sm={8} md={6}>
+                    <AntPaper>Graph</AntPaper>
+                </Grid>
+                <Grid item xs={12} md={3} className={classes.devicesList}>
+                    {devices && Object.values(devices).map(device =>
+                        <Device
+                            key={device.device_id}
+                            active={activeDevice === device.device_id}
+                            device_id={device.device_id}
+                            type_info={device.type_info}
+                            serialNumber={device.serial_number}
+                            gateway={device.host_name}
+                            lastSeen={device.last_seen}
+                            connection_type={device.connection_type}
+                        />)}
 
+                </Grid>
             </Grid>
-        </Grid>
+        </MainContainer>
     )
 };

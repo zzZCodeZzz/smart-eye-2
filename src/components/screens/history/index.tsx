@@ -1,13 +1,14 @@
 import React from 'react';
-import MaterialTable, {Column} from 'material-table';
+import MaterialTable from 'material-table';
 import {useActiveDeviceHistory} from "../../../redux/device/deviceStoreSelectors";
+import MainContainer from "../../ui/layout/mainContainer";
 
 export default function DeviceHistory() {
 
     const activeDeviceHistory = useActiveDeviceHistory();
 
     return (
-        <div>
+        <MainContainer>
             <MaterialTable
                 title={""}
                 columns={[
@@ -33,6 +34,6 @@ export default function DeviceHistory() {
                 // fix, since objects from mqtt are not editable
                 data={JSON.parse(JSON.stringify(activeDeviceHistory))}
             />
-        </div>
+        </MainContainer>
     );
 }
