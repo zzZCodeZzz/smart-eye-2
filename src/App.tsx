@@ -25,6 +25,7 @@ import {RootState} from "./redux/rootReducer";
 import {Measurement} from "./components/screens/measurement";
 import {setActiveDevice} from './redux/device/radEyeDevicesSlice';
 import {Bluetooth, Flare} from "@material-ui/icons";
+import {useActiveDevice} from "./redux/device/deviceStoreSelectors";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -54,14 +55,15 @@ function App() {
         devices: state.radEyeDevices
     }));
 
+    const activeDevice = useActiveDevice();
+
     const dispatch = useDispatch();
 
     const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
 
     return (
         <div className="App">
-            {/*Todo sry inline style*/}
-            <AppBar position="static" style={{display: "flex", flexDirection: "row"}}>
+            <AppBar position="static">
                 <Tabs value={tabValue} aria-label="simple tabs example">
                     <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
                     <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
@@ -97,7 +99,14 @@ function App() {
             </RouterSwitch>
             <AppBar position="static" component="footer">
                 <Toolbar>
-                    Footer
+                    Verbindungsart: {activeDevice && activeDevice.connection_type}
+                    Seriennummer: {activeDevice && activeDevice.serial_number}
+                    Batterie: {activeDevice && activeDevice.batteryType}
+                    Letzt kalibrierung: ?
+                    Aktiv: {activeDevice && activeDevice.last_seen}
+                    Temparatur: {activeDevice && activeDevice.temperature}
+                    Standort: Wolfratshause
+                    Boardnummer: {activeDevice && activeDevice.board_number}
                 </Toolbar>
             </AppBar>
         </div>
