@@ -5,7 +5,7 @@ import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
-import DatePicker from "../../../ui/inputs/date/datePicker";
+import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import TimePicker from "../../../ui/inputs/date/timePikcer";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 
@@ -91,14 +91,11 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <DatePicker
+                <DateTimePicker
                     name={"pick_date"}
                     value={fields.pick_date}
                 />
-                <TimePicker
-                    name={"pick_time"}
-                    value={fields.pick_time}
-                />
+                <br/>
                 <SyncTimeButton/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>

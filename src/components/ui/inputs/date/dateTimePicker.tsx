@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from "react";
-import {DatePicker as MuiDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
+import {MuiPickersUtilsProvider, DateTimePicker as MuiDateTimePicker} from "@material-ui/pickers";
 import moment from "moment";
 import momentUtils from "@date-io/moment";
 
@@ -13,7 +13,7 @@ type DatePickerProps = {
     value?: string;
 }
 
-const DatePicker: FunctionComponent<DatePickerProps> = ({name, value}) => {
+const DateTimePicker: FunctionComponent<DatePickerProps> = ({name, value}) => {
 
     const {t} = useTranslation();
     const dispatch = useDispatch();
@@ -27,18 +27,16 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({name, value}) => {
 
     return (
         <MuiPickersUtilsProvider utils={momentUtils} locale={"de"}>
-            <MuiDatePicker
-                label={t(name)}
+            <MuiDateTimePicker
+                label={t("date_time")}
+                autoOk
+                ampm={false}
                 value={moment(value)}
-                autoOk={true}
                 onChange={onChange}
-                animateYearScrolling
-                format={"DD.MM.YYYY"}
-                openTo={"year"}
-                views={["year", "month", "date"]}
+                format={"DD.MM.YYYY - HH:mm" }
             />
         </MuiPickersUtilsProvider>
     )
 };
 
-export default DatePicker;
+export default DateTimePicker;
