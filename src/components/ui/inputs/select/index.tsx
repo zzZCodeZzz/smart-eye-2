@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             color: theme.palette.text.secondary,
         },
+        select: {
+            textTransform: "uppercase"
+        },
+        option: {
+            textTransform: "uppercase"
+        }
     }),
 );
 
@@ -42,8 +48,8 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
         <AntPaper>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
-                <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange}>
-                    {options.map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
+                <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange} className={classes.select}>
+                    {options.map(option => <MenuItem key={option} value={option} className={classes.option}>{option}</MenuItem>)}
                 </Select>
             </FormControl>
         </AntPaper>
