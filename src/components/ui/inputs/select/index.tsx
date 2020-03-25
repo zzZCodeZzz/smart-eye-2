@@ -41,9 +41,8 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     return (
         <AntPaper>
             <FormControl className={classes.formControl}>
-                {/*Todo @damata kann man dass so machen das das label soch nicht bewegt? ^^'*/}
                 <AntLabel>{t(name)}</AntLabel>
-                <Select value={value ? value : null} inputProps={{name: name, id: inputId}} onChange={onChange}>
+                <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange}>
                     {options.map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
                 </Select>
             </FormControl>

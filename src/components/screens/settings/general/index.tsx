@@ -65,7 +65,6 @@ const GeneralSettings = () => {
             <Grid item xs={12} md={3}>
                 <AntSlider
                     label="History Log"
-                    id="historyLog"
                     value={50}
                     max={3600}
                     min={0}
