@@ -30,11 +30,10 @@ const GeneralSettings = () => {
         accustic_view: device.accustic_view,
         dose_rate_display_unit: device.dose_rate_display_unit,
         dose_rate_cps: device.dose_rate_cps,
-        temperatureDisplay: device.temperatureDisplay,
-        keyTones: device.keyTones,
-        keyLock: device.keyLock,
-        showDisplay: device.showDisplay,
-        graphicalView: device.graphicalView,
+        temperature_display: device.temperature_display,
+        beep_on_key: device.beep_on_key,
+        keyboard_lock: device.keyboard_lock,
+        graphical_view: device.graphical_view,
         show_dr_in_cps_mode: device.show_dr_in_cps_mode,
         pick_date: device.pick_date,
         pick_time: device.pick_time,
@@ -79,22 +78,22 @@ const GeneralSettings = () => {
                 <SyncTimeButton/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSwitch name="keyTones" value={fields.keyTones}/>
+                <AntSwitch name="beep_on_key" value={fields.beep_on_key}/>
                 <br/>
-                <AntSwitch name="keyLock" value={fields.keyLock}/>
+                <AntSwitch name="keyboard_lock" value={fields.keyboard_lock}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
-                    name="temperatureDisplay"
-                    value={fields.temperatureDisplay}
-                    options={["None", "Fahrenheit", "Celsius"]}
+                    name="temperature_display"
+                    value={fields.temperature_display}
+                    options={["none", "celsius", "fahrenheit"]}
                 />
                 <br/>
-                <AntSwitch name="showDisplay" value={fields.showDisplay}/>
+                <AntSwitch name="show_dr_in_cps_mode" value={fields.show_dr_in_cps_mode}/>
                 <br/>
                 <AntSwitch name="reversible" value={fields.reversible}/>
                 <br/>
-                <AntSwitch name="graphicalView" value={fields.graphicalView}/>
+                <AntSwitch name="graphical_view" value={fields.graphical_view}/>
             </Grid>
         </Grid>
     );

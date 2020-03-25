@@ -15,12 +15,11 @@ export type Device = {
 
     dose_rate_display_unit: Maybe<string>;
     dose_rate_cps: Maybe<string>;
-    temperatureDisplay: Maybe<string>;
-    show_dr_in_cps_mode: Maybe<string>
-    keyTones: Maybe<string>,
-    keyLock: Maybe<string>,
-    showDisplay: Maybe<string>,
-    graphicalView: Maybe<string>,
+    temperature_display: Maybe<string>;
+    beep_on_key: Maybe<string>,
+    keyboard_lock: Maybe<string>,
+    show_dr_in_cps_mode: Maybe<string>,
+    graphical_view: Maybe<string>,
     pick_date: Maybe<string>;
     pick_time: Maybe<string>;
 } & InfoData &
