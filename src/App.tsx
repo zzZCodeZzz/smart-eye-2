@@ -5,13 +5,13 @@ import Settings from "./components/screens/settings";
 import {Provider} from "react-redux";
 import store from "./redux/store";
 import {theme} from "./components/ui/layout/theme";
-import MainContainer from "./components/ui/layout/mainContainer";
 import {useConfigureAndConnectMqttClient} from "./mqtt/config";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import {Measurement} from "./components/screens/measurement";
 import MainNavigation from "./components/ui/layout/mainNavigation";
 import Footer from "./components/ui/layout/footer";
+import DeviceHistory from "./components/screens/history";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -43,10 +43,10 @@ function App() {
                     <Redirect to={"/settings"}/>
                 </Route>
                 <Route path={"/measurement"}>
-                    <MainContainer><Measurement/></MainContainer>
+                   <Measurement/>
                 </Route>
                 <Route path={"/log"}>
-                    <MainContainer>log</MainContainer>
+                   <DeviceHistory/>
                 </Route>
                 <Route path={"/settings"}>
                     <Settings/>

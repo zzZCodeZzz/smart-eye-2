@@ -75,7 +75,6 @@ export const useConfigureAndConnectMqttClient = () => {
                 .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
             ) {
                 const data = JSON.parse(message.payloadString);
-                console.log("act", activeDevice?.device_id, data, message.destinationName)
                 if (message.destinationName === mqttConfig.topic_coming_going_toclient) {
                     if (data.devices) {
                         dispatch(onDevicesReceived(data.devices));

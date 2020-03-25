@@ -2,8 +2,10 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
 import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
+import {useSelector} from "react-redux";
+import {RootState} from "../rootReducer";
 
-type DeviceHistoryEntry = {
+export type DeviceHistoryEntry = {
     line: string;
     device_id: string;
     time_record_todb: string;
@@ -44,7 +46,7 @@ const radEyeDevicesSlice = createSlice({
         setActiveDevice(state, action: PayloadAction<string>) {
             state.activeDevice = action.payload;
         },
-        onDevicesReceived(state ,action: PayloadAction<Device[]>) {
+        onDevicesReceived(state, action: PayloadAction<Device[]>) {
             state.devices = action.payload
                 .map(device => {
                     if (!device.serial_number || device.serial_number.replace(/[^0-9SNC]/g, "").length === 0) {
@@ -62,7 +64,7 @@ const radEyeDevicesSlice = createSlice({
             if (!state.devices) state.devices = {};
             state.devices[action.payload.device_id] = action.payload;
         },
-        onDeviceHistoryReceived(state, action: PayloadAction<DeviceHistoryEntry[]>){
+        onDeviceHistoryReceived(state, action: PayloadAction<DeviceHistoryEntry[]>) {
             state.activeDeviceHistory = action.payload;
         }
     }
