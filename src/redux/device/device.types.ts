@@ -19,6 +19,8 @@ export type Device = {
     showDisplay: Maybe<string>,
     graphicalView: Maybe<string>,
     showUnit: Maybe<string>
+    pick_date: Maybe<string>;
+    pick_time: Maybe<string>;
 } & InfoData &
     MeasurementValues &
     ConfigurationValues &

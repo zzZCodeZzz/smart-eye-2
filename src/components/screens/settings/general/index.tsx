@@ -5,10 +5,7 @@ import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
-import {DatePicker, MuiPickersUtilsProvider, TimePicker} from "@material-ui/pickers";
-
-import moment from "moment";
-import momentUtils from "@date-io/moment";
+import DatePicker from "../../../ui/inputs/date/datePicker";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,7 +49,10 @@ const GeneralSettings = () => {
         keyLock: device.keyLock,
         showDisplay: device.showDisplay,
         graphicalView: device.graphicalView,
-        showUnit: device.showUnit
+        showUnit: device.showUnit,
+        // Todo manu klären ob das naming so kommt
+        pick_date: device.pick_date,
+        pick_time: device.pick_time,
     }));
 
     return (
@@ -76,6 +76,7 @@ const GeneralSettings = () => {
                     caption="0 = Save history manually"
                 />
             </Grid>
+
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="unit" value={fields.unit} options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}/>
                 <br/>
@@ -84,21 +85,22 @@ const GeneralSettings = () => {
                 <AntSwitch name="showUnit" value={fields.showUnit}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <MuiPickersUtilsProvider utils={momentUtils}>
-                    <DatePicker
-                        label="Basic example"
-                        value={moment()}
-                        onChange={() => console.log("ayay")}
-                        animateYearScrolling
-                    />
-                    <TimePicker
-                        variant="inline"
-                        label="Inline mode"
-                        orientation="landscape"
-                        value={moment()}
-                        onChange={()=> console.log("hamasdf")}
-                    />
-                </MuiPickersUtilsProvider>
+                {/*<MuiPickersUtilsProvider utils={momentUtils}>*/}
+                {/*    <DatePicker*/}
+                {/*        label={t("pick_date")}*/}
+                {/*        value={moment()}*/}
+                {/*        onChange={() => console.log("ayay")}*/}
+                {/*        animateYearScrolling*/}
+                {/*    />*/}
+                {/*    <TimePicker*/}
+                {/*        variant="inline"*/}
+                {/*        label={t("pick_time")}*/}
+                {/*        orientation="landscape"*/}
+                {/*        value={moment()}*/}
+                {/*        onChange={()=> console.log("hamasdf")}*/}
+                {/*    />*/}
+                {/*</MuiPickersUtilsProvider>*/}
+                <DatePicker name={"pick_date"} value={fields.pick_date}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch name="keyTones" value={fields.keyTones}/>

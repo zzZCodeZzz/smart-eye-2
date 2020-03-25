@@ -13,6 +13,8 @@ import MainNavigation from "./components/ui/layout/mainNavigation";
 import Footer from "./components/ui/layout/footer";
 import DeviceHistory from "./components/screens/history";
 import {RootState} from "./redux/rootReducer";
+import "moment/locale/de";
+import moment from "moment";
 
 export const useTabsWithRouter = (routes: string | string[], defaultRoute: string) => {
     const match = useRouteMatch(routes);
@@ -31,6 +33,8 @@ i18n.use(initReactI18next)
             escapeValue: false
         }
     });
+
+moment.locale("de");
 
 const useTranslationUpdate = () => useSelector((state: RootState) => state.app.dictionary.ready);
 
