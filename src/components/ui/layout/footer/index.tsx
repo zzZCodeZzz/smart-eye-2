@@ -5,7 +5,7 @@ import {useActiveDevice} from "../../../../redux/device/deviceStoreSelectors";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        container: {
+        gridContainer: {
             padding: theme.spacing(3)
         },
         footer: {
@@ -38,7 +38,7 @@ const Footer: FunctionComponent = () => {
     return (
         <Fragment>
             <AppBar position="static">
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth="lg" className={classes.gridContainer}>
                     <Grid container justify="space-between" alignItems="center">
                         Verbindungsart: {activeDevice && activeDevice.connection_type}
                         Seriennummer: {activeDevice && activeDevice.serial_number}
@@ -52,7 +52,7 @@ const Footer: FunctionComponent = () => {
                 </Container>
             </AppBar>
             <AppBar position="static" component="footer" className={classes.footer}>
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth="lg" className={classes.gridContainer}>
                     <Grid container spacing={3} justify="space-between" alignItems="center">
                         <Grid item xs={12} sm={6}>
                             <span>RadEye PRD-ER 33525</span>

@@ -5,6 +5,7 @@ import {AppBar, createStyles, Tab, Tabs, Theme} from "@material-ui/core";
 import GeneralSettings from "./general";
 import MainContainer from "../../ui/layout/mainContainer";
 import {makeStyles} from "@material-ui/core/styles";
+import AlarmSettings from "./alarm";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,7 +50,7 @@ const Settings = (): JSX.Element => {
                         <GeneralSettings/>
                     </Route>
                     <Route path={"/settings/alarm"}>
-                        alarm
+                        <AlarmSettings />
                     </Route>
                     <Route path={"/settings/function"}>
                         function

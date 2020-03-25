@@ -1,5 +1,5 @@
 import React from "react";
-import {createStyles, Grid, Theme} from "@material-ui/core";
+import {createStyles, Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
 import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
@@ -9,28 +9,11 @@ import DatePicker from "../../../ui/inputs/date/datePicker";
 import TimePicker from "../../../ui/inputs/date/timePikcer";
 
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
-        root: {
-            flexGrow: 1,
-            overflowX: "hidden",
-            padding: 20,
-        },
-        container: {
+        gridContainer: {
             justifyContent: "center",
             padding: "10px 0",
-        },
-        formControl: {
-            width: "100%",
-            marginBottom: theme.spacing(3)
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(3),
-        },
-        timePicker: {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-            width: 200,
         }
     }),
 );
@@ -59,7 +42,7 @@ const GeneralSettings = () => {
     }));
 
     return (
-        <Grid container className={classes.container} spacing={3}>
+        <Grid container className={classes.gridContainer} spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect name="language" value={fields.language} options={["german", "english", "français"]}/>
             </Grid>
