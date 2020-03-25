@@ -20,6 +20,7 @@ import {RootState} from "../../../../redux/rootReducer";
 import {useTabsWithRouter} from "../../../../App";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../../inputs/label";
+import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,16 +54,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MainNavigation: FunctionComponent = () => {
 
-    const {devices} = useSelector((state: RootState) => ({
-        dictReady: state.app.dictionary.ready,
-        devices: state.radEyeDevices
-    }));
-
+    const classes = useStyles();
     const dispatch = useDispatch();
+    const {t} = useTranslation();
+
+    const {devices} = useSelector((state: RootState) => ({devices: state.radEyeDevices}));
 
     const {tabValue} = useTabsWithRouter(['/measurement', '/log', '/settings'], '/settings');
-
-    const classes = useStyles();
 
     return (
         <AppBar position="static" className={classes.mainNavigationBar}>
@@ -73,27 +71,27 @@ const MainNavigation: FunctionComponent = () => {
                     </Grid>
                     <Grid item xs={12} sm={5} md={3}>
                         <FormControl className={classes.formControl}>
-                            <AntLabel>Active Device</AntLabel>
+                            <AntLabel>{t("active_device")}</AntLabel>
                             <Select
                                 inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}
                                 value={devices.activeDevice ? devices.activeDevice : ""}
                                 onChange={(event: React.ChangeEvent<any>) => dispatch(setActiveDeviceAndSubscribeHistory(event.target.value))}
                             >
-                                {devices.devices && Object.values(devices.devices).map(device =>
-                                    <MenuItem
-                                        key={device.device_id}
-                                        value={device.device_id}>
+                                {devices.devices && Object.values(devices.devices).map(device => (
+                                    <MenuItem key={device.device_id} value={device.device_id}>
                                         {device.device_id}
-                                        {device.connection_type === "BLE" ? <Bluetooth className={classes.activeDeviceIcon}/> : <Flare className={classes.activeDeviceIcon}/>}
-                                    </MenuItem>)}
+                                        {device.connection_type === "BLE"
+                                            ? <Bluetooth className={classes.activeDeviceIcon}/>
+                                            : <Flare className={classes.activeDeviceIcon}/>}
+                                    </MenuItem>))}
                             </Select>
                         </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
-                            <Tab label="measurement" value={"/measurement"} component={Link} to={"/measurement"}/>
-                            <Tab label="log" value={"/log"} component={Link} to={"/log"}/>
-                            <Tab label="settings" value={"/settings"} component={Link} to={"/settings"}/>
+                            <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
+                            <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
+                            <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
                         </Tabs>
                     </Grid>
                 </Grid>

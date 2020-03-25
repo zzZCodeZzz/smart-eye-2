@@ -35,6 +35,7 @@ type SelectProps = {
 
 const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.Element => {
 
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const inputId = `${name}-select`;

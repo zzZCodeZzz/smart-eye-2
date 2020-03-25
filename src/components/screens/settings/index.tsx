@@ -5,6 +5,7 @@ import {AppBar, createStyles, Tab, Tabs, Theme} from "@material-ui/core";
 import GeneralSettings from "./general";
 import MainContainer from "../../ui/layout/mainContainer";
 import {makeStyles} from "@material-ui/core/styles";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,13 +29,15 @@ const Settings = (): JSX.Element => {
 
     const classes = useStyles();
 
+    const {t} = useTranslation();
+
     return (
         <Fragment>
             <AppBar position="relative" className={classes.settingsNavigation}>
                 <Tabs value={tabValue} aria-label="simple tabs example" centered>
-                    <Tab label="general" value="/settings/general" component={Link} to="/settings/general"/>
-                    <Tab label="alarm" value="/settings/alarm" component={Link} to="/settings/alarm"/>
-                    <Tab label="function" value="/settings/function" component={Link} to="/settings/function"/>
+                    <Tab label={t("general_settings")} value="/settings/general" component={Link} to="/settings/general"/>
+                    <Tab label={t("alarm_settings")} value="/settings/alarm" component={Link} to="/settings/alarm"/>
+                    <Tab label={t("functions_settings")} value="/settings/function" component={Link} to="/settings/function"/>
                 </Tabs>
             </AppBar>
             <MainContainer>
@@ -43,7 +46,7 @@ const Settings = (): JSX.Element => {
                         <Redirect to={"/settings/general"}/>
                     </Route>
                     <Route path={"/settings/general"}>
-                        <GeneralSettings />
+                        <GeneralSettings/>
                     </Route>
                     <Route path={"/settings/alarm"}>
                         alarm
