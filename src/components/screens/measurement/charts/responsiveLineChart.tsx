@@ -98,7 +98,7 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
                     onMouseDown={e => setChartState(prevState => ({...prevState, refAreaLeft: e.activeLabel}))}
                     onMouseMove={e => chartState.refAreaLeft && setChartState(prevState => ({
                         ...prevState,
-                        refAreaRight: e.activeLabel
+                        refAreaRight: e?.activeLabel
                     }))}
                     onMouseUp={zoom}
                 >
