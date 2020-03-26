@@ -36,9 +36,9 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
             position: "relative",
 
             [theme.breakpoints.up("md")]: {
-                minHeight: "9rem"
+                minHeight: "6.5rem"
             },
-            [theme.breakpoints.up("xs")]: {
+            [theme.breakpoints.down("sm")]: {
                 minHeight: "17rem"
             },
             [theme.breakpoints.down("xs")]: {
@@ -46,11 +46,13 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
             },
         },
         centralize: {
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-            justifyContent: "center"
+            [theme.breakpoints.only("sm")]: {
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+                justifyContent: "center"
+            }
         }
     }),
 );

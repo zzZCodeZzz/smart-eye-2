@@ -15,16 +15,16 @@ const AlarmEnergyRate = () => {
                 <Grid item xs={12} className={classes.paperTitle}>
                     <Typography variant="h6">Energieverhältnis</Typography>
                 </Grid>
-                <Grid item sm={12} md={6} lg={3}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
                     <AntSwitch target={"settings"} name="Aktiv"/>
                 </Grid>
-                <Grid item sm={12} md={6} lg={3}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
                     <AntInput name="Minimale Werte"/>
                 </Grid>
-                <Grid item sm={12} md={6} lg={3}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
                     <AntSlider target={"device"} name={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10}/>
                 </Grid>
-                <Grid item sm={12} md={6} lg={3}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
                     <AntSlider target={"device"} name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10}/>
                 </Grid>
             </Grid>
