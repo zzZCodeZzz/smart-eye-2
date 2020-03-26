@@ -2,8 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
 import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
-import {useSelector} from "react-redux";
-import {RootState} from "../rootReducer";
 
 export type DeviceHistoryEntry = {
     line: string;
