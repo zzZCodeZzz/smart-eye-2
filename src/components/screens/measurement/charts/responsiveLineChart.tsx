@@ -20,7 +20,7 @@ type ResponsiveLineChartState = {
 const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
 
     const [chartState, setChartState] = useState<ResponsiveLineChartState>({
-        data,
+        data: data,
         left: 'dataMin',
         right: 'dataMax',
         refAreaLeft: '',
@@ -35,21 +35,19 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
     const getAxisYDomain = (from: string, to: string, ref: "time" | "dose" | "dose_rate", offset: any): string[] => {
 
         const fromIndex = data.findIndex((item: DeviceDoseVisualisation) => item.time === from);
-        const toIndex = data.findIndex((item: DeviceDoseVisualisation)=> item.time === to);
+        const toIndex = data.findIndex((item: DeviceDoseVisualisation) => item.time === to);
 
         const refData = data.slice(fromIndex - 1, toIndex);
-
-        let [bottom, top] = [refData[0]![ref], refData[0]![ref]];
+        let [bottom, top] = [refData[0][ref], refData[0][ref]];
         refData.forEach((d: any) => {
             if (d[ref] > top) top = d[ref];
             if (d[ref] < bottom) bottom = d[ref];
         });
-
         return [(bottom | 0) - offset, (top | 0) + offset];
     };
 
     const zoom = (): void => {
-        const {refAreaLeft, refAreaRight, data} = chartState;
+        const {refAreaLeft, refAreaRight} = chartState;
 
         if (refAreaLeft === refAreaRight || refAreaRight === '') {
             setChartState(prevState => ({...prevState, refAreaLeft: "", refAreaRight: ""}));
@@ -66,25 +64,27 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
         }
 
         // yAxis domain
-        const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose', 1);
-        const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose_rate', 50);
+        if (data.length > 3) {
+            const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose', 1);
+            const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose_rate', 50);
 
-        setChartState(prevState => ({
-            ...prevState,
-            refAreaLeft: '',
-            refAreaRight: '',
-            data: data.slice(),
-            left: refAreaLeft,
-            right: refAreaRight,
-            bottom,
-            top,
-            bottom2,
-            top2,
-        }));
+            setChartState(prevState => ({
+                ...prevState,
+                refAreaLeft: '',
+                refAreaRight: '',
+                data: data.slice(),
+                left: refAreaLeft,
+                right: refAreaRight,
+                bottom,
+                top,
+                bottom2,
+                top2,
+            }));
+        }
+
     };
 
     const zoomOut = (): void => {
-        const {data} = chartState;
         setChartState(prevState => ({
             ...prevState,
             data: data.slice(),

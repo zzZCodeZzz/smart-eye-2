@@ -75,7 +75,6 @@ const radEyeDevicesSlice = createSlice({
             if (action.payload[0]) {
                 const [firstDevice] = action.payload;
                 if (!state.activeDevice) {
-                    console.log("first", firstDevice)
                     state.activeDevice = firstDevice.device_id;
                     MQTTSubscribeHistoryForActiveDevice(firstDevice.device_id);
 
