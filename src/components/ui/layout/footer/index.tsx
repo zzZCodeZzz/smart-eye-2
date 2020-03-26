@@ -6,7 +6,7 @@ import {useActiveDevice} from "../../../../redux/device/deviceStoreSelectors";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         gridContainer: {
-            padding: theme.spacing(3)
+            padding: theme.spacing(5)
         },
         footer: {
             background: theme.palette.secondary.main,
@@ -22,13 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-// TODO @manu geht das?
-// const infoGrid = (item) => (
-//     <Grid item xs={12} sm={4} md={3}>
-//          infoGridItem
-//     </Grid>
-// )
-
 const Footer: FunctionComponent = () => {
 
     const activeDevice = useActiveDevice();
@@ -39,15 +32,31 @@ const Footer: FunctionComponent = () => {
         <Fragment>
             <AppBar position="static">
                 <Container maxWidth="lg" className={classes.gridContainer}>
-                    <Grid container justify="space-between" alignItems="center">
-                        Verbindungsart: {activeDevice && activeDevice.connection_type}
-                        Seriennummer: {activeDevice && activeDevice.serial_number}
-                        Batterie: {activeDevice && activeDevice.battery_type}
-                        Letzt kalibrierung: ?
-                        Aktiv: {activeDevice && activeDevice.last_seen}
-                        Temparatur: {activeDevice && activeDevice.temperature}
-                        Standort: Wolfratshause
-                        Boardnummer: {activeDevice && activeDevice.board_number}
+                    <Grid container justify="space-between" alignItems="center" spacing={3}>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Verbindungsart: {activeDevice && activeDevice.connection_type}
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Seriennummer: {activeDevice && activeDevice.serial_number}
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Batterie: {activeDevice && activeDevice.battery_type}
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Letzt kalibrierung: ?
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Aktiv: {activeDevice && activeDevice.last_seen}
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Temparatur: {activeDevice && activeDevice.temperature}
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Standort: Wolfratshause
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            Boardnummer: {activeDevice && activeDevice.board_number}
+                        </Grid>
                     </Grid>
                 </Container>
             </AppBar>

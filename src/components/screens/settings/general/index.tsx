@@ -8,7 +8,6 @@ import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 import AntPaper from "../../../ui/surfaces/paper";
-import Alert from "../../../ui/surfaces/alert";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -41,7 +40,6 @@ const GeneralSettings = () => {
 
     return (
         <Grid container className={classes.gridContainer} spacing={3}>
-            <Alert title="No device active" message="This is an example of alert we could be using" />
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
                     name="language"

@@ -8,7 +8,7 @@ const useStyles = makeStyles(() =>
             flexGrow: 1,
             overflowX: "hidden",
             padding: "30px 20px",
-            minHeight: "40rem",
+            minHeight: "65vh",
         }
     })
 );

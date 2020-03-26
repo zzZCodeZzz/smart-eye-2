@@ -11,7 +11,7 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
     createStyles({
         gridContainer: {
             justifyContent: "center",
-            padding: theme.spacing(1),
+            padding: `0 ${theme.spacing(1)}px`,
         },
         label: {
             fontWeight: 500,
