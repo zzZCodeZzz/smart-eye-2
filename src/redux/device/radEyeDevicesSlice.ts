@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
 import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
+import moment, {Moment, MomentObjectOutput} from "moment";
 
 export type DeviceHistoryEntry = {
     line: string;
@@ -24,10 +25,11 @@ export type DeviceHistoryEntry = {
     contamination_bq: string;
 }
 
-type DeviceDoseVisualisation = {
-    dose: string;
-    dose_rate: string;
-    count_rate_gamma: string;
+export type DeviceDoseVisualisation = {
+    time: string;
+    dose: number;
+    dose_rate: number;
+    count_rate_gamma: number;
 }
 
 type DevicesState = {
@@ -52,9 +54,10 @@ const radEyeDevicesSlice = createSlice({
             state.activeDevice = action.payload;
             if (state.devices && state.devices[action.payload] && state.devices[action.payload].dose) {
                 state.activeDeviceDoseVisualisation = [{
-                    dose: state.devices[action.payload].dose as string,
-                    dose_rate: state.devices[action.payload].dose_rate as string,
-                    count_rate_gamma: state.devices[action.payload].count_rate_gamma as string
+                    time: moment().toISOString(),
+                    dose: Number(state.devices[action.payload].dose),
+                    dose_rate: Number(state.devices[action.payload].dose_rate),
+                    count_rate_gamma: Number(state.devices[action.payload].count_rate_gamma)
                 }]
             } else {
                 state.activeDeviceDoseVisualisation = [];
@@ -80,9 +83,10 @@ const radEyeDevicesSlice = createSlice({
                         state.activeDeviceDoseVisualisation =
                             [...state.activeDeviceDoseVisualisation,
                                 {
-                                    dose: firstDevice.dose as string,
-                                    dose_rate: firstDevice.dose_rate as string,
-                                    count_rate_gamma: firstDevice.count_rate_gamma as string
+                                    time: moment().toISOString(),
+                                    dose: Number(firstDevice.dose),
+                                    dose_rate: Number(firstDevice.dose_rate),
+                                    count_rate_gamma: Number(firstDevice.count_rate_gamma)
                                 }
                             ]
                     }
@@ -92,9 +96,10 @@ const radEyeDevicesSlice = createSlice({
                         state.activeDeviceDoseVisualisation =
                             [...state.activeDeviceDoseVisualisation,
                                 {
-                                    dose: activeDevice.dose as string,
-                                    dose_rate: activeDevice.dose_rate as string,
-                                    count_rate_gamma: activeDevice.count_rate_gamma as string
+                                    time: moment().toISOString(),
+                                    dose: Number(activeDevice.dose),
+                                    dose_rate: Number(activeDevice.dose_rate),
+                                    count_rate_gamma: Number(activeDevice.count_rate_gamma)
                                 }
                             ]
                     }

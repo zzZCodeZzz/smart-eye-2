@@ -1,9 +1,11 @@
 import React, {FunctionComponent, useState} from 'react';
 import {CartesianGrid, Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
 import {Button} from "@material-ui/core";
+import moment from "moment";
+import {DeviceDoseVisualisation} from "../../../../redux/device/radEyeDevicesSlice";
 
 type ResponsiveLineChartState = {
-    data: any;
+    data: DeviceDoseVisualisation[];
     left: string;
     right: string;
     refAreaLeft: string;
@@ -30,19 +32,24 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
         animation: true
     });
 
-    const getAxisYDomain = (from: string, to: string, ref: "name" | "cost" | "impression", offset: number): string[] => {
-        const refData = data.slice(Number(from) - 1, Number(to));
-        let [bottom, top] = [refData[0][ref], refData[0][ref]];
+    const getAxisYDomain = (from: string, to: string, ref: "time" | "dose" | "dose_rate", offset: any): string[] => {
+
+        const fromIndex = data.findIndex((item: DeviceDoseVisualisation) => item.time === from);
+        const toIndex = data.findIndex((item: DeviceDoseVisualisation)=> item.time === to);
+
+        const refData = data.slice(fromIndex - 1, toIndex);
+
+        let [bottom, top] = [refData[0]![ref], refData[0]![ref]];
         refData.forEach((d: any) => {
             if (d[ref] > top) top = d[ref];
             if (d[ref] < bottom) bottom = d[ref];
         });
 
-        return [String((bottom | 0) - offset), String((top | 0) + offset)];
+        return [(bottom | 0) - offset, (top | 0) + offset];
     };
 
     const zoom = (): void => {
-        let {refAreaLeft, refAreaRight, data} = chartState;
+        const {refAreaLeft, refAreaRight, data} = chartState;
 
         if (refAreaLeft === refAreaRight || refAreaRight === '') {
             setChartState(prevState => ({...prevState, refAreaLeft: "", refAreaRight: ""}));
@@ -50,11 +57,17 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
         }
 
         // xAxis domain
-        if (refAreaLeft > refAreaRight) [refAreaLeft, refAreaRight] = [refAreaRight, refAreaLeft];
+        if (refAreaLeft > refAreaRight) {
+            setChartState(prevState => ({
+                ...prevState,
+                refAreaRight: prevState.refAreaLeft,
+                refAreaLeft: prevState.refAreaRight
+            }))
+        }
 
         // yAxis domain
-        const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'cost', 1);
-        const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'impression', 50);
+        const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose', 1);
+        const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'dose_rate', 50);
 
         setChartState(prevState => ({
             ...prevState,
@@ -92,7 +105,7 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
                 <LineChart
                     data={data}
                     margin={{top: 10, right: 30, left: 0, bottom: 0}}
-                    onMouseDown={e => setChartState(prevState => ({...prevState, refAreaLeft: e.activeLabel}))}
+                    onMouseDown={e => setChartState(prevState => ({...prevState, refAreaLeft: e?.activeLabel}))}
                     onMouseMove={e => chartState.refAreaLeft && setChartState(prevState => ({
                         ...prevState,
                         refAreaRight: e?.activeLabel
@@ -102,10 +115,11 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis
                         allowDataOverflow
-                        dataKey="name"
+                        dataKey="time"
                         domain={[chartState.left, chartState.right]}
-                        type="number"
+                        tickFormatter={item => moment(item).format("HH:mm:ss")}
                     />
+
                     <YAxis
                         allowDataOverflow
                         domain={[chartState.bottom, chartState.top]}
@@ -120,8 +134,8 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
                         yAxisId="2"
                     />
                     <Tooltip/>
-                    <Line yAxisId="1" type="natural" dataKey="cost" stroke="#8884d8" animationDuration={300}/>
-                    <Line yAxisId="2" type="natural" dataKey="impression" stroke="#82ca9d" animationDuration={300}/>
+                    <Line yAxisId="1" type="natural" dataKey="dose" stroke="#8884d8" animationDuration={300}/>
+                    <Line yAxisId="2" type="natural" dataKey="dose_rate" stroke="#82ca9d" animationDuration={300}/>
 
                     {(chartState.refAreaLeft && chartState.refAreaRight)
                         ? (<ReferenceArea
