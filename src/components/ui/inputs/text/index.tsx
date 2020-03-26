@@ -1,22 +1,34 @@
-import {TextField} from "@material-ui/core";
+import {TextField, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent} from "react";
 import {useTranslation} from "react-i18next";
 import AntPaper from "../../surfaces/paper";
 
 
-// const useStyles = makeStyles(() =>
-//     createStyles({
-//         checkLabel: {
-//             textTransform: "uppercase"
-//         }
-//     })
-// );
+const CssTextField = withStyles(({palette}: Theme) => ({
+    root: {
+        "& label.MuiInputLabel-shrink": {
+            textTransform: "uppercase",
+            transform: "translate(9px, -6px) scale(0.8)",
+            padding: "0 0.5rem",
+            background: palette.secondary.light
+        },
+        "& .Mui-disabled": {
+            cursor: "not-allowed",
+
+            "& > fieldset": {
+                borderColor: palette.secondary.main,
+                opacity: "0.2",
+            }
+        }
+    },
+}))(TextField);
 
 type AntTextFieldProps = {
     name: string;
+    disabled?: boolean;
 }
 
-const AntTextField: FunctionComponent<AntTextFieldProps> = ({name}) => {
+const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled}) => {
 
     // const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -29,18 +41,18 @@ const AntTextField: FunctionComponent<AntTextFieldProps> = ({name}) => {
 
     return (
         <AntPaper>
-            <TextField
+            <CssTextField
                 id="outlined-full-width"
                 label={t(name)}
-                style={{ margin: 8 }}
                 placeholder=""
-                helperText="Full width!"
-                fullWidth
-                margin="normal"
                 InputLabelProps={{
                     shrink: true,
                 }}
+                fullWidth
                 variant="outlined"
+                color="secondary"
+                margin="normal"
+                disabled={disabled}
                 // onChange={onChange}
             />
         </AntPaper>

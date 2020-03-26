@@ -4,7 +4,6 @@ import {createStyles, Grid, Typography} from "@material-ui/core";
 import AntTextField from "../../../ui/inputs/text";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
-import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -152,7 +151,7 @@ const AlarmSettings = () => {
                     <AntSwitch target={"settings"} name="Vibrator"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntTextField name="Alarm haltezeit"/>
+                    <AntTextField name="Alarm haltezeit" disabled/>
                 </Grid>
             </Grid>
         </Fragment>
