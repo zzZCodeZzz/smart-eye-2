@@ -5,7 +5,7 @@ import {Typography} from "@material-ui/core";
 const useStyles = makeStyles(() =>
     createStyles({
         label: {
-            fontSize: "0.75rem",
+            fontSize: "0.8rem",
             textTransform: "uppercase"
         }
     })

@@ -31,9 +31,10 @@ type SelectProps = {
     name: string;
     value: Maybe<string>;
     options: string[];
+    normalizeHeight?: boolean;
 }
 
-const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.Element => {
+const AntSelect: FunctionComponent<SelectProps> = ({name, value, options, normalizeHeight}): JSX.Element => {
 
 
     const classes = useStyles();
@@ -46,7 +47,7 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     );
 
     return (
-        <AntPaper>
+        <AntPaper normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange} className={classes.select}>

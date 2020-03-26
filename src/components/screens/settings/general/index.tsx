@@ -6,7 +6,6 @@ import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelecto
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
-import TimePicker from "../../../ui/inputs/date/timePikcer";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 
 const useStyles = makeStyles(() =>
@@ -46,6 +45,7 @@ const GeneralSettings = () => {
                     name="language"
                     value={fields.language}
                     options={["german", "english", "français"]}
+                    normalizeHeight
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -53,6 +53,7 @@ const GeneralSettings = () => {
                     name="battery_type"
                     value={fields.battery_type}
                     options={["battery_rechargeable", "battery_alkaline"]}
+                    normalizeHeight
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -60,6 +61,7 @@ const GeneralSettings = () => {
                     name="accustic_view"
                     value={fields.accustic_view}
                     options={["none", "finder", "single_impulse"]}
+                    normalizeHeight
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>

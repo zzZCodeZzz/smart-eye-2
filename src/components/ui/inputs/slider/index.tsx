@@ -54,12 +54,13 @@ type antSliderProps = {
     value?: string;
     max: number;
     min: number;
-    step: number | null;
+    step?: number | null;
     onChange?: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
     target: "settings" | "device";
+    normalizeHeight?: boolean;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();
@@ -75,7 +76,7 @@ const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, va
 
 
     return (
-        <AntPaper>
+        <AntPaper normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <PrettoSlider
@@ -84,6 +85,7 @@ const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, va
                     name={name}
                     min={min}
                     max={max}
+                    step={step}
                     onChange={onChange}
                 />
                 {caption && <FormHelperText>{t(caption)}</FormHelperText>}
