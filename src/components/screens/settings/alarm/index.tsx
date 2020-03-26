@@ -31,14 +31,6 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down("sm")]: {
                 display: "none"
             },
-        },
-        normalizeHeight1: {
-            [theme.breakpoints.up("sm")]: {
-                minHeight: "17rem",
-            },
-            [theme.breakpoints.down("sm")]: {
-                minHeight: "9rem",
-            },
         }
     }),
 );

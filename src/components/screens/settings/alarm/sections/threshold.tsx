@@ -9,10 +9,10 @@ const AlarmThreshold = () => {
 
     return (
         <Fragment>
-            <Grid item sm={12} md={6} className={classes.paperTitle}>
+            <Grid item xs={12} sm={12} md={6} className={classes.paperTitle}>
                 <Typography variant="h6">Alarmschwelle</Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
                 <AntSwitch target={"settings"} name="nichtAernderbar"/>
             </Grid>
         </Fragment>

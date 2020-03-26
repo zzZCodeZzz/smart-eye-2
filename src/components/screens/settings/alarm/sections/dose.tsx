@@ -9,17 +9,17 @@ const AlarmDose = () => {
 
     return (
         <Fragment>
-            <Grid container alignItems="center">
+            <Grid container spacing={3} alignItems="center">
                 <Grid item xs={12} className={classes.paperTitle}>
                     <Typography variant="h6">Dosis</Typography>
                 </Grid>
-                <Grid item sm={12} md={2} className={classes.label}>
+                <Grid item xs={12} sm={12} md={2} className={classes.label}>
                     <Typography variant="subtitle1">Level</Typography>
                 </Grid>
-                <Grid item sm={12} md={5}>
+                <Grid item xs={12} sm={12} md={5}>
                     <AntInput name="Alarm 1"/>
                 </Grid>
-                <Grid item sm={12} md={5}>
+                <Grid item xs={12} sm={12} md={5}>
                     <AntInput name="Alarm 2"/>
                 </Grid>
             </Grid>
