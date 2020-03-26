@@ -11,11 +11,11 @@ const AlarmRate = () => {
 
     return (
         <AntPaper>
-            <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
+            <Grid container className={classes.gridContainer} spacing={2} alignItems="center">
                 <Grid item xs={12} className={classes.paperTitle}>
                     <Typography variant="h6">Raten</Typography>
                 </Grid>
-                <Grid item xs={12} sm={12} md={3} lg={2} className={classes.label}>
+                <Grid item xs={12} sm={12} md={3} lg={1} className={classes.label}>
                     <Typography variant="subtitle1">Level</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
@@ -26,10 +26,10 @@ const AlarmRate = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
                 <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
-                <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
+                <Grid item xs={12} sm={6} md={3} lg={3} className={classes.placeHolder}/>
             </Grid>
-            <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
-                <Grid item xs={12} sm={12} md={3} lg={2} className={classes.label}>
+            <Grid container className={classes.gridContainer} spacing={2} alignItems="center">
+                <Grid item xs={12} sm={12} md={3} lg={1} className={classes.label}>
                     <Typography variant="subtitle1">Zählrate</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
@@ -44,12 +44,12 @@ const AlarmRate = () => {
                 <Grid item xs={12} sm={6} md={3} lg={2}>
                     <AntTextField name="Sigm min rate"/>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3} lg={2}>
+                <Grid item xs={12} sm={6} md={3} lg={3}>
                     <AntSwitch target={"settings"} name="securityAlarm">Sicherheitsalarm</AntSwitch>
                 </Grid>
             </Grid>
-            <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
-                <Grid item xs={12} sm={12} md={3} lg={2} className={classes.label}>
+            <Grid container className={classes.gridContainer} spacing={2} alignItems="center">
+                <Grid item xs={12} sm={12} md={3} lg={1} className={classes.label}>
                     <Typography variant="subtitle1">Dosierung</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
@@ -60,8 +60,7 @@ const AlarmRate = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
                 <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
-                <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
-                <Grid item xs={12} sm={6} md={3} lg={2} className={classes.placeHolder}/>
+                <Grid item xs={12} sm={6} md={3} lg={3} className={classes.placeHolder}/>
             </Grid>
         </AntPaper>
     );
