@@ -1,6 +1,6 @@
 import {createStyles, FormControl, FormHelperText, Slider, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent} from "react";
-import AntPaper from "../../surfaces/paper";
+import {ConditionalPaper} from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";
 import {useTranslation} from "react-i18next";
@@ -58,9 +58,10 @@ type antSliderProps = {
     onChange?: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
     target: "settings" | "device";
     normalizeHeight?: boolean;
+    withPaper?: boolean;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight, withPaper = true}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();
@@ -76,7 +77,7 @@ const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, va
 
 
     return (
-        <AntPaper normalizeHeight={normalizeHeight}>
+        <ConditionalPaper condition={withPaper} normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <PrettoSlider
@@ -90,7 +91,7 @@ const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, va
                 />
                 {caption && <FormHelperText>{t(caption)}</FormHelperText>}
             </FormControl>
-        </AntPaper>
+        </ConditionalPaper>
     )
 };
 

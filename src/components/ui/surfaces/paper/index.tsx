@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactNode} from "react";
+import React, {FunctionComponent, ReactNode, Fragment} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Paper} from "@material-ui/core";
 
@@ -15,7 +15,6 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
         }
     }),
 );
-
 
 type AntPaperProps = {
     children: ReactNode;
@@ -34,3 +33,11 @@ const AntPaper: FunctionComponent<AntPaperProps> = ({children, normalizeHeight})
 };
 
 export default AntPaper;
+
+
+type ConditionalPaperTypes = AntPaperProps & {
+    condition: boolean | undefined;
+}
+
+export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children}) =>
+    condition ? <AntPaper>{children}</AntPaper> : <Fragment>{children}</Fragment>;

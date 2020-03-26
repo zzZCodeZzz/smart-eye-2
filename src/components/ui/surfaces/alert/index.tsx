@@ -3,8 +3,6 @@ import {Backdrop, createStyles, Fade, Modal, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import WarningIcon from '@material-ui/icons/Warning';
 
-
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         modal: {
