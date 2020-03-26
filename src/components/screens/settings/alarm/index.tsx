@@ -31,6 +31,26 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down("sm")]: {
                 display: "none"
             },
+        },
+        normalizeHeight1: {
+            position: "relative",
+
+            [theme.breakpoints.up("md")]: {
+                minHeight: "9rem"
+            },
+            [theme.breakpoints.up("xs")]: {
+                minHeight: "17rem"
+            },
+            [theme.breakpoints.down("xs")]: {
+                minHeight: "auto"
+            },
+        },
+        centralize: {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            justifyContent: "center"
         }
     }),
 );
@@ -49,10 +69,8 @@ const AlarmSettings = () => {
 
             <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
                 <Grid item xs={12} sm={6}>
-
                     <AntPaper>
                         <AlarmDose/>
-
                     </AntPaper>
                 </Grid>
                 <Grid item xs={12} sm={6}>

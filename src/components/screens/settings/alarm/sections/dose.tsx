@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Grid, Typography} from "@material-ui/core";
 import {useAlarmStyles} from "../index";
 import AntInput from "../../../../ui/inputs/text";
@@ -8,7 +8,7 @@ const AlarmDose = () => {
     const classes = useAlarmStyles();
 
     return (
-        <Fragment>
+        <div className={classes.normalizeHeight1}>
             <Grid container spacing={3} alignItems="center">
                 <Grid item xs={12} className={classes.paperTitle}>
                     <Typography variant="h6">Dosis</Typography>
@@ -23,7 +23,7 @@ const AlarmDose = () => {
                     <AntInput name="Alarm 2"/>
                 </Grid>
             </Grid>
-        </Fragment>
+        </div>
     );
 };
 
