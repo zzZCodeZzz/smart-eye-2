@@ -93,9 +93,9 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
             left: 'dataMin',
             right: 'dataMax',
             top: 'dataMax+1',
-            bottom: 'dataMin',
-            top2: 'dataMax+50',
-            bottom2: 'dataMin+50',
+            bottom: 'dataMin-1',
+            top2: 'dataMax+20',
+            bottom2: 'dataMin-20',
         }));
     };
 
