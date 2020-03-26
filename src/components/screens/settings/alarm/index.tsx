@@ -4,7 +4,6 @@ import {createStyles, Grid, Typography} from "@material-ui/core";
 import AntTextField from "../../../ui/inputs/text";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
-import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -134,7 +133,7 @@ const AlarmSettings = () => {
                     <AntSlider target={"device"} name={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10}/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSlider  target={"device"} name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10}/>
+                    <AntSlider target={"device"} name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10}/>
                 </Grid>
             </Grid>
 

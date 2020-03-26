@@ -69,10 +69,7 @@ export const useConfigureAndConnectMqttClient = () => {
     useEffect(() => {
         mqttClient.onMessageArrived = (message: Message): void => {
             // eslint-disable-next-line no-useless-escape
-            if (/^[\],:{}\s]*$/.test(message.payloadString
-                .replace(/\\["\\\/bfnrtu]/g, '@')
-                .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
-                .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
+            if (/^[\],:{}\s]*$/.test(message.payloadString.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))
             ) {
                 const data = JSON.parse(message.payloadString);
                 if (message.destinationName === mqttConfig.topic_coming_going_toclient) {

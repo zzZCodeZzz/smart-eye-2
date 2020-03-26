@@ -6,7 +6,6 @@ import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelecto
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
-import TimePicker from "../../../ui/inputs/date/timePikcer";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 
 const useStyles = makeStyles(() =>
