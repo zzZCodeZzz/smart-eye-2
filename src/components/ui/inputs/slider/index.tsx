@@ -19,7 +19,9 @@ const PrettoSlider = withStyles((theme: Theme) => ({
     root: {
         color: theme.palette.secondary.main,
         height: 8,
-        marginTop: 10
+        marginTop: 10,
+        maxWidth: "90%",
+        marginLeft: "5%"
     },
     thumb: {
         height: 18,

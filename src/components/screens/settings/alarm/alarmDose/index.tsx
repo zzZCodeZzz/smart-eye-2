@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid, Typography} from "@material-ui/core";
 import {useAlarmStyles} from "../index";
-import AntTextField from "../../../../ui/inputs/text";
+import AntInput from "../../../../ui/inputs/text";
 import AntPaper from "../../../../ui/surfaces/paper";
 
 const AlarmDose = () => {
@@ -18,10 +18,10 @@ const AlarmDose = () => {
                     <Typography variant="subtitle1">Level</Typography>
                 </Grid>
                 <Grid item xs={12} sm={5}>
-                    <AntTextField name="Alarm 1"/>
+                    <AntInput name="Alarm 1"/>
                 </Grid>
                 <Grid item xs={12} sm={5}>
-                    <AntTextField name="Alarm 2"/>
+                    <AntInput name="Alarm 2"/>
                 </Grid>
             </Grid>
         </AntPaper>

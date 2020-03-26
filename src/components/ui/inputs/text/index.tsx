@@ -1,16 +1,14 @@
-import {TextField, Theme, withStyles} from "@material-ui/core";
-import React, {FunctionComponent} from "react";
+import {Input, InputAdornment, Theme, withStyles} from "@material-ui/core";
+import React, {FunctionComponent, ReactElement} from "react";
 import {useTranslation} from "react-i18next";
 import {ConditionalPaper} from "../../surfaces/paper";
+import AntLabel from "../label";
 
 
 const CssTextField = withStyles(({palette}: Theme) => ({
     root: {
-        "& label.MuiInputLabel-shrink": {
-            textTransform: "uppercase",
-            transform: "translate(9px, -6px) scale(0.8)",
-            padding: "0 0.5rem",
-            background: palette.secondary.light
+        "&.MuiInput-underline:after": {
+            borderBottomColor: palette.secondary.main,
         },
         "& .Mui-disabled": {
             cursor: "not-allowed",
@@ -21,15 +19,16 @@ const CssTextField = withStyles(({palette}: Theme) => ({
             }
         }
     },
-}))(TextField);
+}))(Input);
 
 type AntTextFieldProps = {
     name: string;
     disabled?: boolean;
     withPaper?: boolean;
+    adornment?: string | ReactElement;
 }
 
-const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled, withPaper}) => {
+const AntInput: FunctionComponent<AntTextFieldProps> = ({name, disabled, withPaper, adornment}) => {
 
     // const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -42,17 +41,12 @@ const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled, wit
 
     return (
         <ConditionalPaper condition={withPaper}>
+            <AntLabel>{t(name)}</AntLabel>
             <CssTextField
                 id="outlined-full-width"
-                label={t(name)}
                 placeholder=""
-                InputLabelProps={{
-                    shrink: true,
-                }}
+                endAdornment={adornment ? <InputAdornment position="end">{adornment}</InputAdornment> : ""}
                 fullWidth
-                variant="outlined"
-                color="secondary"
-                margin="normal"
                 disabled={disabled}
                 // onChange={onChange}
             />
@@ -60,4 +54,4 @@ const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled, wit
     )
 };
 
-export default AntTextField;
+export default AntInput;

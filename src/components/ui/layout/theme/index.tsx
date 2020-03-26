@@ -14,7 +14,7 @@ export const theme = createMuiTheme({
     }
 });
 
-const styles = () => ({
+const globalStyles = () => ({
     "@global": {
         body: {
             userSelect: "none"
@@ -30,4 +30,4 @@ const MyCssBaseline: FunctionComponent<MyCSSBaselineTypes> = () => {
     return null;
 };
 
-export default withStyles(styles)(MyCssBaseline);
+export default withStyles(globalStyles)(MyCssBaseline);

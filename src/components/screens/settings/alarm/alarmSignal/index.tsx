@@ -2,7 +2,7 @@ import React, {FunctionComponent} from "react";
 import {useAlarmStyles} from "../index";
 import {Grid, Typography} from "@material-ui/core";
 import AntSwitch from "../../../../ui/inputs/switch";
-import AntTextField from "../../../../ui/inputs/text";
+import AntInput from "../../../../ui/inputs/text";
 import AntPaper from "../../../../ui/surfaces/paper";
 
 const AlarmSignal:FunctionComponent = () => {
@@ -25,7 +25,7 @@ const AlarmSignal:FunctionComponent = () => {
                     <AntSwitch target={"settings"} name="Vibrator"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
-                    <AntTextField name="Alarm haltezeit" disabled/>
+                    <AntInput name="Alarm haltezeit" disabled/>
                 </Grid>
             </Grid>
         </AntPaper>
