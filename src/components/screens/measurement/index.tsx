@@ -97,42 +97,36 @@ export const Measurement = () => {
                             max={1}
                             min={20}
                             step={1}
-                            withPaper={false}
                         /><br />
                         <AntSwitch
                             name={"cyclic_update"}
                             label={"permanent_polling"}
                             target={"settings"}
                             value={settings?.cyclic_update}
-                            withPaper={false}
                         /><br />
                         <AntSwitch
                             name={"query_infodata"}
                             label={"infodata"}
                             target={"settings"}
                             value={settings?.query_infodata}
-                            withPaper={false}
                         /><br />
                         <AntSwitch
                             name={"query_measurements"}
                             label={"measurement_values"}
                             target={"settings"}
                             value={settings?.query_measurements}
-                            withPaper={false}
                         /><br />
                         <AntSwitch
                             name={"query_configuration_1"}
                             label={`${t("configuration")} 1`}
                             target={"settings"}
                             value={settings?.query_configuration_1}
-                            withPaper={false}
                         /><br />
                         <AntSwitch
                             name={"query_configuration_2"}
                             label={`${t("configuration")} 2`}
                             target={"settings"}
                             value={settings?.query_configuration_2}
-                            withPaper={false}
                         />
                     </AntPaper>
                 </Grid>

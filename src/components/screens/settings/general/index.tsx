@@ -47,6 +47,7 @@ const GeneralSettings = () => {
                     value={fields.language}
                     options={["german", "english", "français"]}
                     normalizeHeight
+                    withPaper
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -55,6 +56,7 @@ const GeneralSettings = () => {
                     value={fields.battery_type}
                     options={["battery_rechargeable", "battery_alkaline"]}
                     normalizeHeight
+                    withPaper
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -63,6 +65,7 @@ const GeneralSettings = () => {
                     value={fields.accustic_view}
                     options={["none", "finder", "single_impulse"]}
                     normalizeHeight
+                    withPaper
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -74,6 +77,7 @@ const GeneralSettings = () => {
                     min={0}
                     step={10}
                     caption="zero_history_save_manual"
+                    withPaper
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>

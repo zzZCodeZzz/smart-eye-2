@@ -61,7 +61,7 @@ type antSliderProps = {
     withPaper?: boolean;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight, withPaper = true}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight, withPaper}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();

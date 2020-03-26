@@ -39,5 +39,5 @@ type ConditionalPaperTypes = AntPaperProps & {
     condition: boolean | undefined;
 }
 
-export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children}) =>
-    condition ? <AntPaper>{children}</AntPaper> : <Fragment>{children}</Fragment>;
+export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children, normalizeHeight}) =>
+    condition ? <AntPaper normalizeHeight={normalizeHeight}>{children}</AntPaper> : <Fragment>{children}</Fragment>;

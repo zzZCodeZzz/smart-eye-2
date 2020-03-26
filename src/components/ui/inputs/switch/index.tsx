@@ -26,7 +26,7 @@ type AntSwitchProps = {
     withPaper?: boolean;
 }
 
-const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off", withPaper= true}) => {
+const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off", withPaper}) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();

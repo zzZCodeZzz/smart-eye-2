@@ -1,7 +1,7 @@
 import {TextField, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent} from "react";
 import {useTranslation} from "react-i18next";
-import AntPaper from "../../surfaces/paper";
+import {ConditionalPaper} from "../../surfaces/paper";
 
 
 const CssTextField = withStyles(({palette}: Theme) => ({
@@ -26,9 +26,10 @@ const CssTextField = withStyles(({palette}: Theme) => ({
 type AntTextFieldProps = {
     name: string;
     disabled?: boolean;
+    withPaper?: boolean;
 }
 
-const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled}) => {
+const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled, withPaper}) => {
 
     // const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -40,7 +41,7 @@ const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled}) =>
     // const classes = useStyles();
 
     return (
-        <AntPaper>
+        <ConditionalPaper condition={withPaper}>
             <CssTextField
                 id="outlined-full-width"
                 label={t(name)}
@@ -55,7 +56,7 @@ const AntTextField: FunctionComponent<AntTextFieldProps> = ({name, disabled}) =>
                 disabled={disabled}
                 // onChange={onChange}
             />
-        </AntPaper>
+        </ConditionalPaper>
     )
 };
 

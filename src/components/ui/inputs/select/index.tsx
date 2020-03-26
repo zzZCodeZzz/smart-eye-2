@@ -35,7 +35,7 @@ type SelectProps = {
     withPaper?: boolean;
 }
 
-const AntSelect: FunctionComponent<SelectProps> = ({name, value, options, normalizeHeight, withPaper = true}): JSX.Element => {
+const AntSelect: FunctionComponent<SelectProps> = ({name, value, options, normalizeHeight, withPaper}): JSX.Element => {
 
 
     const classes = useStyles();
