@@ -1,30 +1,29 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import {useActiveDeviceHistory} from "../../../redux/device/deviceStoreSelectors";
-import {Container, createStyles} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
 import {useTranslation} from "react-i18next";
+import MainContainer from "../../ui/layout/mainContainer";
 
-const useStyles = makeStyles(() =>
-    createStyles({
-        main: {
-            flexGrow: 1,
-            overflowX: "hidden",
-            padding: 20,
-            maxWidth: "100%",
-
-        }
-    })
-);
+// const useStyles = makeStyles(() =>
+//     createStyles({
+//         main: {
+//             flexGrow: 1,
+//             overflowX: "hidden",
+//             padding: 20,
+//             maxWidth: "100%",
+//
+//         }
+//     })
+// );
 
 export default function DeviceHistory() {
 
     const activeDeviceHistory = useActiveDeviceHistory();
-    const classes = useStyles();
+    // const classes = useStyles();
     const {t} = useTranslation();
 
     return (
-        <Container className={classes.main} component="main">
+        <MainContainer>
             <MaterialTable
                 title={""}
                 columns={[
@@ -61,6 +60,6 @@ export default function DeviceHistory() {
                 // fix, since objects from mqtt are not editable
                 data={JSON.parse(JSON.stringify(activeDeviceHistory))}
             />
-        </Container>
+        </MainContainer>
     );
 }
