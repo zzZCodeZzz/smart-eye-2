@@ -7,7 +7,7 @@ const useStyles = makeStyles(() =>
         main: {
             flexGrow: 1,
             overflowX: "hidden",
-            padding: 20,
+            padding: "30px 0",
             minHeight: "40rem",
         }
     })

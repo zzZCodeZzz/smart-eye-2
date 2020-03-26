@@ -7,12 +7,12 @@ import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
+import AntPaper from "../../../ui/surfaces/paper";
 
 const useStyles = makeStyles(() =>
     createStyles({
         gridContainer: {
             justifyContent: "center",
-            padding: "10px 0",
         }
     }),
 );
@@ -81,64 +81,71 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect
-                    name="dose_rate_display_unit"
-                    value={fields.dose_rate_display_unit}
-                    options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
-                />
-                <br/>
-                <AntSelect
-                    name="dose_rate_cps"
-                    value={fields.dose_rate_cps}
-                    options={["SW/H", "R/H", "REM/H"]}
-                />
-                <br/>
-                <AntSwitch
-                    name="show_dr_in_cps_mode"
-                    value={fields.show_dr_in_cps_mode}
-                    target={"device"}
-                />
+                <AntPaper>
+                    <AntSelect
+                        name="dose_rate_display_unit"
+                        value={fields.dose_rate_display_unit}
+                        options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
+                    />
+                    <br/><br/><br/>
+                    <AntSelect
+                        name="dose_rate_cps"
+                        value={fields.dose_rate_cps}
+                        options={["SW/H", "R/H", "REM/H"]}
+                    />
+                    <br/><br/><br/>
+                    <AntSwitch
+                        name="show_dr_in_cps_mode"
+                        value={fields.show_dr_in_cps_mode}
+                        target={"device"}
+                    />
+                </AntPaper>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <DateTimePicker
-                    name={"pick_date"}
-                    value={fields.pick_date}
-                />
-                <br/>
-                <SyncTimeButton/>
+                <AntPaper>
+                    <DateTimePicker
+                        name={"pick_date"}
+                        value={fields.pick_date}
+                    />
+                    <br/><br/><br/>
+                    <SyncTimeButton/>
+                </AntPaper>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSwitch
-                    name="beep_on_key"
-                    value={fields.beep_on_key}
-                    target={"device"}
-                />
-                <br/>
-                <AntSwitch
-                    name="keyboard_lock"
-                    value={fields.keyboard_lock}
-                    target={"device"}
-                />
+                <AntPaper>
+                    <AntSwitch
+                        name="beep_on_key"
+                        value={fields.beep_on_key}
+                        target={"device"}
+                    />
+                    <br/><br/><br/>
+                    <AntSwitch
+                        name="keyboard_lock"
+                        value={fields.keyboard_lock}
+                        target={"device"}
+                    />
+                </AntPaper>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntSelect
-                    name="temperature_display"
-                    value={fields.temperature_display}
-                    options={["none", "celsius", "fahrenheit"]}
-                />
-                <br/>
-                <br/>
-                <AntSwitch
-                    name="reversible"
-                    value={fields.reversible}
-                    target={"device"}
-                />
-                <br/>
-                <AntSwitch
-                    name="graphical_view"
-                    value={fields.graphical_view}
-                    target={"device"}
-                />
+                <AntPaper>
+                    <AntSelect
+                        name="temperature_display"
+                        value={fields.temperature_display}
+                        options={["none", "celsius", "fahrenheit"]}
+                    />
+                    <br/><br/><br/>
+                    <AntSwitch
+                        name="reversible"
+                        value={fields.reversible}
+                        target={"device"}
+                    />
+                    <br/><br/><br/>
+                    <AntSwitch
+                        name="graphical_view"
+                        value={fields.graphical_view}
+                        target={"device"}
+                    />
+                </AntPaper>
             </Grid>
         </Grid>
     );
