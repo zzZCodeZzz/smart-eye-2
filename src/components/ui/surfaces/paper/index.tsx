@@ -1,30 +1,43 @@
-import React, {FunctionComponent, ReactNode} from "react";
+import React, {FunctionComponent, ReactNode, Fragment} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Paper} from "@material-ui/core";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
         paper: {
-            padding: theme.spacing(2),
-            color: theme.palette.text.secondary,
+            padding: spacing(2),
+            color: palette.text.secondary,
         },
+        normalizeHeight: {
+            [breakpoints.up("sm")]: {
+                minHeight: "7.5rem",
+            }
+        }
     }),
 );
 
-
 type AntPaperProps = {
     children: ReactNode;
+    normalizeHeight?: boolean;
 }
 
-const AntPaper: FunctionComponent<AntPaperProps> = ({children}) => {
+const AntPaper: FunctionComponent<AntPaperProps> = ({children, normalizeHeight}) => {
 
     const classes = useStyles();
 
     return (
-        <Paper className={classes.paper}>
+        <Paper className={`${classes.paper} ${normalizeHeight && classes.normalizeHeight}`}>
             {children}
         </Paper>
     );
 };
 
 export default AntPaper;
+
+
+type ConditionalPaperTypes = AntPaperProps & {
+    condition: boolean | undefined;
+}
+
+export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children, normalizeHeight}) =>
+    condition ? <AntPaper normalizeHeight={normalizeHeight}>{children}</AntPaper> : <Fragment>{children}</Fragment>;

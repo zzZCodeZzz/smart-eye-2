@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from "react";
 import {createStyles, Grid, Switch} from "@material-ui/core";
-import AntPaper from "../../surfaces/paper";
+import {ConditionalPaper} from "../../surfaces/paper";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
@@ -22,10 +22,11 @@ type AntSwitchProps = {
     label?: string;
     checkedLabel?: string;
     uncheckedLabel?: string;
-    target: "settings" | "device"
+    target: "settings" | "device";
+    withPaper?: boolean;
 }
 
-const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off"}) => {
+const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off", withPaper}) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -41,7 +42,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
     const classes = useStyles();
 
     return (
-        <AntPaper>
+        <ConditionalPaper condition={withPaper}>
             <AntLabel>{t(label ? label : name)}</AntLabel>
             <Grid component="label" container alignItems="center" justify={"space-around"} spacing={1}>
                 <Grid item className={classes.checkLabel}>{t(uncheckedLabel)}</Grid>
@@ -50,7 +51,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
                 </Grid>
                 <Grid item className={classes.checkLabel}>{t(checkedLabel)}</Grid>
             </Grid>
-        </AntPaper>
+        </ConditionalPaper>
     )
 };
 

@@ -5,7 +5,7 @@ import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 import {useTranslation} from "react-i18next";
-import AntPaper from "../../surfaces/paper";
+import {ConditionalPaper} from "../../surfaces/paper";
 import AntLabel from "../label";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,9 +31,11 @@ type SelectProps = {
     name: string;
     value: Maybe<string>;
     options: string[];
+    normalizeHeight?: boolean;
+    withPaper?: boolean;
 }
 
-const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.Element => {
+const AntSelect: FunctionComponent<SelectProps> = ({name, value, options, normalizeHeight, withPaper}): JSX.Element => {
 
 
     const classes = useStyles();
@@ -46,14 +48,14 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options}): JSX.
     );
 
     return (
-        <AntPaper>
+        <ConditionalPaper condition={withPaper} normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange} className={classes.select}>
                     {options.map(option => <MenuItem key={option} value={option} className={classes.option}>{t(option)}</MenuItem>)}
                 </Select>
             </FormControl>
-        </AntPaper>
+        </ConditionalPaper>
     )
 };
 

@@ -47,6 +47,10 @@ export default function DeviceHistory() {
                     {title: t("dose_rate_unit"), field: "dose_rate_unit"},
                     {title: t("contamination_bq"), field: "contamination_bq"},
                 ]}
+                options={{
+                    pageSize: 10,
+                    pageSizeOptions: [10, 20, 30, 50]
+                }}
                 // fix, since objects from mqtt are not editable
                 data={JSON.parse(JSON.stringify(activeDeviceHistory))}
             />
