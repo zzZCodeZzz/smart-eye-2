@@ -1,4 +1,5 @@
-import {createMuiTheme} from "@material-ui/core";
+import {createMuiTheme, withStyles} from "@material-ui/core";
+import {FunctionComponent} from "react";
 
 export const theme = createMuiTheme({
     palette:{
@@ -12,3 +13,21 @@ export const theme = createMuiTheme({
         }
     }
 });
+
+const styles = () => ({
+    "@global": {
+        body: {
+            userSelect: "none"
+        }
+    }
+});
+
+type MyCSSBaselineTypes = {
+    classes: object;
+}
+
+const MyCssBaseline: FunctionComponent<MyCSSBaselineTypes> = () => {
+    return null;
+};
+
+export default withStyles(styles)(MyCssBaseline);

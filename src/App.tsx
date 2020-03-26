@@ -4,7 +4,7 @@ import {CssBaseline, ThemeProvider} from "@material-ui/core";
 import Settings from "./components/screens/settings";
 import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
-import {theme} from "./components/ui/layout/theme";
+import MyCssBaseline, {theme} from "./components/ui/layout/theme";
 import {useConfigureAndConnectMqttClient} from "./mqtt/config";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
@@ -69,6 +69,7 @@ const AppWithContext = () => (
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <CssBaseline/>
+            <MyCssBaseline />
             <BrowserRouter>
                 <App/>
             </BrowserRouter>
