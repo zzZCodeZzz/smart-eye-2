@@ -1,11 +1,12 @@
 import {createStyles, FormControl, FormHelperText, Slider, Theme, withStyles} from "@material-ui/core";
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, MouseEvent} from "react";
 import {ConditionalPaper} from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
+import {updateAppSettingsLocalAndRemote} from "../../../../redux/app/appSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -52,8 +53,9 @@ const PrettoSlider = withStyles((theme: Theme) => ({
 
 type antSliderProps = {
     name: string;
+    label?: string;
     caption?: string;
-    value?: string;
+    value?: string | number;
     max: number;
     min: number;
     step?: number | null;
@@ -63,27 +65,26 @@ type antSliderProps = {
     withPaper?: boolean;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step, normalizeHeight, withPaper}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, label, target, caption, value, max, min, step, normalizeHeight, withPaper}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();
     const dispatch = useDispatch();
 
     const onChange = (event: React.ChangeEvent<{}>, value: number | number[]) => {
-        if(target === "device") {
+        if (target === "device") {
             dispatch(updateDeviceLocalAndRemote(name, String(value)));
-        } else if(target === "settings") {
-            console.log("updateSttings");
+        } else if (target === "settings") {
+            dispatch(updateAppSettingsLocalAndRemote(name, value))
         }
     };
-
 
     return (
         <ConditionalPaper condition={withPaper} normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
-                <AntLabel>{t(name)}</AntLabel>
+                <AntLabel>{t(label ? label : name)}</AntLabel>
                 <PrettoSlider
-                    value={Number(value)}
+                    value={typeof value !== "number" ? Number(value) : value}
                     valueLabelDisplay="auto"
                     name={name}
                     min={min}

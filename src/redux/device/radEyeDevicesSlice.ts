@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Device} from "./device.types";
 import {AppThunk} from "../store";
 import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
-import moment, {Moment, MomentObjectOutput} from "moment";
+import moment from "moment";
 
 export type DeviceHistoryEntry = {
     line: string;

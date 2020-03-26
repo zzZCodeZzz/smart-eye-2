@@ -7,6 +7,7 @@ import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevices
 import {crazyToBool} from "../../../../mqtt/utils";
 import AntLabel from "../label";
 import {makeStyles} from "@material-ui/core/styles";
+import {updateAppSettingsLocalAndRemote} from "../../../../redux/app/appSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -35,7 +36,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
         if (target === "device") {
             dispatch(updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0"))
         } else if (target === "settings") {
-            console.log("message for settings");
+            dispatch(updateAppSettingsLocalAndRemote(event.target.name, event.target.checked))
         }
     };
 

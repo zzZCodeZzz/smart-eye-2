@@ -1,6 +1,7 @@
 import {mqttConfig} from "./config";
 import mqtt, {Message, MQTTError} from "paho-mqtt"
 import {Device} from "../redux/device/device.types";
+import {AppSettings} from "../redux/app/appSlice";
 
 export let mqttClient = new mqtt.Client(mqttConfig.broker, 9001, Math.random().toString(36).substr(2, 9));
 
@@ -15,6 +16,13 @@ export const MQTTSubscribeHistoryForActiveDevice = (deviceId: string) => {
     message.destinationName = mqttConfig.topic_parsed_tobroker.replace('#', deviceId);
     mqttClient.send(message);
 };
+
+export const MQTTsendSettings = (settings: AppSettings) => {
+    const message = new Message(JSON.stringify({client: window.location.hostname, settings}));
+    message.destinationName = mqttConfig.topic_coming_going_toserver;
+    mqttClient.send(message);
+};
+
 
 mqttClient.onConnectionLost = (error: MQTTError): void => {
     console.log("connection lost, using broker:", mqttConfig.broker)
@@ -62,4 +70,6 @@ const connectionOptions: mqtt.ConnectionOptions = {
 };
 
 export const connectMqttClient = () => mqttClient.connect(connectionOptions);
+
+export const disConnectMqttClient = () => mqttClient.disconnect();
 

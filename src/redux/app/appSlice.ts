@@ -1,7 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import i18n from "i18next";
+import {AppThunk} from "../store";
+import {MQTTsendSettings} from "../../mqtt/mqttClient";
 
-type AppSettings = {
+export type AppSettings = {
     interval: number;
     cyclic_update: string,
     query_infodata: string,
@@ -40,6 +42,11 @@ const appSlice = createSlice({
     initialState: initialState,
     reducers: {
         onSettingsReceived(state, action: PayloadAction<AppSettings>) {
+            if (!state.settings) {
+                state.settings = action.payload;
+            }
+        },
+        updateSettings(state, action: PayloadAction<AppSettings>) {
             state.settings = action.payload;
         },
         onDictionaryReceived(state, action: PayloadAction<Dictionary>) {
@@ -63,6 +70,13 @@ const appSlice = createSlice({
     }
 });
 
-export const {onSettingsReceived, onDictionaryReceived} = appSlice.actions;
+export const updateAppSettingsLocalAndRemote = (field: string, value: any): AppThunk => async (dispatch, getState) => {
+    const {settings} = getState().app;
+    const alteredSettings: AppSettings = {...settings, [field]: value} as AppSettings;
+    dispatch(updateSettings(alteredSettings));
+    MQTTsendSettings(alteredSettings);
+};
+
+export const {onSettingsReceived, onDictionaryReceived, updateSettings} = appSlice.actions;
 
 export default appSlice.reducer;

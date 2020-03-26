@@ -86,15 +86,13 @@ export const Measurement = () => {
     const {activeDevice, devices, activeDeviceDoseVisualisation} = useSelector((state: RootState) =>
         state.radEyeDevices, shallowEqual
     );
-    const settings = useSelector((state: RootState) => state.app.settings);
+    const settings = useSelector((state: RootState) => state.app.settings, shallowEqual);
 
     const fields = useActiveDeviceFields((device => ({
         dose_rate: device.dose_rate,
         count_rate_gamma: device.count_rate_gamma,
         dose: device.dose,
     })));
-
-    // console.log("sachen", activeDeviceDoseVisualisation)
 
     return (
         <MainContainer>
@@ -117,10 +115,12 @@ export const Measurement = () => {
                         <Divider/><br />
                         <Typography style={{fontWeight: "bold"}}>{t("polling_interval")}</Typography><br />
                         <AntSlider
-                            name={"polling_interval"}
+                            name={"interval"}
+                            label={"polling_interval"}
                             target={"settings"}
-                            max={1}
-                            min={20}
+                            value={settings?.interval}
+                            min={1}
+                            max={20}
                             step={1}
                         /><br />
                         <AntSwitch
@@ -156,7 +156,6 @@ export const Measurement = () => {
                     </AntPaper>
                 </Grid>
                 <Grid item xs={12} sm={8} md={6} style={{position: "relative"}}>
-                    {/*todo here fasdfasdfds*/}
                     <AntPaper className={classes.graph}>
                         <ExampleRes data={activeDeviceDoseVisualisation}/>
                     </AntPaper>
