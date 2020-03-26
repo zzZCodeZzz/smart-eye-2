@@ -7,6 +7,9 @@ import AntLabel from "../label";
 
 const CssTextField = withStyles(({palette}: Theme) => ({
     root: {
+        "& .MuiInput-input": {
+            textTransform: "uppercase"
+        },
         "&.MuiInput-underline:after": {
             borderBottomColor: palette.secondary.main,
         },

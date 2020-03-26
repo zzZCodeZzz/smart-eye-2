@@ -87,10 +87,7 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
     };
 
     return (
-        <div style={{width: '100%', height: 300}}>
-
-            <Button onClick={zoomOut}>Zoom Out</Button>
-
+        <div style={{width: '100%', height: "30rem", textAlign: "center"}}>
             <ResponsiveContainer>
                 <LineChart
                     data={data}
@@ -135,6 +132,7 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
                         : null}
                 </LineChart>
             </ResponsiveContainer>
+            <Button onClick={zoomOut}>Zoom Out</Button>
         </div>
     );
 };
