@@ -17,7 +17,7 @@ import ExampleRes from "./charts/responsiveLineChart";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         device: {
-            marginBottom: theme.spacing(3),
+            marginBottom: theme.spacing(5),
             padding: theme.spacing(3)
         },
         activeDevice: {
@@ -26,6 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
         devicesList: {
             [theme.breakpoints.down("sm")]: {
                 display: "none"
+            }
+        },
+        graph: {
+            minHeight: "37rem",
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
+            justifyContent: "center",
+
+            [theme.breakpoints.up("md")]: {
+                width: "calc(100% - 24px)",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)"
             }
         }
     })
@@ -103,17 +117,23 @@ export const Measurement = () => {
 
     return (
         <MainContainer>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
                 <Grid item xs={12} sm={4} md={3}>
                     <AntPaper>
-                        <Refresh/>
-                        <Typography variant={"h6"}>{t("dose_rate")}</Typography>
-                        <Typography>{fields.dose_rate ? fields.dose_rate : "/"}</Typography>
-                        <Typography style={{fontWeight: "bold"}}>{t("counter")}</Typography>
-                        <Typography>{fields.count_rate_gamma ? fields.count_rate_gamma : "/"}</Typography>
-                        <Typography style={{fontWeight: "bold"}}>{t("dose")}</Typography>
-                        <Typography>{fields.dose ? fields.dose : "/"}</Typography>
-                        <Divider/>
+                        <Grid container spacing={1} justify="space-between">
+                            <Grid item xs={4} alignItems="center" style={{alignSelf: "center", textAlign: "center"}}>
+                                <Refresh/>
+                            </Grid>
+                            <Grid item xs={8} style={{textAlign: "right"}}>
+                                <Typography variant={"h6"}>{t("dose_rate")}</Typography>
+                                <Typography>{fields.dose_rate ? fields.dose_rate : "/"}</Typography>
+                                <Typography style={{fontWeight: "bold"}}>{t("counter")}</Typography>
+                                <Typography>{fields.count_rate_gamma ? fields.count_rate_gamma : "/"}</Typography>
+                                <Typography style={{fontWeight: "bold"}}>{t("dose")}</Typography>
+                                <Typography>{fields.dose ? fields.dose : "/"}</Typography>
+                            </Grid>
+                        </Grid><br />
+                        <Divider/><br />
                         <Typography style={{fontWeight: "bold"}}>{t("polling_interval")}</Typography><br />
                         <AntSlider
                             name={"polling_interval"}
@@ -154,9 +174,8 @@ export const Measurement = () => {
                         />
                     </AntPaper>
                 </Grid>
-                <Grid item xs={12} sm={8} md={6}>
-                    {/*todo here fasdfasdfds*/}
-                    <AntPaper>
+                <Grid item xs={12} sm={8} md={6} style={{position: "relative"}}>
+                    <AntPaper className={classes.graph}>
                         <ExampleRes data={data}/>
                     </AntPaper>
                 </Grid>

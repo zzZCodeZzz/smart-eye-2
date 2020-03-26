@@ -17,16 +17,17 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
 );
 
 type AntPaperProps = {
+    className?: string;
     children: ReactNode;
     normalizeHeight?: boolean;
 }
 
-const AntPaper: FunctionComponent<AntPaperProps> = ({children, normalizeHeight}) => {
+const AntPaper: FunctionComponent<AntPaperProps> = ({children, normalizeHeight, className}) => {
 
     const classes = useStyles();
 
     return (
-        <Paper className={`${classes.paper} ${normalizeHeight && classes.normalizeHeight}`}>
+        <Paper className={`${classes.paper} ${normalizeHeight && classes.normalizeHeight} ${className && className}`}>
             {children}
         </Paper>
     );

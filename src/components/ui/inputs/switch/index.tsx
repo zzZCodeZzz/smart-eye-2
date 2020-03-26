@@ -44,7 +44,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
     return (
         <ConditionalPaper condition={withPaper}>
             <AntLabel>{t(label ? label : name)}</AntLabel>
-            <Grid component="label" container alignItems="center" justify={"space-around"} spacing={1}>
+            <Grid component="label" container alignItems="center" justify={"center"} spacing={1}>
                 <Grid item className={classes.checkLabel}>{t(uncheckedLabel)}</Grid>
                 <Grid item>
                     <Switch onChange={onChange} checked={crazyToBool(value)} name={name}/>
