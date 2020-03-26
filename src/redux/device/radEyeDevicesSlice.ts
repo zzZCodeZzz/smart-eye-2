@@ -24,17 +24,24 @@ export type DeviceHistoryEntry = {
     contamination_bq: string;
 }
 
+type DeviceDoseVisualisation = {
+    dose: string;
+    dose_rate: string;
+    count_rate_gamma: string;
+}
+
 type DevicesState = {
     activeDevice: string | null;
     activeDeviceHistory?: DeviceHistoryEntry[];
+    activeDeviceDoseVisualisation: DeviceDoseVisualisation[],
     devices: {
         [device_id: string]: Device;
     } | null;
 }
-
 const initialState: DevicesState = {
     activeDevice: null,
-    devices: null
+    devices: null,
+    activeDeviceDoseVisualisation: []
 };
 
 const radEyeDevicesSlice = createSlice({
@@ -43,6 +50,15 @@ const radEyeDevicesSlice = createSlice({
     reducers: {
         setActiveDevice(state, action: PayloadAction<string>) {
             state.activeDevice = action.payload;
+            if (state.devices && state.devices[action.payload] && state.devices[action.payload].dose) {
+                state.activeDeviceDoseVisualisation = [{
+                    dose: state.devices[action.payload].dose as string,
+                    dose_rate: state.devices[action.payload].dose_rate as string,
+                    count_rate_gamma: state.devices[action.payload].count_rate_gamma as string
+                }]
+            } else {
+                state.activeDeviceDoseVisualisation = [];
+            }
         },
         onDevicesReceived(state, action: PayloadAction<Device[]>) {
             state.devices = action.payload
@@ -53,9 +69,36 @@ const radEyeDevicesSlice = createSlice({
                     return device;
                 }).reduce((acc, curr) => ({...acc, [curr.device_id]: curr}), {});
 
-            if (!state.activeDevice && action.payload[0]) {
-                state.activeDevice = action.payload[0].device_id;
-                MQTTSubscribeHistoryForActiveDevice(action.payload[0].device_id);
+            if (action.payload[0]) {
+                const [firstDevice] = action.payload;
+                if (!state.activeDevice) {
+                    console.log("first", firstDevice)
+                    state.activeDevice = firstDevice.device_id;
+                    MQTTSubscribeHistoryForActiveDevice(firstDevice.device_id);
+
+                    if (firstDevice.dose_rate) {
+                        state.activeDeviceDoseVisualisation =
+                            [...state.activeDeviceDoseVisualisation,
+                                {
+                                    dose: firstDevice.dose as string,
+                                    dose_rate: firstDevice.dose_rate as string,
+                                    count_rate_gamma: firstDevice.count_rate_gamma as string
+                                }
+                            ]
+                    }
+                } else {
+                    const [activeDevice] = action.payload.filter(device => device.device_id === state.activeDevice);
+                    if (activeDevice.dose_rate) {
+                        state.activeDeviceDoseVisualisation =
+                            [...state.activeDeviceDoseVisualisation,
+                                {
+                                    dose: activeDevice.dose as string,
+                                    dose_rate: activeDevice.dose_rate as string,
+                                    count_rate_gamma: activeDevice.count_rate_gamma as string
+                                }
+                            ]
+                    }
+                }
             }
         },
         updateDevice(state, action: PayloadAction<Device>) {
