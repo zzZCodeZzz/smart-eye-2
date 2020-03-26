@@ -13,7 +13,7 @@ const SyncTimeButton = () => {
     const onClick = () => dispatch(
             updateDeviceLocalAndRemote("sync_host", moment().format("YYYY-MM-DD HH:mm:ss"))
     );
-    return (<Button onClick={onClick}>{t("sync_host")}</Button>);
+    return (<Button onClick={onClick} style={{margin: "0 auto", display: "inherit"}}>{t("sync_host")}</Button>);
 };
 
 export default SyncTimeButton;

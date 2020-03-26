@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
+import AntLabel from "../label";
 
 type DatePickerProps = {
     name: string;
@@ -27,12 +28,13 @@ const DateTimePicker: FunctionComponent<DatePickerProps> = ({name, value}) => {
 
     return (
         <MuiPickersUtilsProvider utils={momentUtils} locale={"de"}>
+            <AntLabel>{t("date_time")}</AntLabel>
             <MuiDateTimePicker
-                label={t("date_time")}
                 autoOk
                 ampm={false}
                 value={moment(value)}
                 onChange={onChange}
+                fullWidth
                 format={"DD.MM.YYYY - HH:mm" }
             />
         </MuiPickersUtilsProvider>
