@@ -4,6 +4,7 @@ import {createStyles, Grid, Typography} from "@material-ui/core";
 import AntTextField from "../../../ui/inputs/text";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
+import {useTranslation} from "react-i18next";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,10 +52,10 @@ const AlarmSettings = () => {
                     <Typography variant="subtitle1" className={classes.label}>Level</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 1" />
+                    <AntTextField name="Alarm 1"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 2" />
+                    <AntTextField name="Alarm 2"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}/>
                 <Grid item xs={12} sm={6} md={3} lg={2}/>
@@ -65,19 +66,19 @@ const AlarmSettings = () => {
                     <Typography variant="subtitle1" className={classes.label}>Zählrate</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 1" />
+                    <AntTextField name="Alarm 1"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 2" />
+                    <AntTextField name="Alarm 2"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Sigma *)" />
+                    <AntTextField name="Sigma *)"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Sigm min rate" />
+                    <AntTextField name="Sigm min rate"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntSwitch name="securityAlarm">Sicherheitsalarm</AntSwitch>
+                    <AntSwitch target={"settings"} name="securityAlarm">Sicherheitsalarm</AntSwitch>
                 </Grid>
             </Grid>
             <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
@@ -85,10 +86,10 @@ const AlarmSettings = () => {
                     <Typography variant="subtitle1" className={classes.label}>Dosierung</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 1" />
+                    <AntTextField name="Alarm 1"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <AntTextField name="Alarm 2" />
+                    <AntTextField name="Alarm 2"/>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} lg={2}/>
                 <Grid item xs={12} sm={6} md={3} lg={2}/>
@@ -103,10 +104,10 @@ const AlarmSettings = () => {
                     <Typography variant="subtitle1" className={classes.label}>Level</Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntTextField name="Alarm 1" />
+                    <AntTextField name="Alarm 1"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntTextField name="Alarm 2" />
+                    <AntTextField name="Alarm 2"/>
                 </Grid>
             </Grid>
 
@@ -115,7 +116,7 @@ const AlarmSettings = () => {
                     <Typography variant="h6">Alarmschwelle</Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSwitch name="nichtAernderbar" />
+                    <AntSwitch target={"settings"} name="nichtAernderbar"/>
                 </Grid>
             </Grid>
 
@@ -124,16 +125,16 @@ const AlarmSettings = () => {
                     <Typography variant="h6">Energieverhältnis</Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSwitch name="Aktiv" />
+                    <AntSwitch target={"settings"} name="Aktiv"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntTextField name="Minimale Werte" />
+                    <AntTextField name="Minimale Werte"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSlider name={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10} />
+                    <AntSlider target={"device"} name={"Empfindlichkeit Niederenergie"} max={100} min={0} step={10}/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSlider name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10} />
+                    <AntSlider  target={"device"} name={"Empfindlichkeit Hochenergie"} max={100} min={0} step={10}/>
                 </Grid>
             </Grid>
 
@@ -142,16 +143,16 @@ const AlarmSettings = () => {
                     <Typography variant="h6">Alarmsignalisierung</Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSwitch name="Schallgeber" />
+                    <AntSwitch target={"settings"} name="Schallgeber"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSwitch name="LED" />
+                    <AntSwitch target={"settings"} name="LED"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntSwitch name="Vibrator" />
+                    <AntSwitch target={"settings"} name="Vibrator"/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <AntTextField name="Alarm haltezeit" />
+                    <AntTextField name="Alarm haltezeit"/>
                 </Grid>
             </Grid>
         </Fragment>

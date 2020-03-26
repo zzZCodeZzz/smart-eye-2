@@ -51,7 +51,7 @@ type MeasurementValues = {
     "voltage": Maybe<string>,
     "count_rate_gamma": Maybe<string>,
     "count_rate_neutron": Maybe<string>,
-    "dose_rate": Maybe<string>,
+    dose_rate: Maybe<string>,
     "dose": Maybe<string>,
     "sigma_alarm_threshold": Maybe<string>,
     "alarm_and_error_flags": Maybe<string>,

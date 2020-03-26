@@ -16,28 +16,33 @@ const useStyles = makeStyles(() =>
     })
 );
 
-
 type AntSwitchProps = {
     name: string;
     value?: string | number | boolean;
+    label?: string;
     checkedLabel?: string;
     uncheckedLabel?: string;
+    target: "settings" | "device"
 }
 
-const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, value, checkedLabel = "on", uncheckedLabel = "off"}) => {
+const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off"}) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => dispatch(
-        updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0")
-    );
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (target === "device") {
+            dispatch(updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0"))
+        } else if (target === "settings") {
+            console.log("message for settings");
+        }
+    };
 
     const classes = useStyles();
 
     return (
         <AntPaper>
-            <AntLabel>{t(name)}</AntLabel>
+            <AntLabel>{t(label ? label : name)}</AntLabel>
             <Grid component="label" container alignItems="center" justify={"space-around"} spacing={1}>
                 <Grid item className={classes.checkLabel}>{t(uncheckedLabel)}</Grid>
                 <Grid item>

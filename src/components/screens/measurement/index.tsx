@@ -1,13 +1,17 @@
 import React, {FunctionComponent} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/rootReducer";
 import {Maybe} from "../../../redux/device/device.types";
 import {setActiveDeviceAndSubscribeHistory} from "../../../redux/device/radEyeDevicesSlice";
-import {Bluetooth, Flare} from "@material-ui/icons";
-import {createStyles, Grid, Paper, Theme, Typography} from "@material-ui/core";
+import {Bluetooth, Flare, Refresh} from "@material-ui/icons";
+import {createStyles, Divider, Grid, Paper, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntPaper from "../../ui/surfaces/paper";
 import MainContainer from "../../ui/layout/mainContainer";
+import {useTranslation} from "react-i18next";
+import {useActiveDeviceFields} from "../../../redux/device/deviceStoreSelectors";
+import AntSlider from "../../ui/inputs/slider";
+import AntSwitch from "../../ui/inputs/switch";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -62,15 +66,63 @@ const Device: FunctionComponent<DeviceProps> = ({active, connection_type, serial
 
 export const Measurement = () => {
 
-    const {activeDevice, devices} = useSelector((state: RootState) => state.radEyeDevices);
-
+    const {t} = useTranslation();
     const classes = useStyles();
+    const {activeDevice, devices} = useSelector((state: RootState) => state.radEyeDevices, shallowEqual);
+    const settings = useSelector((state: RootState) => state.app.settings);
+
+    const fields = useActiveDeviceFields((device => ({
+        dose_rate: device.dose_rate,
+        count_rate_gamma: device.count_rate_gamma,
+        dose: device.dose
+    })));
 
     return (
         <MainContainer>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={4} md={3}>
-                    <AntPaper>Dosisleistung</AntPaper>
+                    <AntPaper>
+                        <Refresh/>
+                        <Typography variant={"h6"}>{t("dose_rate")}</Typography>
+                        <Typography>{fields.dose_rate ? fields.dose_rate : "/"}</Typography>
+                        <Typography style={{fontWeight: "bold"}}>{t("counter")}</Typography>
+                        <Typography>{fields.count_rate_gamma ? fields.count_rate_gamma : "/"}</Typography>
+                        <Typography style={{fontWeight: "bold"}}>{t("dose")}</Typography>
+                        <Typography>{fields.dose ? fields.dose : "/"}</Typography>
+                        <Divider/>
+                        <Typography style={{fontWeight: "bold"}}>{t("polling_interval")}</Typography>
+                        <AntSlider name={"polling_interval"} target={"settings"} max={1} min={20} step={1}/>
+                        <AntSwitch
+                            name={"cyclic_update"}
+                            label={"permanent_polling"}
+                            target={"settings"}
+                            value={settings?.cyclic_update}
+                        />
+                        <AntSwitch
+                            name={"query_infodata"}
+                            label={"infodata"}
+                            target={"settings"}
+                            value={settings?.query_infodata}
+                        />
+                        <AntSwitch
+                            name={"query_measurements"}
+                            label={"measurement_values"}
+                            target={"settings"}
+                            value={settings?.query_measurements}
+                        />
+                        <AntSwitch
+                            name={"query_configuration_1"}
+                            label={`${t("configuration")} 1`}
+                            target={"settings"}
+                            value={settings?.query_configuration_1}
+                        />
+                        <AntSwitch
+                            name={"query_configuration_2"}
+                            label={`${t("configuration")} 2`}
+                            target={"settings"}
+                            value={settings?.query_configuration_2}
+                        />
+                    </AntPaper>
                 </Grid>
                 <Grid item xs={12} sm={8} md={6}>
                     <AntPaper>Graph</AntPaper>
@@ -87,7 +139,6 @@ export const Measurement = () => {
                             lastSeen={device.last_seen}
                             connection_type={device.connection_type}
                         />)}
-
                 </Grid>
             </Grid>
         </MainContainer>

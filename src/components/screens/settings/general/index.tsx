@@ -66,6 +66,7 @@ const GeneralSettings = () => {
                 <AntSlider
                     name="history_log_time"
                     value={fields.history_log_time}
+                    target={"device"}
                     max={3600}
                     min={0}
                     step={10}
@@ -88,6 +89,7 @@ const GeneralSettings = () => {
                 <AntSwitch
                     name="show_dr_in_cps_mode"
                     value={fields.show_dr_in_cps_mode}
+                    target={"device"}
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -102,11 +104,13 @@ const GeneralSettings = () => {
                 <AntSwitch
                     name="beep_on_key"
                     value={fields.beep_on_key}
+                    target={"device"}
                 />
                 <br/>
                 <AntSwitch
                     name="keyboard_lock"
                     value={fields.keyboard_lock}
+                    target={"device"}
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -116,19 +120,17 @@ const GeneralSettings = () => {
                     options={["none", "celsius", "fahrenheit"]}
                 />
                 <br/>
-                <AntSwitch
-                    name="show_dr_in_cps_mode"
-                    value={fields.show_dr_in_cps_mode}
-                />
                 <br/>
                 <AntSwitch
                     name="reversible"
                     value={fields.reversible}
+                    target={"device"}
                 />
                 <br/>
                 <AntSwitch
                     name="graphical_view"
                     value={fields.graphical_view}
+                    target={"device"}
                 />
             </Grid>
         </Grid>

@@ -56,17 +56,22 @@ type antSliderProps = {
     min: number;
     step: number | null;
     onChange?: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
+    target: "settings" | "device";
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, caption, value, max, min, step}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, target, caption, value, max, min, step}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();
     const dispatch = useDispatch();
 
-    const onChange = (event: React.ChangeEvent<{}>, value: number | number[]) => dispatch(
-        updateDeviceLocalAndRemote(name, String(value))
-    );
+    const onChange = (event: React.ChangeEvent<{}>, value: number | number[]) => {
+        if(target === "device") {
+            dispatch(updateDeviceLocalAndRemote(name, String(value)));
+        } else if(target === "settings") {
+            console.log("updateSttings");
+        }
+    };
 
 
     return (

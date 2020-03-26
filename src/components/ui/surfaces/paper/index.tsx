@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-type antPaperProps = {
+type AntPaperProps = {
     children: ReactNode;
 }
 
-const AntPaper: FunctionComponent<antPaperProps> = ({children}) => {
+const AntPaper: FunctionComponent<AntPaperProps> = ({children}) => {
 
     const classes = useStyles();
 
