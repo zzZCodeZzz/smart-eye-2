@@ -23,6 +23,12 @@ export const MQTTsendSettings = (settings: AppSettings) => {
     mqttClient.send(message);
 };
 
+export const MQTTqueryDevices = () => {
+    const message = new Message("SHOW_DEVICES");
+    message.destinationName = mqttConfig.topic_coming_going_toserver;
+    mqttClient.send(message);
+};
+
 
 mqttClient.onConnectionLost = (error: MQTTError): void => {
     console.log("connection lost, using broker:", mqttConfig.broker)
@@ -43,25 +49,15 @@ const onConnect = (): void => {
     message.destinationName = mqttConfig.topic_coming_going_toserver;
     mqttClient.send(message);
 
-    message = new Message("GET_DEVICES");
-    message.destinationName = mqttConfig.topic_coming_going_toserver;
-    mqttClient.send(message);
-
     message = new Message("SHOW_GATEWAYS");
     message.destinationName = mqttConfig.topic_coming_going_toserver;
     mqttClient.send(message);
 
-    message = new Message("SHOW_DEVICES");
-    message.destinationName = mqttConfig.topic_coming_going_toserver;
-    mqttClient.send(message);
-
     message = new Message("SHOW_DICTIONARY");
     message.destinationName = mqttConfig.topic_coming_going_toserver;
     mqttClient.send(message);
 
-    message = new Message("SHOW_DICTIONARY");
-    message.destinationName = mqttConfig.topic_coming_going_toserver;
-    mqttClient.send(message);
+    MQTTqueryDevices();
 };
 
 const connectionOptions: mqtt.ConnectionOptions = {
@@ -69,7 +65,11 @@ const connectionOptions: mqtt.ConnectionOptions = {
     onFailure: (e: MQTTError) => console.log("onFailure", e)
 };
 
-export const connectMqttClient = () => mqttClient.connect(connectionOptions);
+export const connectMqttClient = () => {
+    if (!mqttClient.isConnected()) {
+        mqttClient.connect(connectionOptions)
+    }
+};
 
 export const disConnectMqttClient = () => mqttClient.disconnect();
 

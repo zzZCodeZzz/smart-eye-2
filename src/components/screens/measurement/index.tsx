@@ -13,6 +13,7 @@ import {useActiveDeviceFields} from "../../../redux/device/deviceStoreSelectors"
 import AntSlider from "../../ui/inputs/slider";
 import AntSwitch from "../../ui/inputs/switch";
 import ExampleRes from "./charts/responsiveLineChart";
+import {MQTTqueryDevices} from "../../../mqtt/mqttClient";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -94,6 +95,8 @@ export const Measurement = () => {
         dose: device.dose,
     })));
 
+    const onRefresh = () => MQTTqueryDevices();
+
     return (
         <MainContainer>
             <Grid container spacing={2}>
@@ -101,7 +104,8 @@ export const Measurement = () => {
                     <AntPaper>
                         <Grid container spacing={1} justify="space-between">
                             <Grid item xs={4} alignItems="center" style={{alignSelf: "center", textAlign: "center"}}>
-                                <Refresh/>
+                                {/*Todo @datama kannst du hier bitte nen hover oder button effect auf den refresh legen?*/}
+                                <Refresh onClick={onRefresh}/>
                             </Grid>
                             <Grid item xs={8} style={{textAlign: "right"}}>
                                 <Typography variant={"h6"}>{t("dose_rate")}</Typography>
@@ -116,10 +120,10 @@ export const Measurement = () => {
                         <Typography style={{fontWeight: "bold"}}>{t("polling_interval")}</Typography><br />
                         <AntSlider
                             name={"interval"}
-                            label={"polling_interval"}
+                            label={`${t("polling_interval")} ${(settings?.interval)}`}
                             target={"settings"}
                             value={settings?.interval}
-                            min={1}
+                            min={0}
                             max={20}
                             step={1}
                         /><br />
