@@ -54,7 +54,7 @@ export default function DeviceHistory() {
                         textOrientation: "mixed",
                         textTransform: "uppercase"
                     },
-                    pageSize: 10,
+                    pageSize: 5,
                     pageSizeOptions: [10, 20, 30, 50],
                 }}
 
