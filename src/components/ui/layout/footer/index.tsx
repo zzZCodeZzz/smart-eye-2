@@ -31,7 +31,7 @@ const Footer: FunctionComponent = () => {
     return (
         <Fragment>
             <AppBar position="static">
-                <Container maxWidth="lg" className={classes.gridContainer}>
+                <Container maxWidth="xl" className={classes.gridContainer}>
                     <Grid container justify="space-between" alignItems="center" spacing={3}>
                         <Grid item xs={12} sm={6} md={3}>
                             Verbindungsart: {activeDevice && activeDevice.connection_type}
@@ -61,7 +61,7 @@ const Footer: FunctionComponent = () => {
                 </Container>
             </AppBar>
             <AppBar position="static" component="footer" className={classes.footer}>
-                <Container maxWidth="lg" className={classes.gridContainer}>
+                <Container maxWidth="xl" className={classes.gridContainer}>
                     <Grid container spacing={3} justify="space-between" alignItems="center">
                         <Grid item xs={12} sm={6}>
                             <span>RadEye PRD-ER 33525</span>

@@ -76,7 +76,7 @@ const MainNavigation: FunctionComponent = () => {
 
     return (
         <AppBar position="static" className={classes.mainNavigationBar}>
-            <Container maxWidth={"lg"}>
+            <Container maxWidth={"xl"}>
                 <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"} className={classes.navBlocksWrapper}>
                     <Grid item xs={12} sm={8} lg={2}>
                         <Typography variant={"h3"} className={classes.logo}>smartEye</Typography>
