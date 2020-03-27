@@ -1,6 +1,7 @@
 import React, {FunctionComponent, ReactNode} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Box} from "@material-ui/core";
+import {theme} from "../../layout/theme";
 
 
 const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
@@ -14,9 +15,10 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
             // boxShadow: shadows(3)
         },
         container: {
-            "&not(last-child)": {
-                paddingBottom: "16px"
-            }
+            paddingBottom: theme.spacing(2),
+            // "&not(last-child)": {
+            //     paddingTop: theme.spacing(3)
+            // }
         },
         //TODO remove this shit everywhere
         normalizeHeight: {

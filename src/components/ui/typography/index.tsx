@@ -14,7 +14,7 @@ const useStyles = makeStyles(({spacing, typography}: Theme) =>
         },
         h3: {
             fontWeight: typography.fontWeightMedium,
-            margin: `${spacing(3)}px 0 0`,
+            margin: `${spacing(3)}px 0 ${spacing(1)}px`,
             display: "block",
             width: "100%"
         }
