@@ -1,7 +1,7 @@
 import {Input, InputAdornment, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent, ReactElement} from "react";
 import {useTranslation} from "react-i18next";
-import {ConditionalBox} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/box";
 import AntLabel from "../label";
 
 

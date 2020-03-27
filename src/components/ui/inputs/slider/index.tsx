@@ -1,6 +1,6 @@
 import {createStyles, FormControl, FormHelperText, Slider, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent} from "react";
-import {ConditionalBox} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/box";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";
 import {useTranslation} from "react-i18next";

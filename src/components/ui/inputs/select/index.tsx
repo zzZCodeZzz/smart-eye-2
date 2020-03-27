@@ -5,7 +5,7 @@ import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 import {useTranslation} from "react-i18next";
-import {ConditionalBox} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/box";
 import AntLabel from "../label";
 
 const useStyles = makeStyles((theme: Theme) =>

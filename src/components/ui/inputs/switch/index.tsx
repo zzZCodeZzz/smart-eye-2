@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from "react";
 import {createStyles, Grid, Switch} from "@material-ui/core";
-import {ConditionalBox} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/box";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";

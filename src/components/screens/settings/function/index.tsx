@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {useActiveDeviceConfigurationFlags} from "../../../../redux/device/deviceStoreSelectors";
-import AntBox from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/box";
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 import {Grid} from "@material-ui/core";
 import AntSelect from "../../../ui/inputs/select";

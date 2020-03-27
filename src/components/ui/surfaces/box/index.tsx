@@ -9,7 +9,7 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
             height: "100%",
             boxSizing: "border-box",
             padding: spacing(2),
-            color: palette.text.secondary,
+            background: palette.background.paper,
             borderRadius: 4,
             // boxShadow: shadows(3)
         },

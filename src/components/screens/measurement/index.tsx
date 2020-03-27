@@ -6,7 +6,7 @@ import {setActiveDeviceAndSubscribeHistory} from "../../../redux/device/radEyeDe
 import {Bluetooth, Flare, Refresh} from "@material-ui/icons";
 import {createStyles, Grid, Paper, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import AntBox from "../../ui/surfaces/paper";
+import AntBox from "../../ui/surfaces/box";
 import MainContainer from "../../ui/layout/mainContainer";
 import {useTranslation} from "react-i18next";
 import {useActiveDeviceFields} from "../../../redux/device/deviceStoreSelectors";

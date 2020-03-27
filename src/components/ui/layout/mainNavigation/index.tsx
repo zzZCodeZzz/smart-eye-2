@@ -31,8 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
         logo: {
             letterSpacing: "-0.07rem",
             fontWeight: 500,
-            marginTop: theme.spacing(3),
-            marginBottom: theme.spacing(3),
+            margin: `${theme.spacing(2)}px 0`,
             [theme.breakpoints.only("xs")]: {
                 textAlign: "center"
             }
@@ -48,6 +47,16 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: "1rem",
             lineHeight: "80%",
             marginLeft: theme.spacing(0.5)
+        },
+        navBlocksWrapper: {
+            [theme.breakpoints.only("xs")]: {
+                "& :nth-child(2)": {
+                    order: 3
+                },
+                "& :nth-child(3)": {
+                    order: 2
+                },
+            }
         }
     })
 );
@@ -65,11 +74,18 @@ const MainNavigation: FunctionComponent = () => {
     return (
         <AppBar position="static" className={classes.mainNavigationBar}>
             <Container maxWidth={"lg"}>
-                <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"}>
-                    <Grid item xs={12} sm={5}>
+                <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"} className={classes.navBlocksWrapper}>
+                    <Grid item xs={12} md={3} lg={2}>
                         <Typography variant={"h3"} className={classes.logo}>smartEye</Typography>
                     </Grid>
-                    <Grid item xs={12} sm={5} md={3}>
+                    <Grid item xs={12} md={9} lg={8}>
+                        <Tabs value={tabValue} aria-label="simple tabs example" centered>
+                            <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
+                            <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
+                            <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
+                        </Tabs>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={2}>
                         <FormControl className={classes.formControl}>
                             <AntLabel>{t("active_device")}</AntLabel>
                             <Select
@@ -86,13 +102,6 @@ const MainNavigation: FunctionComponent = () => {
                                     </MenuItem>))}
                             </Select>
                         </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Tabs value={tabValue} aria-label="simple tabs example" centered>
-                            <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
-                            <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
-                            <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
-                        </Tabs>
                     </Grid>
                 </Grid>
             </Container>

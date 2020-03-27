@@ -7,7 +7,7 @@ import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
-import AntBox from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/box";
 
 const useStyles = makeStyles(() =>
     createStyles({

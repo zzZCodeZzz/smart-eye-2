@@ -6,7 +6,7 @@ import AlarmDose from "./sections/dose";
 import AlarmEnergyRate from "./sections/energyRatio";
 import AlarmThreshold from "./sections/threshold";
 import AlarmSignal from "./sections/signal";
-import AntBox from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/box";
 
 export const useAlarmStyles = makeStyles((theme: Theme) =>
     createStyles({
