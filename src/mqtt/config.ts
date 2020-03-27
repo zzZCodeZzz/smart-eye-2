@@ -1,12 +1,11 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Message} from "paho-mqtt";
-import {onDevicesReceived, onDeviceHistoryReceived} from "../redux/device/radEyeDevicesSlice";
+import {onDeviceHistoryReceived, onDevicesReceived} from "../redux/device/radEyeDevicesSlice";
 import {onDictionaryReceived, onSettingsReceived} from "../redux/app/appSlice";
 import {onGatewaysReceived} from "../redux/gateway/gatewaySlice";
-import {connectMqttClient, disConnectMqttClient, mqttClient} from "./mqttClient";
+import {connectMqttClient, mqttClient} from "./mqttClient";
 import {useEffect} from "react";
 import {useActiveDevice} from "../redux/device/deviceStoreSelectors";
-import {RootState} from "../redux/rootReducer";
 
 export const mqttConfig = {
     // ----------------MQTT -------------------
