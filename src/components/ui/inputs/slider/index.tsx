@@ -1,5 +1,5 @@
 import {createStyles, FormControl, FormHelperText, Slider, Theme, withStyles} from "@material-ui/core";
-import React, {FunctionComponent, MouseEvent} from "react";
+import React, {FunctionComponent} from "react";
 import {ConditionalPaper} from "../../surfaces/paper";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";

@@ -7,6 +7,7 @@ import MainContainer from "../../ui/layout/mainContainer";
 import {makeStyles} from "@material-ui/core/styles";
 import AlarmSettings from "./alarm";
 import {useTranslation} from "react-i18next";
+import FunctionSettings from "./function";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,9 +37,22 @@ const Settings = (): JSX.Element => {
         <Fragment>
             <AppBar position="relative" className={classes.settingsNavigation}>
                 <Tabs value={tabValue} aria-label="simple tabs example" centered>
-                    <Tab label={t("general_settings")} value="/settings/general" component={Link} to="/settings/general"/>
-                    <Tab label={t("alarm_settings")} value="/settings/alarm" component={Link} to="/settings/alarm"/>
-                    <Tab label={t("functions_settings")} value="/settings/function" component={Link} to="/settings/function"/>
+                    <Tab
+                        label={t("general_settings")}
+                        value="/settings/general" component={Link}
+                        to="/settings/general"
+                    />
+                    <Tab
+                        label={t("alarm_settings")}
+                        value="/settings/alarm"
+                        component={Link} to="/settings/alarm"
+                    />
+                    <Tab
+                        label={t("functions_settings")}
+                        value="/settings/function"
+                        component={Link}
+                        to="/settings/function"
+                    />
                 </Tabs>
             </AppBar>
             <MainContainer>
@@ -50,10 +64,10 @@ const Settings = (): JSX.Element => {
                         <GeneralSettings/>
                     </Route>
                     <Route path={"/settings/alarm"}>
-                        <AlarmSettings />
+                        <AlarmSettings/>
                     </Route>
                     <Route path={"/settings/function"}>
-                        function
+                        <FunctionSettings/>
                     </Route>
                 </Switch>
             </MainContainer>

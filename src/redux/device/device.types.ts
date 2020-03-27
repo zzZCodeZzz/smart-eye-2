@@ -1,5 +1,16 @@
 export type Maybe<T> = T | undefined;
 
+export type ConfigurationFlag = {
+    options: string[];
+    category: string;
+    sub_category: string;
+    value: number;
+};
+
+export type ConfigurationFlags = {
+    [flag_key: string]: ConfigurationFlag;
+}
+
 export type Device = {
     device_id: string;
     device_name: string;
@@ -22,6 +33,7 @@ export type Device = {
     graphical_view: Maybe<string>,
     pick_date: Maybe<string>;
     pick_time: Maybe<string>;
+    configuration_flags: ConfigurationFlags;
 } & InfoData &
     MeasurementValues &
     ConfigurationValues &

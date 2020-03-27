@@ -65,6 +65,8 @@ const radEyeDevicesSlice = createSlice({
         },
         onDevicesReceived(state, action: PayloadAction<Device[]>) {
             state.devices = action.payload
+            // Todo remove mock
+                .map(device => ({...device, configuration_flags: confFlagsMock}))
                 .map(device => {
                     if (!device.serial_number || device.serial_number.replace(/[^0-9SNC]/g, "").length === 0) {
                         return {...device, serial_number: "00000"}
@@ -134,3 +136,132 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
 export const {onDevicesReceived, updateDevice, setActiveDevice, onDeviceHistoryReceived} = radEyeDevicesSlice.actions;
 
 export default radEyeDevicesSlice.reducer;
+
+const confFlagsMock = {
+    turbo: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Motor",
+        sub_category: "Aktor",
+        value: 1
+    },
+    temperatur: {
+        options: [
+            "kelvin",
+            "fahrenheit",
+            "celsius"
+        ],
+        category: "Motor",
+        sub_category: "Sensor",
+        value: 2
+    },
+    temperatur2: {
+        options: [
+            "kelvin",
+            "fahrenheit",
+            "celsius"
+        ],
+        category: "Motor2",
+        sub_category: "Sensor",
+        value: 2
+    },
+    temperatur3: {
+        options: [
+            "kelvin",
+            "fahrenheit",
+            "celsius"
+        ],
+        category: "Motor3",
+        sub_category: "Sensor",
+        value: 2
+    },
+    temperatur4: {
+        options: [
+            "kelvin",
+            "fahrenheit",
+            "celsius"
+        ],
+        category: "Motor4",
+        sub_category: "Sensor",
+        value: 2
+    },
+    sparmodus: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Motor",
+        sub_category: "Aktor",
+        value: 0
+    },
+    drehzal: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Motor",
+        sub_category: "Sensor",
+        value: 1
+    },
+    geschwindigkeit: {
+        options: [
+            "kilometer",
+            "meilen"
+        ],
+        category: "Anzeige",
+        sub_category: "combi",
+        value: 1
+    },
+    language: {
+        options: [
+            "englisch",
+            "deutsch",
+            "französisch",
+            "italienisch",
+            "spanisch",
+            "portugisisch",
+            "polnisch"
+        ],
+        category: "Anzeige",
+        sub_category: "Mittelkonsole",
+        value: 6
+    },
+    radio: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Anzeige",
+        sub_category: "Mittelkonsole",
+        value: 1
+    },
+    oelstand: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Anzeige",
+        sub_category: "combi",
+        value: 1
+    },
+    licht: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Innenraum",
+        sub_category: "Beleuchtung",
+        value: 1
+    },
+    navigation: {
+        options: [
+            "off",
+            "on"
+        ],
+        category: "Anzeige",
+        sub_category: "Mittelkonsole",
+        value: 1
+    }
+};
