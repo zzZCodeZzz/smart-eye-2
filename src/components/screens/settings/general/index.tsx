@@ -2,12 +2,13 @@ import React from "react";
 import {createStyles, Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AntSelect from "../../../ui/inputs/select";
-import {useActiveDeviceFields} from "../../../../redux/device/deviceStoreSelectors";
+import {useGeneralDeviceSettingsSelector} from "../../../../redux/device/deviceStoreSelectors";
 import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
 import AntBox from "../../../ui/surfaces/box";
+import {useUpdateDevice} from "../../../../redux/device/radEyeDevicesSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -20,30 +21,16 @@ const useStyles = makeStyles(() =>
 const GeneralSettings = () => {
 
     const classes = useStyles();
-
-    const fields = useActiveDeviceFields(device => ({
-        language: device.language,
-        reversible: device.reversible,
-        battery_type: device.battery_type,
-        accustic_view: device.accustic_view,
-        dose_rate_display_unit: device.dose_rate_display_unit,
-        dose_rate_cps: device.dose_rate_cps,
-        temperature_display: device.temperature_display,
-        beep_on_key: device.beep_on_key,
-        keyboard_lock: device.keyboard_lock,
-        graphical_view: device.graphical_view,
-        show_dr_in_cps_mode: device.show_dr_in_cps_mode,
-        pick_date: device.pick_date,
-        pick_time: device.pick_time,
-        history_log_time: device.history_log_time
-    }));
+    const generalSettings = useGeneralDeviceSettingsSelector();
+    const {updateSelect, updateSwitch, updateSlider, updateTime} = useUpdateDevice();
 
     return (
         <Grid container className={classes.gridContainer} spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
                     name="language"
-                    value={fields.language}
+                    value={generalSettings.language}
+                    onChange={updateSelect}
                     options={["german", "english", "français"]}
                     normalizeHeight
                     withPaper
@@ -52,7 +39,8 @@ const GeneralSettings = () => {
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
                     name="battery_type"
-                    value={fields.battery_type}
+                    value={generalSettings.battery_type}
+                    onChange={updateSelect}
                     options={["battery_rechargeable", "battery_alkaline"]}
                     normalizeHeight
                     withPaper
@@ -61,7 +49,8 @@ const GeneralSettings = () => {
             <Grid item xs={12} sm={6} md={3}>
                 <AntSelect
                     name="accustic_view"
-                    value={fields.accustic_view}
+                    value={generalSettings.accustic_view}
+                    onChange={updateSelect}
                     options={["none", "finder", "single_impulse"]}
                     normalizeHeight
                     withPaper
@@ -70,8 +59,8 @@ const GeneralSettings = () => {
             <Grid item xs={12} sm={6} md={3}>
                 <AntSlider
                     name="history_log_time"
-                    value={fields.history_log_time}
-                    target={"device"}
+                    value={generalSettings.history_log_time}
+                    onChange={(event, value) => updateSlider("history_log_time", value)}
                     max={3600}
                     min={0}
                     step={10}
@@ -83,28 +72,31 @@ const GeneralSettings = () => {
                 <AntBox>
                     <AntSelect
                         name="dose_rate_display_unit"
-                        value={fields.dose_rate_display_unit}
+                        value={generalSettings.dose_rate_display_unit}
+                        onChange={updateSelect}
                         options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
                     />
                     <br/><br/><br/>
                     <AntSelect
                         name="dose_rate_cps"
-                        value={fields.dose_rate_cps}
+                        value={generalSettings.dose_rate_cps}
+                        onChange={updateSelect}
                         options={["SW/H", "R/H", "REM/H"]}
                     />
                     <br/><br/><br/>
                     <AntSwitch
                         name="show_dr_in_cps_mode"
-                        value={fields.show_dr_in_cps_mode}
-                        target={"device"}
+                        value={generalSettings.show_dr_in_cps_mode}
+                        onChange={updateSwitch}
                     />
                 </AntBox>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntBox>
                     <DateTimePicker
-                        name={"pick_date"}
-                        value={fields.pick_date}
+                        name={"date_time"}
+                        onChange={time => updateTime("pick_date", time)}
+                        value={generalSettings.pick_date}
                     />
                     <br/><br/><br/>
                     <SyncTimeButton/>
@@ -114,14 +106,14 @@ const GeneralSettings = () => {
                 <AntBox>
                     <AntSwitch
                         name="beep_on_key"
-                        value={fields.beep_on_key}
-                        target={"device"}
+                        value={generalSettings.beep_on_key}
+                        onChange={updateSwitch}
                     />
                     <br/><br/><br/>
                     <AntSwitch
                         name="keyboard_lock"
-                        value={fields.keyboard_lock}
-                        target={"device"}
+                        value={generalSettings.keyboard_lock}
+                        onChange={updateSwitch}
                     />
                 </AntBox>
             </Grid>
@@ -129,20 +121,21 @@ const GeneralSettings = () => {
                 <AntBox>
                     <AntSelect
                         name="temperature_display"
-                        value={fields.temperature_display}
+                        value={generalSettings.temperature_display}
+                        onChange={updateSelect}
                         options={["none", "celsius", "fahrenheit"]}
                     />
                     <br/><br/><br/>
                     <AntSwitch
                         name="reversible"
-                        value={fields.reversible}
-                        target={"device"}
+                        value={generalSettings.reversible}
+                        onChange={updateSwitch}
                     />
                     <br/><br/><br/>
                     <AntSwitch
                         name="graphical_view"
-                        value={fields.graphical_view}
-                        target={"device"}
+                        value={generalSettings.graphical_view}
+                        onChange={updateSwitch}
                     />
                 </AntBox>
             </Grid>

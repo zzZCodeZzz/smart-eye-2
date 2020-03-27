@@ -2,12 +2,9 @@ import React, {FunctionComponent} from "react";
 import {createStyles, Grid, Switch} from "@material-ui/core";
 import {ConditionalBox} from "../../surfaces/box";
 import {useTranslation} from "react-i18next";
-import {useDispatch} from "react-redux";
-import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 import {crazyToBool} from "../../../../mqtt/utils";
 import AntLabel from "../label";
 import {makeStyles} from "@material-ui/core/styles";
-import {updateAppSettingsLocalAndRemote} from "../../../../redux/app/appSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -23,23 +20,13 @@ type AntSwitchProps = {
     label?: string;
     checkedLabel?: string;
     uncheckedLabel?: string;
-    target: "settings" | "device";
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     withPaper?: boolean;
 }
 
-const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, value, checkedLabel = "on", uncheckedLabel = "off", withPaper}) => {
+const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, onChange, value, checkedLabel = "on", uncheckedLabel = "off", withPaper}) => {
 
-    const dispatch = useDispatch();
     const {t} = useTranslation();
-
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (target === "device") {
-            dispatch(updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0"))
-        } else if (target === "settings") {
-            dispatch(updateAppSettingsLocalAndRemote(event.target.name, event.target.checked))
-        }
-    };
-
     const classes = useStyles();
 
     return (
@@ -48,7 +35,11 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
             <Grid component="label" container alignItems="center" justify={"center"} spacing={1}>
                 <Grid item className={classes.checkLabel}>{t(uncheckedLabel)}</Grid>
                 <Grid item>
-                    <Switch onChange={onChange} checked={crazyToBool(value)} name={name}/>
+                    <Switch
+                        onChange={onChange}
+                        checked={crazyToBool(value)}
+                        name={name}
+                    />
                 </Grid>
                 <Grid item className={classes.checkLabel}>{t(checkedLabel)}</Grid>
             </Grid>

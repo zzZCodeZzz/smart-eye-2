@@ -3,6 +3,9 @@ import {Device} from "./device.types";
 import {AppThunk} from "../store";
 import {MQTTsendDevice, MQTTSubscribeHistoryForActiveDevice} from "../../mqtt/mqttClient";
 import moment from "moment";
+import {useDispatch} from "react-redux";
+import React from "react";
+import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 
 export type DeviceHistoryEntry = {
     line: string;
@@ -131,6 +134,35 @@ export const updateDeviceLocalAndRemote = (fieldName: string, value: string): Ap
     const alteredDevice: Device = {...radEyeDevices?.devices![radEyeDevices.activeDevice], [fieldName]: value};
     MQTTsendDevice(alteredDevice);
     dispatch(updateDevice(alteredDevice));
+};
+
+export const useUpdateDevice = () => {
+    const dispatch = useDispatch();
+
+    const updateSelect = (event: React.ChangeEvent<any>) => dispatch(
+        updateDeviceLocalAndRemote(event.target.name, event.target.value)
+    );
+
+    const updateSwitch = (event: React.ChangeEvent<HTMLInputElement>) => dispatch(
+        updateDeviceLocalAndRemote(event.target.name, event.target.checked ? "1" : "0")
+    );
+
+    const updateSlider = (fieldName: string, value: number | number[]) => dispatch(
+        updateDeviceLocalAndRemote(fieldName, String(value))
+    );
+
+    const updateTime = (fieldName: string, time: MaterialUiPickersDate) => {
+        if (time) {
+            dispatch(updateDeviceLocalAndRemote(fieldName, time.format("YYYY-MM-DD HH:mm:ss")));
+        }
+    };
+
+    return {
+        updateSelect,
+        updateSwitch,
+        updateSlider,
+        updateTime
+    };
 };
 
 export const {onDevicesReceived, updateDevice, setActiveDevice, onDeviceHistoryReceived} = radEyeDevicesSlice.actions;

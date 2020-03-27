@@ -3,8 +3,16 @@ import {Grid} from "@material-ui/core";
 import AntInput from "../../../../ui/inputs/text";
 import AntSwitch from "../../../../ui/inputs/switch";
 import {H2, H3} from "../../../../ui/typography";
+import {useAlarmStyles} from "../index";
 
 const AlarmRate = () => {
+
+    const classes = useAlarmStyles();
+
+    const onTempChange = () => {
+        console.log("todo change")
+    };
+
 
     return (
         <Grid container spacing={1} justify={"space-between"}>
@@ -56,9 +64,11 @@ const AlarmRate = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch
-                    target={"settings"}
-                    name="securityAlarm">
-                    Sicherheitsalarm</AntSwitch>
+                    name="securityAlarm"
+                    onChange={onTempChange}
+                >
+                    Sicherheitsalarm
+                </AntSwitch>
             </Grid>
 
 

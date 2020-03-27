@@ -56,7 +56,6 @@ export default function DeviceHistory() {
                     pageSize: 5,
                     pageSizeOptions: [10, 20, 30, 50],
                 }}
-
                 // fix, since objects from mqtt are not editable
                 data={JSON.parse(JSON.stringify(activeDeviceHistory))}
             />

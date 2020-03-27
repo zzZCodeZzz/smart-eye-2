@@ -4,9 +4,6 @@ import {ConditionalBox} from "../../surfaces/box";
 import {makeStyles} from "@material-ui/core/styles";
 import AntLabel from "../label";
 import {useTranslation} from "react-i18next";
-import {useDispatch} from "react-redux";
-import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
-import {updateAppSettingsLocalAndRemote} from "../../../../redux/app/appSlice";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -59,25 +56,15 @@ type antSliderProps = {
     max: number;
     min: number;
     step?: number | null;
-    onChange?: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
-    target: "settings" | "device";
+    onChange: (event: React.ChangeEvent<{}>, value: number | number[]) => void;
     normalizeHeight?: boolean;
     withPaper?: boolean;
 }
 
-const AntSlider: FunctionComponent<antSliderProps> = ({name, label, target, caption, value, max, min, step, normalizeHeight, withPaper}) => {
+const AntSlider: FunctionComponent<antSliderProps> = ({name, label, onChange, caption, value, max, min, step, normalizeHeight, withPaper}) => {
 
     const classes = useStyles();
     const {t} = useTranslation();
-    const dispatch = useDispatch();
-
-    const onChange = (event: React.ChangeEvent<{}>, value: number | number[]) => {
-        if (target === "device") {
-            dispatch(updateDeviceLocalAndRemote(name, String(value)));
-        } else if (target === "settings") {
-            dispatch(updateAppSettingsLocalAndRemote(name, value))
-        }
-    };
 
     return (
         <ConditionalBox condition={withPaper} normalizeHeight={normalizeHeight}>

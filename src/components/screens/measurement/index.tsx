@@ -120,6 +120,8 @@ export const Measurement = () => {
 
     const onRefresh = () => MQTTqueryDevices();
 
+    const onTempChange = () => {console.log("todo change")};
+
     return (
         <MainContainer>
             <Grid container spacing={2}>
@@ -139,8 +141,8 @@ export const Measurement = () => {
                         <H3>{t("polling_interval")}</H3>
                         <AntSlider
                             name={"interval"}
+                            onChange={((event, value) => console.log("veal", value))}
                             label={`${t("polling_interval")} ${(settings?.interval)}`}
-                            target={"settings"}
                             value={settings?.interval}
                             min={0}
                             max={20}
@@ -149,31 +151,31 @@ export const Measurement = () => {
                         <AntSwitch
                             name={"cyclic_update"}
                             label={"permanent_polling"}
-                            target={"settings"}
+                            onChange={onTempChange}
                             value={settings?.cyclic_update}
                         />
                         <AntSwitch
                             name={"query_infodata"}
                             label={"infodata"}
-                            target={"settings"}
+                            onChange={onTempChange}
                             value={settings?.query_infodata}
                         />
                         <AntSwitch
                             name={"query_measurements"}
                             label={"measurement_values"}
-                            target={"settings"}
+                            onChange={onTempChange}
                             value={settings?.query_measurements}
                         />
                         <AntSwitch
                             name={"query_configuration_1"}
                             label={`${t("configuration")} 1`}
-                            target={"settings"}
+                            onChange={onTempChange}
                             value={settings?.query_configuration_1}
                         />
                         <AntSwitch
                             name={"query_configuration_2"}
                             label={`${t("configuration")} 2`}
-                            target={"settings"}
+                            onChange={onTempChange}
                             value={settings?.query_configuration_2}
                         />
                     </AntBox>

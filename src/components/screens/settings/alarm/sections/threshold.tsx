@@ -11,7 +11,7 @@ const AlarmThreshold = () => {
                 <H2>Alarmschwelle</H2>
             </Grid>
             <Grid item xs={12} sm={12}>
-                <AntSwitch target={"settings"} name="nichtAernderbar"/>
+                <AntSwitch onChange={() => console.log("bla")} name="nichtAernderbar"/>
             </Grid>
         </Grid>
     );

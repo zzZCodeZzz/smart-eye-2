@@ -20,6 +20,10 @@ const FunctionSettings = () => {
 
     const classes = useStyles();
 
+    const onChangeSelect = (event: React.ChangeEvent<any>) => {
+        console.log("duah");
+    }
+
     return (
         <Grid container className={classes.gridContainer} spacing={3}>
             {Object.entries(configurationFlags).map(([categoryKey, category]) => (
@@ -33,14 +37,15 @@ const FunctionSettings = () => {
                                     confFlag.options.length > 2
                                         ? <AntSwitch
                                             name={confFlagKey}
-                                            target={"device"}
                                             uncheckedLabel={confFlag.options[0]}
                                             checkedLabel={confFlag.options[1]}
+                                            onChange={() => console.log("bla")}
                                             value={confFlag.value}
                                         />
                                         : <AntSelect
                                             name={confFlagKey}
                                             options={confFlag.options}
+                                            onChange={onChangeSelect}
                                             value={String(confFlag.value)}
                                         />))}
                             </Fragment>))}
@@ -49,5 +54,6 @@ const FunctionSettings = () => {
         </Grid>
     )
 };
+
 
 export default FunctionSettings;
