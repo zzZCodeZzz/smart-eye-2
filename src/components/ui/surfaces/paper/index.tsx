@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactNode, Fragment} from "react";
+import React, {FunctionComponent, ReactNode} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Paper} from "@material-ui/core";
 
@@ -10,6 +10,12 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
             padding: spacing(2),
             color: palette.text.secondary,
         },
+        container: {
+            "&not(last-child)": {
+                paddingBottom: "16px"
+            }
+        },
+        //TODO remove this shit everywhere
         normalizeHeight: {
             [breakpoints.up("sm")]: {
                 minHeight: "7.5rem",
@@ -42,5 +48,10 @@ type ConditionalPaperTypes = AntPaperProps & {
     condition: boolean | undefined;
 }
 
-export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children, normalizeHeight}) =>
-    condition ? <AntPaper normalizeHeight={normalizeHeight}>{children}</AntPaper> : <Fragment>{children}</Fragment>;
+export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children, normalizeHeight}) => {
+
+    const classes = useStyles();
+
+    return condition ? <AntPaper normalizeHeight={normalizeHeight}>{children}</AntPaper> : <div className={classes.container}>{children}</div>;
+};
+
