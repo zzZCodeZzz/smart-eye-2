@@ -2,7 +2,7 @@ import {createMuiTheme, withStyles} from "@material-ui/core";
 import {FunctionComponent} from "react";
 
 export const theme = createMuiTheme({
-    palette:{
+    palette: {
         type: "dark",
         primary: {
             main: "#424242"
@@ -21,8 +21,24 @@ export const theme = createMuiTheme({
 const globalStyles = () => ({
     "@global": {
         body: {
-            userSelect: "none"
+            userSelect: "none",
+        },
+        main: {
+            flexGrow: 1,
+            flexShrink: 0,
+        },
+        footer: {
+            flexShrink: 0,
+        },
+        header: {
+            flexShrink: 0,
+        },
+        ".App" : {
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column"
         }
+
     }
 });
 

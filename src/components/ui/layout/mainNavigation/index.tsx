@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
         logo: {
             letterSpacing: "-0.07rem",
             fontWeight: 500,
-            margin: `${theme.spacing(2)}px 0 0`,
+            margin: `${theme.spacing(2)}px 0`,
             [theme.breakpoints.only("xs")]: {
                 textAlign: "center"
             }
@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         navBlocksWrapper: {
             [theme.breakpoints.down("md")]: {
-                "& :nth-child(2)": {
+                "& > :nth-child(2)": {
                     order: 3
                 },
-                "& :nth-child(3)": {
+                "& > :nth-child(3)": {
                     order: 2
                 },
             }

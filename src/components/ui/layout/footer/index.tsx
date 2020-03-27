@@ -1,4 +1,4 @@
-import React, {Fragment, FunctionComponent} from "react";
+import React, {FunctionComponent} from "react";
 import {AppBar, Container, createStyles, Grid, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {useActiveDevice} from "../../../../redux/device/deviceStoreSelectors";
@@ -29,8 +29,8 @@ const Footer: FunctionComponent = () => {
     const classes = useStyles();
 
     return (
-        <Fragment>
-            <AppBar position="static">
+        <Container component={"footer"} maxWidth={false} style={{ padding: 0}}>
+            <AppBar position="static" component={"section"}>
                 <Container maxWidth="xl" className={classes.gridContainer}>
                     <Grid container justify="space-between" alignItems="center" spacing={3}>
                         <Grid item xs={12} sm={6} md={3}>
@@ -60,7 +60,7 @@ const Footer: FunctionComponent = () => {
                     </Grid>
                 </Container>
             </AppBar>
-            <AppBar position="static" component="footer" className={classes.footer}>
+            <AppBar position="static" component="section" className={classes.footer}>
                 <Container maxWidth="xl" className={classes.gridContainer}>
                     <Grid container spacing={3} justify="space-between" alignItems="center">
                         <Grid item xs={12} sm={6}>
@@ -73,7 +73,7 @@ const Footer: FunctionComponent = () => {
                     </Grid>
                 </Container>
             </AppBar>
-        </Fragment>
+        </Container>
     );
 };
 
