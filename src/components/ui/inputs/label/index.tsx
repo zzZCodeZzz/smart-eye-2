@@ -8,7 +8,11 @@ const useStyles = makeStyles(({spacing}: Theme) =>
             display: "inline-block",
             fontSize: "0.8rem",
             textTransform: "uppercase",
-            marginTop: spacing(1)
+            marginTop: spacing(1),
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            maxWidth: "100%",
+            overflow: "hidden"
         }
     })
 );

@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
             marginLeft: theme.spacing(0.5)
         },
         navBlocksWrapper: {
-            [theme.breakpoints.down("md")]: {
+            [theme.breakpoints.down("sm")]: {
                 "& > :nth-child(2)": {
                     order: 3
                 },
@@ -59,7 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         tabContainer: {
-            alignSelf: "flex-end"
+            alignSelf: "flex-end",
+            height: "5.5rem",
+            "& a": {
+                height: "5.5rem",
+            }
         }
     })
 );
@@ -78,18 +82,18 @@ const MainNavigation: FunctionComponent = () => {
         <AppBar position="static" className={classes.mainNavigationBar}>
             <Container maxWidth={"xl"}>
                 <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"} className={classes.navBlocksWrapper}>
-                    <Grid item xs={12} sm={8} lg={2}>
+                    <Grid item xs={12} sm={8} md={2}>
                         <Typography variant={"h3"} className={classes.logo}>smartEye</Typography>
                     </Grid>
-                    <Grid item xs={12} md={12} lg={8} className={classes.tabContainer}>
+                    <Grid item xs={12} sm={12} md={8} className={classes.tabContainer}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
                             <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
                             <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
                             <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
                         </Tabs>
                     </Grid>
-                    <Grid item xs={12} sm={4} lg={2}>
-                        <FormControl className={classes.formControl}>
+                    <Grid item xs={12} sm={4} md={2}>
+                        <FormControl className={classes.formControl} style={{transform: "scale(0.9)"}}>
                             <AntLabel>{t("active_device")}</AntLabel>
                             <Select
                                 inputProps={{name: "deviceDropDown", id: "deviceDropDown"}}

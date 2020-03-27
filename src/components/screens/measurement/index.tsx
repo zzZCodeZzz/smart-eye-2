@@ -24,7 +24,7 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
         },
         deviceIcon: {
             display: "inline-block",
-            marginRight: spacing(0.5),
+            marginRight: spacing(1),
             transform: "translateY(0.25rem)",
         },
         activeDevice: {
@@ -168,7 +168,7 @@ export const Measurement = () => {
                                     step={1}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <AntSwitch
                                     name={"cyclic_update"}
                                     label={"permanent_polling"}
@@ -176,7 +176,7 @@ export const Measurement = () => {
                                     value={settings?.cyclic_update}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <AntSwitch
                                     name={"query_infodata"}
                                     label={"infodata"}
@@ -184,7 +184,7 @@ export const Measurement = () => {
                                     value={settings?.query_infodata}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <AntSwitch
                                     name={"query_measurements"}
                                     label={"measurement_values"}
@@ -192,7 +192,7 @@ export const Measurement = () => {
                                     value={settings?.query_measurements}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <AntSwitch
                                     name={"query_configuration_1"}
                                     label={`${t("configuration")} 1`}
@@ -200,7 +200,7 @@ export const Measurement = () => {
                                     value={settings?.query_configuration_1}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={6}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <AntSwitch
                                     name={"query_configuration_2"}
                                     label={`${t("configuration")} 2`}
