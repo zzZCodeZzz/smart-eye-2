@@ -6,7 +6,7 @@ import {useActiveDevice} from "../../../../redux/device/deviceStoreSelectors";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         gridContainer: {
-            padding: theme.spacing(5)
+            padding: theme.spacing(2.5)
         },
         footer: {
             background: theme.palette.secondary.main,
