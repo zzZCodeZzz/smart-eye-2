@@ -1,8 +1,26 @@
 import React, {FunctionComponent, useState} from 'react';
 import {CartesianGrid, Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
-import {Button} from "@material-ui/core";
+import {Button, Theme} from "@material-ui/core";
 import moment from "moment";
 import {DeviceDoseVisualisation} from "../../../../redux/device/radEyeDevicesSlice";
+import {createStyles, makeStyles} from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        chartContainer: {
+            width: "100%",
+            height: "30rem",
+            textAlign: "center",
+
+            "& .recharts-responsive-container": {
+                [theme.breakpoints.down("xs")]: {
+                    height: "90%!important",
+                }
+            }
+        }
+    }),
+);
 
 type ResponsiveLineChartState = {
     data: DeviceDoseVisualisation[];
@@ -99,8 +117,10 @@ const ResponsiveLineChart: FunctionComponent<{ data: any }> = ({data}) => {
         }));
     };
 
+    const classes = useStyles();
+
     return (
-        <div style={{width: '100%', height: "30rem", textAlign: "center"}}>
+        <div className={classes.chartContainer}>
             <ResponsiveContainer>
                 <LineChart
                     data={data}

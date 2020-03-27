@@ -30,18 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         graph: {
-            minHeight: "37rem",
             display: "flex",
             flexDirection: "column",
             alignContent: "center",
             justifyContent: "center",
-
-            [theme.breakpoints.up("md")]: {
-                width: "calc(100% - 24px)",
-                position: "absolute",
-                top: "50%",
-                transform: "translateY(-50%)"
-            }
         }
     })
 );
