@@ -44,6 +44,7 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
         refreshButton: {
             cursor: "pointer",
             position: "absolute",
+            zIndex: 2,
             top: "40%",
             left: "20%",
             transform: "translate(-50%,-50%)",
