@@ -1,7 +1,7 @@
 import React from "react";
-import {Grid, Typography} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import AntInput from "../../../../ui/inputs/text";
-import {H2} from "../../../../ui/typography";
+import {H2, H3} from "../../../../ui/typography";
 
 const AlarmDose = () => {
 
@@ -9,14 +9,12 @@ const AlarmDose = () => {
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <H2>Dosis</H2>
+                <H3>Level</H3>
             </Grid>
-            <Grid item xs={12} sm={12}>
-                <Typography variant="subtitle1">Level</Typography>
-            </Grid>
-            <Grid item xs={12} md={6} lg={12}>
+            <Grid item xs={12} md={12} lg={12}>
                 <AntInput name="Alarm 1"/>
             </Grid>
-            <Grid item xs={12} md={6} lg={12}>
+            <Grid item xs={12} md={12} lg={12}>
                 <AntInput name="Alarm 2"/>
             </Grid>
         </Grid>

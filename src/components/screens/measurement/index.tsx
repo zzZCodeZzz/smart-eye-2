@@ -14,12 +14,18 @@ import AntSlider from "../../ui/inputs/slider";
 import AntSwitch from "../../ui/inputs/switch";
 import ExampleRes from "./charts/responsiveLineChart";
 import {MQTTqueryDevices} from "../../../mqtt/mqttClient";
-import {H3} from "../../ui/typography";
+import {H2, H3} from "../../ui/typography";
+import AntLabel from "../../ui/inputs/label";
 
 const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
         device: {
             padding: spacing(3),
+        },
+        deviceIcon: {
+            display: "inline-block",
+            marginRight: spacing(0.5),
+            transform: "translateY(0.25rem)",
         },
         activeDevice: {
             background: palette.secondary.main
@@ -65,7 +71,7 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
             [breakpoints.down("xs")]: {
                 fontSize: "6rem"
             }
-        }
+        },
     })
 );
 
@@ -87,18 +93,29 @@ const Device: FunctionComponent<DeviceProps> = ({active, connection_type, serial
     const classes = useStyles();
 
     return (
+        // TODO @manu styled box instead?
         <Paper
             className={`${classes.device} ${active && classes.activeDevice}`}
             onClick={onClick}
         >
-            <Typography variant="h4">
-                {connection_type === "BLE" ? <Bluetooth/> : <Flare/>}
-            </Typography>
-            type_info: {type_info ? type_info : "UNDEFINED"} <br/>
-            serialNumber: {serialNumber} <br/>
-            address: {device_id.split("@")[0]} <br/>
-            gateway: {gateway} <br/>
-            lastSeen: {lastSeen} <br/>
+            <H2>
+                {connection_type === "BLE"
+                    ? <i  className={classes.deviceIcon}><Bluetooth/></i>
+                    : <i className={classes.deviceIcon}><Flare/></i>}
+                {type_info ? type_info : "UNDEFINED"}
+            </H2>
+            <Grid container justify={"space-between"} direction="row">
+                <AntLabel>serial:</AntLabel> {serialNumber}
+            </Grid>
+            <Grid container justify={"space-between"} direction="row">
+                <AntLabel>address:</AntLabel>{device_id.split("@")[0]}
+            </Grid>
+            <Grid container justify={"space-between"} direction="row">
+                <AntLabel>gateway:</AntLabel> {gateway}
+            </Grid>
+            <Grid container justify={"space-between"} direction="row">
+                <AntLabel>last Seen:</AntLabel> {lastSeen}
+            </Grid>
         </Paper>
     )
 };
@@ -139,45 +156,59 @@ export const Measurement = () => {
                             </Grid>
                         </Grid>
                         <H3>{t("polling_interval")}</H3>
-                        <AntSlider
-                            name={"interval"}
-                            onChange={((event, value) => console.log("veal", value))}
-                            label={`${t("polling_interval")} ${(settings?.interval)}`}
-                            value={settings?.interval}
-                            min={0}
-                            max={20}
-                            step={1}
-                        />
-                        <AntSwitch
-                            name={"cyclic_update"}
-                            label={"permanent_polling"}
-                            onChange={onTempChange}
-                            value={settings?.cyclic_update}
-                        />
-                        <AntSwitch
-                            name={"query_infodata"}
-                            label={"infodata"}
-                            onChange={onTempChange}
-                            value={settings?.query_infodata}
-                        />
-                        <AntSwitch
-                            name={"query_measurements"}
-                            label={"measurement_values"}
-                            onChange={onTempChange}
-                            value={settings?.query_measurements}
-                        />
-                        <AntSwitch
-                            name={"query_configuration_1"}
-                            label={`${t("configuration")} 1`}
-                            onChange={onTempChange}
-                            value={settings?.query_configuration_1}
-                        />
-                        <AntSwitch
-                            name={"query_configuration_2"}
-                            label={`${t("configuration")} 2`}
-                            onChange={onTempChange}
-                            value={settings?.query_configuration_2}
-                        />
+                        <Grid container spacing={3} justify="space-between" style={{position: "relative"}}>
+                            <Grid item xs={12}>
+                                <AntSlider
+                                    name={"interval"}
+                                    onChange={((event, value) => console.log("veal", value))}
+                                    label={`${t("polling_interval")} ${(settings?.interval)}`}
+                                    value={settings?.interval}
+                                    min={0}
+                                    max={20}
+                                    step={1}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={12} lg={6}>
+                                <AntSwitch
+                                    name={"cyclic_update"}
+                                    label={"permanent_polling"}
+                                    onChange={onTempChange}
+                                    value={settings?.cyclic_update}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={12} lg={6}>
+                                <AntSwitch
+                                    name={"query_infodata"}
+                                    label={"infodata"}
+                                    onChange={onTempChange}
+                                    value={settings?.query_infodata}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={12} lg={6}>
+                                <AntSwitch
+                                    name={"query_measurements"}
+                                    label={"measurement_values"}
+                                    onChange={onTempChange}
+                                    value={settings?.query_measurements}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={12} lg={6}>
+                                <AntSwitch
+                                    name={"query_configuration_1"}
+                                    label={`${t("configuration")} 1`}
+                                    onChange={onTempChange}
+                                    value={settings?.query_configuration_1}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={12} lg={6}>
+                                <AntSwitch
+                                    name={"query_configuration_2"}
+                                    label={`${t("configuration")} 2`}
+                                    onChange={onTempChange}
+                                    value={settings?.query_configuration_2}
+                                />
+                            </Grid>
+                        </Grid>
                     </AntBox>
                 </Grid>
                 <Grid item xs={12} sm={8} md={6} style={{position: "relative"}}>

@@ -2,7 +2,7 @@ import React, {FunctionComponent, ReactNode} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Divider, Typography} from "@material-ui/core";
 
-const useStyles = makeStyles(({spacing, typography}: Theme) =>
+const useStyles = makeStyles(({palette, spacing, typography, breakpoints}: Theme) =>
     createStyles({
         h2: {
             fontSize: typography.h6.fontSize,
@@ -13,10 +13,21 @@ const useStyles = makeStyles(({spacing, typography}: Theme) =>
             width: "100%"
         },
         h3: {
+            color: palette.text.primary,
             fontWeight: typography.fontWeightMedium,
-            margin: `${spacing(3)}px 0 ${spacing(1)}px`,
+            textAlign: "center",
+            textTransform: "uppercase",
+            margin: `${spacing(3.5)}px 0 ${spacing(1)}px`,
             display: "block",
-            width: "100%"
+            width: "100%",
+                "&:not(:nth-child(2))": {
+                    [breakpoints.down("md")]: {
+                        margin: `${spacing(7)}px 0 ${spacing(1)}px`,
+                },
+            },
+        },
+        divider: {
+            background: palette.text.primary,
         }
     })
 );
@@ -44,7 +55,7 @@ export const H3: FunctionComponent<TypographyProps> = ({children}) => {
     return (
         <Typography component="h3" className={classes.h3}>
             {children}
-            <Divider/>
+            <Divider className={classes.divider}/>
         </Typography>
     )
 

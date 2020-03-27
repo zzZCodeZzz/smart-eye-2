@@ -76,14 +76,12 @@ const GeneralSettings = () => {
                         onChange={updateSelect}
                         options={["S-1", "SW/H", "R/H", "REM/H", "Level"]}
                     />
-                    <br/><br/><br/>
                     <AntSelect
                         name="dose_rate_cps"
                         value={generalSettings.dose_rate_cps}
                         onChange={updateSelect}
                         options={["SW/H", "R/H", "REM/H"]}
                     />
-                    <br/><br/><br/>
                     <AntSwitch
                         name="show_dr_in_cps_mode"
                         value={generalSettings.show_dr_in_cps_mode}
@@ -98,7 +96,6 @@ const GeneralSettings = () => {
                         onChange={time => updateTime("pick_date", time)}
                         value={generalSettings.pick_date}
                     />
-                    <br/><br/><br/>
                     <SyncTimeButton/>
                 </AntBox>
             </Grid>
@@ -109,7 +106,6 @@ const GeneralSettings = () => {
                         value={generalSettings.beep_on_key}
                         onChange={updateSwitch}
                     />
-                    <br/><br/><br/>
                     <AntSwitch
                         name="keyboard_lock"
                         value={generalSettings.keyboard_lock}
@@ -125,13 +121,11 @@ const GeneralSettings = () => {
                         onChange={updateSelect}
                         options={["none", "celsius", "fahrenheit"]}
                     />
-                    <br/><br/><br/>
                     <AntSwitch
                         name="reversible"
                         value={generalSettings.reversible}
                         onChange={updateSwitch}
                     />
-                    <br/><br/><br/>
                     <AntSwitch
                         name="graphical_view"
                         value={generalSettings.graphical_view}

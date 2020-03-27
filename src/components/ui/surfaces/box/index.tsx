@@ -3,29 +3,22 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Box} from "@material-ui/core";
 import {theme} from "../../layout/theme";
 
-
-const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
+const useStyles = makeStyles(({spacing, palette}: Theme) =>
     createStyles({
-        box: {
+        withPaper: {
+            position: "relative",
             height: "100%",
             boxSizing: "border-box",
             padding: spacing(2),
             background: palette.background.paper,
             borderRadius: 4,
-            // boxShadow: shadows(3)
         },
-        container: {
-            paddingBottom: theme.spacing(2),
-            // "&not(last-child)": {
+        noPaper: {
+            paddingBottom: theme.spacing(1),
+            // "&:not(:last-child)": {
             //     paddingTop: theme.spacing(3)
             // }
         },
-        //TODO remove this shit everywhere
-        normalizeHeight: {
-            [breakpoints.up("sm")]: {
-                minHeight: "7.5rem",
-            }
-        }
     }),
 );
 
@@ -35,12 +28,15 @@ type AntBoxProps = {
     normalizeHeight?: boolean;
 }
 
-const AntBox: FunctionComponent<AntBoxProps> = ({children, normalizeHeight, className}) => {
+type ConditionalBoxTypes = AntBoxProps & {
+    condition: boolean | undefined;
+}
 
+const AntBox: FunctionComponent<AntBoxProps> = ({children, className}) => {
     const classes = useStyles();
 
     return (
-        <Box boxShadow={2} className={`${classes.box} ${normalizeHeight && classes.normalizeHeight} ${className && className}`}>
+        <Box boxShadow={2} className={`${classes.withPaper} ${className && className}`}>
             {children}
         </Box>
     );
@@ -48,15 +44,11 @@ const AntBox: FunctionComponent<AntBoxProps> = ({children, normalizeHeight, clas
 
 export default AntBox;
 
-
-type ConditionalBoxTypes = AntBoxProps & {
-    condition: boolean | undefined;
-}
-
 export const ConditionalBox: FunctionComponent<ConditionalBoxTypes> = ({condition, children, normalizeHeight}) => {
-
     const classes = useStyles();
 
-    return condition ? <AntBox normalizeHeight={normalizeHeight}>{children}</AntBox> : <div className={classes.container}>{children}</div>;
+    return condition
+        ? <AntBox normalizeHeight={normalizeHeight}>{children}</AntBox>
+        : <div className={classes.noPaper}>{children}</div>;
 };
 

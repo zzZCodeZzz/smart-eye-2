@@ -9,7 +9,8 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles(() =>
     createStyles({
         checkLabel: {
-            textTransform: "uppercase"
+            textTransform: "uppercase",
+            fontSize: "0.7rem",
         }
     })
 );
