@@ -5,6 +5,8 @@ import {Paper} from "@material-ui/core";
 const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
         paper: {
+            height: "100%",
+            boxSizing: "border-box",
             padding: spacing(2),
             color: palette.text.secondary,
         },
