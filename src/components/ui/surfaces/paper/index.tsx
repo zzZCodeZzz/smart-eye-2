@@ -1,14 +1,17 @@
 import React, {FunctionComponent, ReactNode} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Paper} from "@material-ui/core";
+import {Box} from "@material-ui/core";
+
 
 const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
-        paper: {
+        box: {
             height: "100%",
             boxSizing: "border-box",
             padding: spacing(2),
             color: palette.text.secondary,
+            borderRadius: 4,
+            // boxShadow: shadows(3)
         },
         container: {
             "&not(last-child)": {
@@ -24,34 +27,34 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     }),
 );
 
-type AntPaperProps = {
+type AntBoxProps = {
     className?: string;
     children: ReactNode;
     normalizeHeight?: boolean;
 }
 
-const AntPaper: FunctionComponent<AntPaperProps> = ({children, normalizeHeight, className}) => {
+const AntBox: FunctionComponent<AntBoxProps> = ({children, normalizeHeight, className}) => {
 
     const classes = useStyles();
 
     return (
-        <Paper className={`${classes.paper} ${normalizeHeight && classes.normalizeHeight} ${className && className}`}>
+        <Box boxShadow={2} className={`${classes.box} ${normalizeHeight && classes.normalizeHeight} ${className && className}`}>
             {children}
-        </Paper>
+        </Box>
     );
 };
 
-export default AntPaper;
+export default AntBox;
 
 
-type ConditionalPaperTypes = AntPaperProps & {
+type ConditionalBoxTypes = AntBoxProps & {
     condition: boolean | undefined;
 }
 
-export const ConditionalPaper: FunctionComponent<ConditionalPaperTypes> = ({condition, children, normalizeHeight}) => {
+export const ConditionalBox: FunctionComponent<ConditionalBoxTypes> = ({condition, children, normalizeHeight}) => {
 
     const classes = useStyles();
 
-    return condition ? <AntPaper normalizeHeight={normalizeHeight}>{children}</AntPaper> : <div className={classes.container}>{children}</div>;
+    return condition ? <AntBox normalizeHeight={normalizeHeight}>{children}</AntBox> : <div className={classes.container}>{children}</div>;
 };
 

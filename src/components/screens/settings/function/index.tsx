@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {useActiveDeviceConfigurationFlags} from "../../../../redux/device/deviceStoreSelectors";
-import AntPaper from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/paper";
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 import {Grid} from "@material-ui/core";
 import AntSelect from "../../../ui/inputs/select";
@@ -24,7 +24,7 @@ const FunctionSettings = () => {
         <Grid container className={classes.gridContainer} spacing={3}>
             {Object.entries(configurationFlags).map(([categoryKey, category]) => (
                 <Grid item xs={12} sm={6} md={3}>
-                    <AntPaper>
+                    <AntBox>
                         <H2>{categoryKey}</H2>
                         {Object.entries(category).map(([subCategoryKey, subCategory]) => (
                             <Fragment>
@@ -44,7 +44,7 @@ const FunctionSettings = () => {
                                             value={String(confFlag.value)}
                                         />))}
                             </Fragment>))}
-                    </AntPaper>
+                    </AntBox>
                 </Grid>))}
         </Grid>
     )

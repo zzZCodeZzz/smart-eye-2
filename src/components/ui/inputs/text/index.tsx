@@ -1,7 +1,7 @@
 import {Input, InputAdornment, Theme, withStyles} from "@material-ui/core";
 import React, {FunctionComponent, ReactElement} from "react";
 import {useTranslation} from "react-i18next";
-import {ConditionalPaper} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/paper";
 import AntLabel from "../label";
 
 
@@ -43,7 +43,7 @@ const AntInput: FunctionComponent<AntTextFieldProps> = ({name, disabled, withPap
     // const classes = useStyles();
 
     return (
-        <ConditionalPaper condition={withPaper}>
+        <ConditionalBox condition={withPaper}>
             <AntLabel>{t(name)}</AntLabel>
             <CssTextField
                 id="outlined-full-width"
@@ -53,7 +53,7 @@ const AntInput: FunctionComponent<AntTextFieldProps> = ({name, disabled, withPap
                 disabled={disabled}
                 // onChange={onChange}
             />
-        </ConditionalPaper>
+        </ConditionalBox>
     )
 };
 

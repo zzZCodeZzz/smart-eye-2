@@ -6,7 +6,7 @@ import {setActiveDeviceAndSubscribeHistory} from "../../../redux/device/radEyeDe
 import {Bluetooth, Flare, Refresh} from "@material-ui/icons";
 import {createStyles, Grid, Paper, Theme, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import AntPaper from "../../ui/surfaces/paper";
+import AntBox from "../../ui/surfaces/paper";
 import MainContainer from "../../ui/layout/mainContainer";
 import {useTranslation} from "react-i18next";
 import {useActiveDeviceFields} from "../../../redux/device/deviceStoreSelectors";
@@ -124,7 +124,7 @@ export const Measurement = () => {
         <MainContainer>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={4} md={3}>
-                    <AntPaper>
+                    <AntBox>
                         <Grid container spacing={3} justify="space-between" style={{position: "relative"}}>
                             <Refresh onClick={onRefresh} className={classes.refreshButton}/>
                             <Grid item xs={12} sm={12} className={classes.doseInfo}>
@@ -176,12 +176,12 @@ export const Measurement = () => {
                             target={"settings"}
                             value={settings?.query_configuration_2}
                         />
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
                 <Grid item xs={12} sm={8} md={6} style={{position: "relative"}}>
-                    <AntPaper className={classes.graph}>
+                    <AntBox className={classes.graph}>
                         <ExampleRes data={activeDeviceDoseVisualisation}/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
                 <Grid item xs={12} md={3} className={classes.devicesList}>
                     {devices && Object.values(devices).map(device =>

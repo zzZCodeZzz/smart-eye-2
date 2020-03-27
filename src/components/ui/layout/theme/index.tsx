@@ -14,8 +14,8 @@ export const theme = createMuiTheme({
         background: {
             default: "#1f2d36",
             paper: "#1f2d36"
-        }
-    },
+        },
+    }
 });
 
 const globalStyles = () => ({

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
             justifyContent: "center",
         },
-        paper: {
+        box: {
             backgroundColor: theme.palette.background.paper,
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
@@ -55,7 +55,7 @@ const Alert:FunctionComponent<AlertProps> = ({title, message}) => {
             }}
         >
             <Fade in={open}>
-                <div className={classes.paper}>
+                <div className={classes.box}>
                     <h2 id="transition-modal-title">{<WarningIcon />} {title}</h2>
                     <p id="transition-modal-description">{message}</p>
                 </div>

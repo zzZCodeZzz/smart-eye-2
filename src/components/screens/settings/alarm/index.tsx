@@ -6,7 +6,7 @@ import AlarmDose from "./sections/dose";
 import AlarmEnergyRate from "./sections/energyRatio";
 import AlarmThreshold from "./sections/threshold";
 import AlarmSignal from "./sections/signal";
-import AntPaper from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/paper";
 
 export const useAlarmStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,33 +34,33 @@ const AlarmSettings = () => {
         <Fragment>
             <Grid container className={classes.gridContainer} spacing={3}>
                 <Grid item xs={12} md={12} component="section">
-                    <AntPaper>
+                    <AntBox>
                         <AlarmRate/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
 
                 <Grid item xs={12} sm={6} lg={3} component="section">
-                    <AntPaper>
+                    <AntBox>
                         <AlarmDose/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
 
                 <Grid item xs={12} sm={6} lg={3} component="section">
-                    <AntPaper>
+                    <AntBox>
                         <AlarmThreshold/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
 
                 <Grid item xs={12} sm={6} lg={3} component="section">
-                    <AntPaper>
+                    <AntBox>
                         <AlarmEnergyRate/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
 
                 <Grid item xs={12} sm={6} lg={3} component="section">
-                    <AntPaper>
+                    <AntBox>
                         <AlarmSignal/>
-                    </AntPaper>
+                    </AntBox>
                 </Grid>
             </Grid>
         </Fragment>

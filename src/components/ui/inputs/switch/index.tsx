@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from "react";
 import {createStyles, Grid, Switch} from "@material-ui/core";
-import {ConditionalPaper} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/paper";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
@@ -43,7 +43,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
     const classes = useStyles();
 
     return (
-        <ConditionalPaper condition={withPaper}>
+        <ConditionalBox condition={withPaper}>
             <AntLabel>{t(label ? label : name)}</AntLabel>
             <Grid component="label" container alignItems="center" justify={"center"} spacing={1}>
                 <Grid item className={classes.checkLabel}>{t(uncheckedLabel)}</Grid>
@@ -52,7 +52,7 @@ const AntSwitch: FunctionComponent<AntSwitchProps> = ({name, label, target, valu
                 </Grid>
                 <Grid item className={classes.checkLabel}>{t(checkedLabel)}</Grid>
             </Grid>
-        </ConditionalPaper>
+        </ConditionalBox>
     )
 };
 

@@ -5,7 +5,7 @@ import {Maybe} from "../../../../redux/device/device.types";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
 import {useTranslation} from "react-i18next";
-import {ConditionalPaper} from "../../surfaces/paper";
+import {ConditionalBox} from "../../surfaces/paper";
 import AntLabel from "../label";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
         formControl: {
             width: "100%",
         },
-        paper: {
+        box: {
             padding: theme.spacing(2),
             textAlign: 'center',
             color: theme.palette.text.secondary,
@@ -52,14 +52,14 @@ const AntSelect: FunctionComponent<SelectProps> = ({name, value, options, normal
     );
 
     return (
-        <ConditionalPaper condition={withPaper} normalizeHeight={normalizeHeight}>
+        <ConditionalBox condition={withPaper} normalizeHeight={normalizeHeight}>
             <FormControl className={classes.formControl}>
                 <AntLabel>{t(name)}</AntLabel>
                 <Select value={value ? value : ""} inputProps={{name: name, id: inputId}} onChange={onChange} className={classes.select}>
                     {options.map(option => <MenuItem key={option} value={option} className={classes.option}>{t(option)}</MenuItem>)}
                 </Select>
             </FormControl>
-        </ConditionalPaper>
+        </ConditionalBox>
     )
 };
 

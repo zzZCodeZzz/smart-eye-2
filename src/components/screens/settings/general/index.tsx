@@ -7,7 +7,7 @@ import AntSwitch from "../../../ui/inputs/switch";
 import AntSlider from "../../../ui/inputs/slider";
 import DateTimePicker from "../../../ui/inputs/date/dateTimePicker";
 import SyncTimeButton from "../../../ui/inputs/button/synTimeButton";
-import AntPaper from "../../../ui/surfaces/paper";
+import AntBox from "../../../ui/surfaces/paper";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -80,7 +80,7 @@ const GeneralSettings = () => {
                 />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntPaper>
+                <AntBox>
                     <AntSelect
                         name="dose_rate_display_unit"
                         value={fields.dose_rate_display_unit}
@@ -98,20 +98,20 @@ const GeneralSettings = () => {
                         value={fields.show_dr_in_cps_mode}
                         target={"device"}
                     />
-                </AntPaper>
+                </AntBox>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntPaper>
+                <AntBox>
                     <DateTimePicker
                         name={"pick_date"}
                         value={fields.pick_date}
                     />
                     <br/><br/><br/>
                     <SyncTimeButton/>
-                </AntPaper>
+                </AntBox>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntPaper>
+                <AntBox>
                     <AntSwitch
                         name="beep_on_key"
                         value={fields.beep_on_key}
@@ -123,10 +123,10 @@ const GeneralSettings = () => {
                         value={fields.keyboard_lock}
                         target={"device"}
                     />
-                </AntPaper>
+                </AntBox>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <AntPaper>
+                <AntBox>
                     <AntSelect
                         name="temperature_display"
                         value={fields.temperature_display}
@@ -144,7 +144,7 @@ const GeneralSettings = () => {
                         value={fields.graphical_view}
                         target={"device"}
                     />
-                </AntPaper>
+                </AntBox>
             </Grid>
         </Grid>
     );
