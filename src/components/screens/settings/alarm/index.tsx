@@ -12,47 +12,16 @@ export const useAlarmStyles = makeStyles((theme: Theme) =>
     createStyles({
         gridContainer: {
             justifyContent: "center",
-            padding: `0 ${theme.spacing(1)}px`,
         },
-        label: {
-            fontWeight: 500,
-            textAlign: "right",
-            paddingTop: `${theme.spacing(3)}px!important`,
-            paddingBottom: `${theme.spacing(0)}px!important`,
-            [theme.breakpoints.down("md")]: {
-                textAlign: "center",
+        right: {
+            [theme.breakpoints.up("md")]: {
+                textAlign: "right",
             }
-        },
-        paperTitle: {
-            padding: 0,
-            margin: 0
         },
         placeHolder: {
             [theme.breakpoints.down("sm")]: {
                 display: "none"
             },
-        },
-        normalizeHeight1: {
-            position: "relative",
-
-            [theme.breakpoints.up("md")]: {
-                minHeight: "6.5rem"
-            },
-            [theme.breakpoints.down("sm")]: {
-                minHeight: "17rem"
-            },
-            [theme.breakpoints.down("xs")]: {
-                minHeight: "auto"
-            },
-        },
-        centralize: {
-            [theme.breakpoints.only("sm")]: {
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%,-50%)",
-                justifyContent: "center"
-            }
         }
     }),
 );
@@ -63,34 +32,32 @@ const AlarmSettings = () => {
 
     return (
         <Fragment>
-            <AntPaper>
-                <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
-                    <AlarmRate/>
+            <Grid container className={classes.gridContainer} spacing={3}>
+                <Grid item xs={12} md={12} component="section">
+                    <AntPaper>
+                        <AlarmRate/>
+                    </AntPaper>
                 </Grid>
-            </AntPaper><br/>
 
-            <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} lg={3} component="section">
                     <AntPaper>
                         <AlarmDose/>
                     </AntPaper>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+
+                <Grid item xs={12} sm={6} lg={3} component="section">
                     <AntPaper>
                         <AlarmThreshold/>
                     </AntPaper>
                 </Grid>
-            </Grid>
 
-
-            <Grid container className={classes.gridContainer} spacing={3} alignItems="center">
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} lg={3} component="section">
                     <AntPaper>
                         <AlarmEnergyRate/>
                     </AntPaper>
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} lg={3} component="section">
                     <AntPaper>
                         <AlarmSignal/>
                     </AntPaper>

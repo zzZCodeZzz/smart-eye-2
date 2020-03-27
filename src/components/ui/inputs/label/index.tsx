@@ -4,7 +4,7 @@ import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(() =>
     createStyles({
-        label: {
+        right: {
             fontSize: "0.8rem",
             textTransform: "uppercase"
         }
@@ -19,7 +19,7 @@ const AntLabel: FunctionComponent<antLabelProps> = ({children}) => {
 
     const classes = useStyles();
 
-    return <Typography component="span" className={classes.label}>{children}</Typography>
+    return <Typography component="span" className={classes.right}>{children}</Typography>
 
 };
 

@@ -9,14 +9,14 @@ const AlarmRate = () => {
     const classes = useAlarmStyles();
 
     return (
-        <Fragment>
-            <Grid item xs={12} className={classes.paperTitle}>
+        <Grid container spacing={3}>
+            <Grid item xs={12}>
                 <Typography variant="h6">
                     Raten
                 </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.label}>
+            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
                 <Typography variant="subtitle1">
                     Level
                 </Typography>
@@ -32,7 +32,7 @@ const AlarmRate = () => {
             <Grid item xs={12} sm={6} md={2} lg={3} className={classes.placeHolder}/>
 
 
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.label}>
+            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
                 <Typography variant="subtitle1">
                     Zählrate
                 </Typography>
@@ -62,7 +62,7 @@ const AlarmRate = () => {
             </Grid>
 
 
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.label}>
+            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
                 <Typography variant="subtitle1">Dosierung</Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={2} lg={2}>
@@ -74,7 +74,7 @@ const AlarmRate = () => {
             <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
             <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
             <Grid item xs={12} sm={6} md={2} lg={3} className={classes.placeHolder}/>
-        </Fragment>
+        </Grid>
     );
 };
 
