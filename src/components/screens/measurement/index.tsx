@@ -46,16 +46,15 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
             cursor: "pointer",
             position: "absolute",
             zIndex: 2,
-            top: "40%",
-            left: "20%",
-            transform: "translate(-50%,-50%)",
+            top: "30%",
+            left: "10%",
             transition: "all 0.3s ease-in-out",
 
             "&:hover": {
                 color: palette.secondary.main
             },
             "&:active": {
-                transform: "scale(0.75)"
+                transform: "scale(0.75) rotate(45deg)"
             },
             [breakpoints.up("lg")]: {
                 fontSize: "6rem"

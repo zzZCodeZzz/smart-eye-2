@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
         logo: {
             letterSpacing: "-0.07rem",
             fontWeight: 500,
-            margin: `${theme.spacing(2)}px 0`,
+            margin: `${theme.spacing(2)}px 0 0`,
             [theme.breakpoints.only("xs")]: {
                 textAlign: "center"
             }
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
                     order: 2
                 },
             }
+        },
+        tabContainer: {
+            alignSelf: "flex-end"
         }
     })
 );
@@ -78,7 +81,7 @@ const MainNavigation: FunctionComponent = () => {
                     <Grid item xs={12} sm={8} lg={2}>
                         <Typography variant={"h3"} className={classes.logo}>smartEye</Typography>
                     </Grid>
-                    <Grid item xs={12} md={12} lg={8}>
+                    <Grid item xs={12} md={12} lg={8} className={classes.tabContainer}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
                             <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
                             <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
