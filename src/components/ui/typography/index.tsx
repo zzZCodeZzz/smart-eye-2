@@ -8,11 +8,15 @@ const useStyles = makeStyles(({spacing, typography}: Theme) =>
             fontSize: typography.h6.fontSize,
             fontWeight: typography.fontWeightBold,
             textTransform: "uppercase",
-            marginBottom: `${spacing(2)}px`
+            // marginBottom: `${spacing(2)}px`,
+            display: "block",
+            width: "100%"
         },
         h3: {
             fontWeight: typography.fontWeightMedium,
-            margin: `${spacing(2)}px 0 ${spacing(1)}px`
+            margin: `${spacing(3)}px 0 0`,
+            display: "block",
+            width: "100%"
         }
     })
 );

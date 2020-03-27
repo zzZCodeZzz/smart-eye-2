@@ -20,7 +20,7 @@ const MainContainer: FunctionComponent<mainContainerProps> = ({children}) => {
 
     const classes = useStyles();
 
-    return <Container component="main" maxWidth={"lg"} className={classes.main}> {children} </Container>;
+    return <Container component="main" maxWidth={"xl"} className={classes.main}> {children} </Container>;
 };
 
 

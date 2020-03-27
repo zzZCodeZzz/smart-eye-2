@@ -33,31 +33,31 @@ const AlarmSettings = () => {
     return (
         <Fragment>
             <Grid container className={classes.gridContainer} spacing={3}>
-                <Grid item xs={12} md={12} component="section">
+                <Grid item xs={12} md={6} component="section">
                     <AntBox>
                         <AlarmRate/>
                     </AntBox>
                 </Grid>
 
-                <Grid item xs={12} sm={6} lg={3} component="section">
+                <Grid item xs={12} sm={6} md={3} component="section">
                     <AntBox>
                         <AlarmDose/>
                     </AntBox>
                 </Grid>
 
-                <Grid item xs={12} sm={6} lg={3} component="section">
+                <Grid item xs={12} sm={6} md={3} component="section">
                     <AntBox>
                         <AlarmThreshold/>
                     </AntBox>
                 </Grid>
 
-                <Grid item xs={12} sm={6} lg={3} component="section">
+                <Grid item xs={12} sm={6} component="section">
                     <AntBox>
                         <AlarmEnergyRate/>
                     </AntBox>
                 </Grid>
 
-                <Grid item xs={12} sm={6} lg={3} component="section">
+                <Grid item xs={12} sm={6} component="section">
                     <AntBox>
                         <AlarmSignal/>
                     </AntBox>

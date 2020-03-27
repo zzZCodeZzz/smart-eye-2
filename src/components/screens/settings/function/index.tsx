@@ -23,7 +23,7 @@ const FunctionSettings = () => {
     return (
         <Grid container className={classes.gridContainer} spacing={3}>
             {Object.entries(configurationFlags).map(([categoryKey, category]) => (
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid item xs={12} sm={6} md={3} lg={2}>
                     <AntBox>
                         <H2>{categoryKey}</H2>
                         {Object.entries(category).map(([subCategoryKey, subCategory]) => (

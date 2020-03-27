@@ -1,60 +1,60 @@
 import React, {Fragment} from "react";
-import {Grid, Typography} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import AntInput from "../../../../ui/inputs/text";
 import AntSwitch from "../../../../ui/inputs/switch";
-import {useAlarmStyles} from "../index";
+import {H2, H3} from "../../../../ui/typography";
 
 const AlarmRate = () => {
 
-    const classes = useAlarmStyles();
-
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={1} justify={"space-between"}>
+            <H2>Raten</H2>
+            <Grid container xs={12} md={6} lg={6} spacing={1}>
+                <Grid item xs={12} sm={12}>
+                    <H3>Level</H3>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <AntInput name="Alarm 1"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <AntInput name="Alarm 2"/>
+                </Grid>
+            </Grid>
+
+            <Grid container xs={12} md={6} lg={6} spacing={1}>
+                <Grid item xs={12} sm={12}>
+                    <H3>Dosierung</H3>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <AntInput name="Alarm 1"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <AntInput name="Alarm 2"/>
+                </Grid>
+            </Grid>
+
+
             <Grid item xs={12}>
-                <Typography variant="h6">
-                    Raten
-                </Typography>
+                <H3>Zählrate</H3>
             </Grid>
-
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
-                <Typography variant="subtitle1">
-                    Level
-                </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
-                <AntInput name="Alarm 1"/>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
-                <AntInput name="Alarm 2"/>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
-            <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
-            <Grid item xs={12} sm={6} md={2} lg={3} className={classes.placeHolder}/>
-
-
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
-                <Typography variant="subtitle1">
-                    Zählrate
-                </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
+            <Grid item xs={12} sm={6} md={2}>
                 <AntInput
                     name="Alarm 1"/>
             </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
+            <Grid item xs={12} sm={6} md={2}>
                 <AntInput
                     name="Alarm 2"/>
             </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
+            <Grid item xs={12} sm={6} md={2}>
                 <AntInput
                     name="Sigma *)"/>
             </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntInput
-                    name="Sigm min rate"
+                    name="Sig min rate"
                     adornment={<Fragment>s<sup>-1</sup></Fragment>}/>
             </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={3}>
+            <Grid item xs={12} sm={6} md={3}>
                 <AntSwitch
                     target={"settings"}
                     name="securityAlarm">
@@ -62,18 +62,6 @@ const AlarmRate = () => {
             </Grid>
 
 
-            <Grid item xs={12} sm={12} md={2} lg={1} className={classes.right}>
-                <Typography variant="subtitle1">Dosierung</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
-                <AntInput name="Alarm 1" adornment={"μSW/h"}/>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2}>
-                <AntInput name="Alarm 2"/>
-            </Grid>
-            <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
-            <Grid item xs={12} sm={6} md={2} lg={2} className={classes.placeHolder}/>
-            <Grid item xs={12} sm={6} md={2} lg={3} className={classes.placeHolder}/>
         </Grid>
     );
 };
