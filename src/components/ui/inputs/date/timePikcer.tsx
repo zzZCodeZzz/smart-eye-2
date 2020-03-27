@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 import {useDispatch} from "react-redux";
 import {updateDeviceLocalAndRemote} from "../../../../redux/device/radEyeDevicesSlice";
+import AntLabel from "../label";
 
 type TimePickerProps = {
     name: string;
@@ -27,6 +28,7 @@ const TimePicker: FunctionComponent<TimePickerProps> = ({name, value}) => {
 
     return (
         <MuiPickersUtilsProvider utils={momentUtils} locale={"de"}>
+            <AntLabel>{t("date_time")}</AntLabel>
             <MuiTimePicker
                 variant="inline"
                 label={t("pick_time")}
