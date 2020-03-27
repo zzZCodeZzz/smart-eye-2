@@ -19,7 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
             color: theme.palette.text.secondary,
         },
         select: {
-            textTransform: "uppercase"
+            textTransform: "uppercase",
+
+            "&:after" : {
+                borderBottomColor: theme.palette.secondary.main
+            }
         },
         option: {
             textTransform: "uppercase"
