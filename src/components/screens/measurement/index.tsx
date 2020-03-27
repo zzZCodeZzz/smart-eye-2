@@ -19,13 +19,15 @@ import {H3} from "../../ui/typography";
 const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
         device: {
-            marginBottom: spacing(5),
-            padding: spacing(3)
+            padding: spacing(3),
         },
         activeDevice: {
             background: palette.secondary.main
         },
         devicesList: {
+            "& > :not(:last-child)": {
+                marginBottom: spacing(3),
+            },
             [breakpoints.down("sm")]: {
                 display: "none"
             }
@@ -38,7 +40,6 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
         },
         doseInfo: {
             textAlign: "right",
-            marginBottom: spacing(5),
             position: "relative"
         },
         refreshButton: {

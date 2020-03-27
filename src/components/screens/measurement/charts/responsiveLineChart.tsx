@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         chartContainer: {
             width: "100%",
-            height: "30rem",
+            height: "25rem",
             textAlign: "center",
 
             "& .recharts-responsive-container": {
