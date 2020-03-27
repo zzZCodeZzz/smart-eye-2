@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
             marginLeft: theme.spacing(0.5)
         },
         navBlocksWrapper: {
-            [theme.breakpoints.only("xs")]: {
+            [theme.breakpoints.down("md")]: {
                 "& :nth-child(2)": {
                     order: 3
                 },
@@ -75,17 +75,17 @@ const MainNavigation: FunctionComponent = () => {
         <AppBar position="static" className={classes.mainNavigationBar}>
             <Container maxWidth={"lg"}>
                 <Grid container justify={"space-between"} alignContent={"center"} alignItems={"center"} className={classes.navBlocksWrapper}>
-                    <Grid item xs={12} md={3} lg={2}>
+                    <Grid item xs={12} sm={8} lg={2}>
                         <Typography variant={"h3"} className={classes.logo}>smartEye</Typography>
                     </Grid>
-                    <Grid item xs={12} md={9} lg={8}>
+                    <Grid item xs={12} md={12} lg={8}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
                             <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
                             <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
                             <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
                         </Tabs>
                     </Grid>
-                    <Grid item xs={12} md={12} lg={2}>
+                    <Grid item xs={12} sm={4} lg={2}>
                         <FormControl className={classes.formControl}>
                             <AntLabel>{t("active_device")}</AntLabel>
                             <Select
