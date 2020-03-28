@@ -56,6 +56,9 @@ const globalStyles = () => ({
         ".MuiTableSortLabel-icon ": {
             position: "absolute",
             top: "4rem"
+        },
+        ".MuiTableCell-root.MuiTableCell-footer": {
+            borderBottom: "none",
         }
     }
 });
