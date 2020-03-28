@@ -21,6 +21,7 @@ const useStyles = makeStyles(({spacing, palette, breakpoints}: Theme) =>
     createStyles({
         device: {
             padding: spacing(3),
+            cursor: "pointer",
         },
         deviceIcon: {
             display: "inline-block",

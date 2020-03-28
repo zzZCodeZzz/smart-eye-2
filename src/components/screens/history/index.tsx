@@ -49,12 +49,16 @@ export default function DeviceHistory() {
                 ]}
                 options={{
                     headerStyle: {
-                        fontSize: "0.7rem",
-                        textTransform: "uppercase",
-                        padding: 0
+                        // fontSize: "0.7rem",
+                        // textTransform: "uppercase",
+                        // padding: 0,
+                        // maxWidth: "3rem",
+                        // textOverflow: "ellipsis",
+                        // whiteSpace: "nowrap",
+                        // overflow: "hidden",
                     },
                     pageSize: 5,
-                    pageSizeOptions: [10, 20, 30, 50],
+                    pageSizeOptions: [5, 10, 20, 30],
                 }}
                 // fix, since objects from mqtt are not editable
                 data={JSON.parse(JSON.stringify(activeDeviceHistory))}

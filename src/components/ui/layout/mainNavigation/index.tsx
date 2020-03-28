@@ -88,8 +88,8 @@ const MainNavigation: FunctionComponent = () => {
                     <Grid item xs={12} sm={12} md={8} className={classes.tabContainer}>
                         <Tabs value={tabValue} aria-label="simple tabs example" centered>
                             <Tab label={t("measurement")} value={"/measurement"} component={Link} to={"/measurement"}/>
-                            <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
                             <Tab label={t("settings")} value={"/settings"} component={Link} to={"/settings"}/>
+                            <Tab label={t("log")} value={"/log"} component={Link} to={"/log"}/>
                         </Tabs>
                     </Grid>
                     <Grid item xs={12} sm={4} md={2}>
